@@ -1,0 +1,27 @@
+@theme {
+  --color-navy: #0b2a44;
+  --color-navy-soft: #14456b;
+  --color-blue: #4aa3dd;
+  --color-violet: #1a5a8a;
+  --color-purple: #14456b;
+  --color-magenta: #0b2a44;
+  --color-pink: #4aa3dd;
+  --color-core-cyan: #7fd0ff;
+  --color-alert: #ec3013;
+  --color-neutral-light: #f3f2f2;
+  --color-ink: #201e1d;
+  --color-ink-muted: #5b5856;
+  --color-line: #d9d7d4;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-card: none;
+  --shadow-card-hover: 6px 6px 0 rgb(11 42 68 / 0.12);
+}
+
+:root {
+  --paper: #f3f2f2;
+  --black: #0e1418;
+  --ink: #201e1d;
+  --gradient-brand: linear-gradient(90deg, #0b2a44 0%, #1a5a8a 50%, #4aa3dd 100%);
+  --gradient-brand-soft: linear-gradient(90deg, rgb(11 42 68 / 0.06), rgb(11 42 68 / 0.06));
+}

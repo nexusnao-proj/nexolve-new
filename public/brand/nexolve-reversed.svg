@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456 96" role="img" aria-label="Nexolve Technologies">
+  <g fill="none" transform="rotate(-90 48 48)">
+    <circle cx="48" cy="48" r="38" stroke="#1A5A8A" stroke-width="10" stroke-dasharray="3 10.264"/>
+    <circle cx="48" cy="48" r="27" stroke="#4AA3DD" stroke-width="7" stroke-dasharray="2.5 8.81"/>
+  </g>
+  <circle cx="48" cy="48" r="7" fill="#7FD0FF"/>
+  <rect x="120" y="17" width="2" height="72" fill="#FFFFFF"/>
+  <text x="146" y="60" font-family="Archivo, 'Segoe UI', system-ui, sans-serif" font-size="60" font-weight="800" letter-spacing="0.02em" fill="#FFFFFF">NEXOLVE</text>
+  <text x="146" y="88" font-family="Archivo, 'Segoe UI', system-ui, sans-serif" font-size="17" font-weight="600" letter-spacing="0.42em" fill="#FFFFFF">TECHNOLOGIES</text>
+</svg>

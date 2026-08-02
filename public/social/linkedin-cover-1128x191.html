@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Nexolve Technologies — LinkedIn company cover (1128×191)</title>
+<!-- Font fallback for manual preview; the render script injects the local Archivo woff2. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..800&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { background: #ffffff; }
+
+  .cover {
+    position: relative;
+    width: 1128px;
+    height: 191px;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Dotted world-map watermark, matching the site belief section (opacity 0.55 there). */
+  .cover .map {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Pick a horizontal band of the map that shows recognizable landmass. */
+    object-position: 50% 34%;
+    opacity: 0.5;
+  }
+
+  /* White radial fade over the text zone for readability, like the site's overlay. */
+  .cover .fade {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 980px 380px at 63% 48%,
+      rgb(255 255 255 / 0.9) 0%,
+      rgb(255 255 255 / 0.58) 46%,
+      rgb(255 255 255 / 0.14) 78%,
+      transparent 100%
+    );
+  }
+
+  /*
+   * LinkedIn overlays the company profile picture on the bottom-left of the
+   * cover, so the left ~320px stays free of text (map texture only).
+   */
+  .content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 342px;
+    right: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .grid {
+    display: flex;
+    align-items: flex-start;
+    gap: 38px;
+    width: 100%;
+  }
+
+  .label {
+    flex: none;
+    padding-top: 5px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #5B5856;
+    white-space: nowrap;
+  }
+
+  .headline {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.045em;
+    color: #0B2A44;
+  }
+
+  .body {
+    margin-top: 11px;
+    max-width: 566px;
+    font-size: 12px;
+    line-height: 1.55;
+    font-weight: 500;
+    color: #5B5856;
+  }
+</style>
+</head>
+<body>
+  <div class="cover">
+    <img class="map" src="../brand/dotted-world-map.svg" alt="" />
+    <div class="fade"></div>
+    <div class="content">
+      <div class="grid">
+        <p class="label">Procurement, solved.</p>
+        <div>
+          <h1 class="headline">We fix how large organisations<br />buy, source and move goods.</h1>
+          <p class="body">Procurement and supply chain transformation on SAP, Coupa and Oracle&mdash;consulting, platform delivery, integration and software engineering across APAC and the Middle East.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
