@@ -4,7 +4,37 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: #4aa3dd #0e1418;
+  scrollbar-width: auto;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Brand scrollbar: slim at rest, brighter on interaction. */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0e1418;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid #0e1418;
+  border-radius: 999px;
+  background: #4aa3dd;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7fd0ff;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #1a5a8a;
+}
+
+::-webkit-scrollbar-corner {
+  background: #0e1418;
 }
 
 body {
