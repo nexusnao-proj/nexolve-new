@@ -101,8 +101,7 @@ export function Header() {
         <div className="hidden lg:block">
           <ButtonLink
             href="/contact"
-            variant="secondary"
-            className={light ? "border-white/40 text-white hover:border-white hover:bg-white hover:text-ink" : undefined}
+            variant={light ? "onDark" : "secondary"}
           >
             Book a discovery session <ArrowIcon />
           </ButtonLink>

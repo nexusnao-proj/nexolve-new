@@ -27,6 +27,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <ProofBand />
 
       <section className="border-b-2 border-ink bg-neutral-light" aria-labelledby="firm-statement-title">
         <Container className="max-w-[1440px] py-16 sm:py-20 lg:px-12 lg:py-24">
@@ -82,8 +83,6 @@ export default function HomePage() {
           </Reveal>
         </Container>
       </section>
-
-      <ProofBand />
 
       <CtaSection
         title="Let's look at your landscape."

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "ghost" | "inverse";
+type Variant = "primary" | "secondary" | "ghost" | "inverse" | "onDark";
 type Size = "md" | "lg";
 
 const base =
@@ -9,12 +9,14 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "border-alert bg-alert text-white hover:border-ink hover:bg-ink active:translate-y-px",
+    "border-alert bg-alert text-white hover:border-ink hover:bg-ink hover:text-white active:translate-y-px",
   secondary:
     "border-line bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-white active:translate-y-px",
   ghost: "border-transparent bg-transparent text-ink hover:border-ink",
   inverse:
     "border-white bg-white text-ink hover:bg-ink hover:text-white active:translate-y-px",
+  onDark:
+    "border-white/45 bg-transparent text-white hover:border-white hover:bg-white hover:text-ink active:translate-y-px",
 };
 
 const sizes: Record<Size, string> = {

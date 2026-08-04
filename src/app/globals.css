@@ -85,10 +85,6 @@
   pointer-events: none;
 }
 
-.hero-capability-rail {
-  border-top: 2px solid rgb(255 255 255 / 0.28);
-}
-
 .home-hero__shell {
   height: calc(100svh - 72px);
 }
@@ -852,9 +848,6 @@
     margin-top: 1rem;
   }
 
-  .hero-capability-rail {
-    padding-top: 0.65rem;
-  }
 }
 
 /* First-visit intro splash: the inline script in the root layout adds

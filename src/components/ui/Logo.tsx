@@ -1,12 +1,11 @@
 import { MatrixMark } from "@/components/brand/MatrixMark";
 import { cn } from "@/lib/utils";
 
-/** The mark animates everywhere it is rendered, while respecting reduction cuts. */
+/** The logo mark always preserves all three ray layers. */
 export function LogoMark({ className, size = 34 }: { className?: string; size?: number }) {
-  const cut = size < 24 ? "micro" : size <= 48 ? "compact" : "full";
   return (
     <span className={cn("inline-block shrink-0", className)} style={{ width: size, height: size }}>
-      <MatrixMark animated cut={cut} title="Nexolve Technologies" className="size-full" />
+      <MatrixMark animated cut="full" title="Nexolve Technologies" className="size-full" />
     </span>
   );
 }
@@ -25,7 +24,7 @@ function AnimatedLockup({ light = false, dark = false, className }: LockupProps)
       aria-label="Nexolve Technologies"
       className={cn("brand-lockup", reversed && "brand-lockup--reversed", className)}
     >
-      <MatrixMark animated cut="compact" dark={reversed} className="brand-lockup__mark" />
+      <MatrixMark animated cut="full" dark={reversed} className="brand-lockup__mark" />
       <span className="brand-lockup__rule" aria-hidden="true" />
       <span className="brand-lockup__type" aria-hidden="true">
         <span className="brand-lockup__name">NEXOLVE</span>

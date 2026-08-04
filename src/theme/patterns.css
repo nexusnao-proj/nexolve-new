@@ -194,6 +194,7 @@ textarea {
 .matrix-mark--dark .matrix-mark__ring--outer { stroke: #fff; }
 .matrix-mark--dark .matrix-mark__ring--middle { stroke: #4aa3dd; }
 .matrix-mark--dark .matrix-mark__ring--inner { stroke: #1a5a8a; }
+.matrix-mark--dark .matrix-mark__core { fill: #fff; }
 
 .matrix-mark--animated .matrix-mark__ring--outer { animation: matrix-outer 1.5s linear infinite; }
 .matrix-mark--animated .matrix-mark__ring--middle { animation: matrix-middle 1.5s linear infinite; }

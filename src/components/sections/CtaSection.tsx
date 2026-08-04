@@ -24,7 +24,7 @@ export function CtaSection({
             <p className="max-w-xl text-base leading-7 text-white/55 sm:text-lg">{lede}</p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <ButtonLink href={primaryHref} size="lg">{primaryLabel}<ArrowIcon /></ButtonLink>
-              <ButtonLink href={secondaryHref} size="lg" variant="secondary" className="border-white/45 text-white hover:border-white hover:bg-white hover:text-black">{secondaryLabel}</ButtonLink>
+              <ButtonLink href={secondaryHref} size="lg" variant="onDark">{secondaryLabel}</ButtonLink>
             </div>
           </div>
         </Reveal>
