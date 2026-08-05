@@ -71,23 +71,52 @@ export default function HomePage() {
 
       <IntelligenceHub />
 
-      <section className="border-b-2 border-ink bg-neutral-light" aria-labelledby="services-home-title">
+      <section className="border-y border-line bg-white" aria-labelledby="services-home-title">
         <Container className="max-w-[1440px] py-16 sm:py-20 lg:px-12 lg:py-24">
-          <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <Reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="editorial-label text-navy">The offering</p>
-              <h2 id="services-home-title" className="mt-5 max-w-3xl text-4xl font-bold tracking-[-0.05em] sm:text-6xl">Five service lines. One accountable team.</h2>
+              <p className="editorial-label text-blue">Our offering</p>
+              <h2
+                id="services-home-title"
+                className="mt-4 max-w-3xl text-3xl font-bold tracking-[-0.04em] text-ink sm:text-4xl lg:text-[2.75rem]"
+              >
+                Five service lines. One accountable team.
+              </h2>
             </div>
-            <Link href="/services" className="inline-flex min-h-11 items-center gap-3 text-sm font-bold">All services <ArrowIcon /></Link>
+            <Link
+              href="/services"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-blue transition-colors hover:text-navy"
+            >
+              All services <ArrowIcon />
+            </Link>
           </Reveal>
 
-          <Reveal group className="service-matrix mt-10 grid border-l-2 border-t-2 border-ink sm:grid-cols-2 lg:grid-cols-5">
+          <Reveal group className="service-matrix mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-5">
             {services.map((service, index) => (
-              <Link key={service.slug} href={`/services/${service.slug}`} data-reveal className="service-matrix__item group">
-                <span className="text-xs font-extrabold tabular-nums tracking-[0.12em] text-navy-soft">{String(index + 1).padStart(2, "0")}</span>
-                <h3 className="mt-7 text-xl font-bold leading-[1.05] tracking-[-0.035em]">{service.title}</h3>
-                <p className="mt-4 grow text-[0.9375rem] leading-6 text-ink-muted">{service.excerpt}</p>
-                <span className="mt-7 inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-navy">View practice <ArrowIcon className="transition-transform group-hover:translate-x-1" /></span>
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                data-reveal
+                className="service-matrix__item group"
+              >
+                <span className="text-xs font-extrabold tabular-nums tracking-[0.12em] text-blue transition-colors group-hover:text-white/70">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <Icon
+                  name={service.icon}
+                  size={28}
+                  className="mt-5 text-blue transition-colors group-hover:text-white/80"
+                />
+                <h3 className="mt-5 text-lg font-bold leading-[1.15] tracking-[-0.03em] text-ink transition-colors group-hover:text-white">
+                  {service.title}
+                </h3>
+                <p className="mt-3 grow text-[0.9rem] leading-6 text-ink-muted transition-colors group-hover:text-white/70">
+                  {service.excerpt}
+                </p>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-blue transition-colors group-hover:text-white">
+                  View practice{" "}
+                  <ArrowIcon className="transition-transform group-hover:translate-x-1" />
+                </span>
               </Link>
             ))}
           </Reveal>
