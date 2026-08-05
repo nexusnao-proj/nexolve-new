@@ -164,6 +164,19 @@ const paths: Record<IconName, React.ReactNode> = {
       <path d="m9 12 2 2 4-4" />
     </>
   ),
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 2.8 3.8 5.8 3.8 9s-1.3 6.2-3.8 9c-2.5-2.8-3.8-5.8-3.8-9s1.3-6.2 3.8-9Z" />
+    </>
+  ),
+  badge: (
+    <>
+      <rect x="5" y="3" width="14" height="18" rx="2" />
+      <circle cx="12" cy="9" r="2.5" />
+      <path d="M8.5 16.5c.9-1.5 2.1-2.2 3.5-2.2s2.6.7 3.5 2.2" />
+    </>
+  ),
 };
 
 type IconProps = {

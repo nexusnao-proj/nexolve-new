@@ -112,4 +112,6 @@ export type IconName =
   | "rocket"
   | "calendar"
   | "users"
-  | "shield";
+  | "shield"
+  | "globe"
+  | "badge";

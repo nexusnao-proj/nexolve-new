@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 import { services } from "@/lib/content/services";
+import type { IconName } from "@/lib/content/types";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/animation/Reveal";
 import { Hero } from "@/components/sections/home/Hero";
@@ -8,6 +9,7 @@ import { IntelligenceHub } from "@/components/sections/home/IntelligenceHub";
 import { ProofBand } from "@/components/sections/home/ProofBand";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { ArrowIcon } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 
 export const metadata = buildMetadata({
   title: "Nexolve Technologies — Procurement & Supply Chain Transformation",
@@ -16,12 +18,12 @@ export const metadata = buildMetadata({
   path: "/",
 });
 
-const firmStats = [
-  ["15+", "Enterprise programmes"],
-  ["24+", "Years combined delivery"],
-  ["9", "Platforms & modules"],
-  ["2", "Delivery regions"],
-] as const;
+const firmStats: { value: string; label: string; icon: IconName }[] = [
+  { value: "15+", label: "Enterprise programmes delivered", icon: "calendar" },
+  { value: "24+", label: "Years combined delivery experience", icon: "users" },
+  { value: "9", label: "Platforms & modules expertise", icon: "badge" },
+  { value: "2", label: "Delivery regions (India & Middle East)", icon: "globe" },
+];
 
 export default function HomePage() {
   return (
@@ -29,32 +31,40 @@ export default function HomePage() {
       <Hero />
       <ProofBand />
 
-      <section className="border-b-2 border-ink bg-neutral-light" aria-labelledby="firm-statement-title">
+      <section className="border-y border-navy bg-navy text-white" aria-labelledby="firm-statement-title">
         <Container className="max-w-[1440px] py-16 sm:py-20 lg:px-12 lg:py-24">
-          <Reveal className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+          <Reveal className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16 xl:gap-20">
             <div>
-              <p className="editorial-label text-navy">The firm</p>
-              <p className="mt-5 max-w-md text-xl font-bold leading-7 tracking-[-0.025em] text-ink">
-                A consulting firm with an engineering bench, built on delivery rather than a pitch deck.
-              </p>
-              <dl className="mt-9 grid grid-cols-2 border-l-2 border-t-2 border-ink">
-                {firmStats.map(([value, label]) => (
-                  <div key={label} className="border-b-2 border-r-2 border-ink p-4 sm:p-5">
-                    <dd className="text-3xl font-extrabold tracking-[-0.05em] text-navy sm:text-4xl">{value}</dd>
-                    <dt className="mt-2 text-[0.62rem] font-extrabold uppercase leading-4 tracking-[0.15em] text-ink-muted">{label}</dt>
-                  </div>
-                ))}
-              </dl>
-            </div>
-            <div>
-              <p className="editorial-label text-ink-muted">What we believe</p>
-              <h2 id="firm-statement-title" className="mt-5 max-w-4xl text-4xl leading-[1] font-bold tracking-[-0.05em] text-ink sm:text-6xl lg:text-[4.5rem]">
+              <p className="editorial-label text-blue">What we believe</p>
+              <h2
+                id="firm-statement-title"
+                className="mt-5 max-w-xl text-3xl font-bold leading-[1.08] tracking-[-0.04em] text-white sm:text-4xl lg:text-[2.75rem]"
+              >
                 Procurement transformation is only real when it runs in live operations.
               </h2>
-              <p className="mt-7 max-w-2xl text-base leading-7 text-ink-muted sm:text-lg">
-                We design how organisations source, buy and pay—then implement it, integrate it and stay through adoption. Process credibility, platform depth and software engineering remain under one roof.
+              <p className="mt-6 max-w-lg text-base leading-7 text-white/72 sm:text-lg">
+                We design how organisations source, buy and pay—then implement, integrate and stay
+                through adoption. Process credibility, platform depth and software engineering remain
+                under one roof.
               </p>
             </div>
+
+            <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {firmStats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="firm-stat flex items-start gap-4 rounded-2xl border border-blue/45 bg-navy-soft/40 px-5 py-5 transition-[border-color,background-color] duration-250 hover:border-blue hover:bg-navy-soft/70"
+                >
+                  <Icon name={stat.icon} size={26} className="mt-0.5 shrink-0 text-blue" />
+                  <div className="min-w-0">
+                    <dd className="text-2xl font-extrabold tracking-[-0.04em] text-white sm:text-[1.65rem]">
+                      {stat.value}
+                    </dd>
+                    <dt className="mt-1 text-sm leading-snug text-white/70">{stat.label}</dt>
+                  </div>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </Container>
       </section>
