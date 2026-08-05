@@ -280,34 +280,72 @@ textarea {
   transform: translateY(-50%);
 }
 
+.proof-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--color-line);
+  border-left: 1px solid var(--color-line);
+}
+
 .brand-proof__logo {
   display: grid;
-  min-height: 6.25rem;
+  min-height: 5.5rem;
   place-items: center;
-  border-right: 2px solid #201e1d;
-  border-bottom: 2px solid #201e1d;
+  border-right: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
   background: #fff;
   padding: 1rem;
 }
 
 .brand-proof__logo--platform {
-  min-height: 7rem;
+  min-height: 6.5rem;
+  grid-column: span 1;
+}
+
+.proof-logo-grid .brand-proof__logo:nth-child(n + 5) {
+  min-height: 5rem;
+}
+
+@media (min-width: 640px) {
+  .proof-logo-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .proof-logo-grid .brand-proof__logo--platform {
+    grid-column: span 2;
+    min-height: 7rem;
+  }
+
+  .proof-logo-grid .brand-proof__logo:nth-child(n + 5) {
+    grid-column: span 1;
+    min-height: 5.5rem;
+  }
 }
 
 .proof-project {
   display: flex;
-  min-height: 18rem;
+  min-height: 16rem;
   flex-direction: column;
-  border-right: 2px solid #201e1d;
-  border-bottom: 2px solid #201e1d;
+  border: 1px solid var(--color-line);
   background: #fff;
-  padding: 1.4rem;
-  transition: background-color 250ms ease, color 250ms ease;
+  padding: 1.5rem;
+  transition:
+    background-color 250ms ease,
+    border-color 250ms ease,
+    color 250ms ease,
+    box-shadow 250ms ease;
 }
 
 .proof-project:hover,
 .proof-project:focus-visible {
+  border-color: #0b2a44;
   background: #0b2a44;
+  color: #fff;
+  box-shadow: 0 12px 28px rgb(11 42 68 / 0.12);
+}
+
+.proof-project:hover h4,
+.proof-project:focus-visible h4 {
   color: #fff;
 }
 

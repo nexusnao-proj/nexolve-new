@@ -109,4 +109,7 @@ export type IconName =
   | "cap"
   | "building"
   | "briefcase"
-  | "rocket";
+  | "rocket"
+  | "calendar"
+  | "users"
+  | "shield";

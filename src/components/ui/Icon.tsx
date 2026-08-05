@@ -144,6 +144,26 @@ const paths: Record<IconName, React.ReactNode> = {
       <path d="M9 15c-2 .5-3.5 2.5-4 6 3.5-.5 5.5-2 6-4m1.5-8.5h.01" />
     </>
   ),
+  calendar: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 10h18M8 3v4m8-4v4" />
+    </>
+  ),
+  users: (
+    <>
+      <circle cx="9" cy="8" r="3.5" />
+      <path d="M2.5 19.5c.8-3.2 3-5 6.5-5s5.7 1.8 6.5 5" />
+      <circle cx="17" cy="9" r="2.5" />
+      <path d="M15.2 14.2c2.4.4 4.3 1.8 4.8 4.3" />
+    </>
+  ),
+  shield: (
+    <>
+      <path d="M12 3 4.5 6.5v5.2c0 4.6 3.1 8.7 7.5 9.8 4.4-1.1 7.5-5.2 7.5-9.8V6.5L12 3Z" />
+      <path d="m9 12 2 2 4-4" />
+    </>
+  ),
 };
 
 type IconProps = {

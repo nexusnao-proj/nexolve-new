@@ -684,20 +684,25 @@
 
   .proof-project {
     min-height: 0;
-    padding: 1rem;
+    padding: 1.15rem;
   }
 
-  .proof-project h3 {
-    margin-top: 0.8rem;
-    font-size: 1.2rem;
-  }
-
-  .proof-project p {
-    display: none;
+  .proof-project h4 {
+    margin-top: 1rem;
+    font-size: 1.1rem;
   }
 
   .proof-project > span:last-child {
     margin-top: 1rem;
+  }
+
+  .brand-proof__logo {
+    min-height: 4.5rem;
+    padding: 0.75rem;
+  }
+
+  .brand-proof__logo--platform {
+    min-height: 5.25rem;
   }
 
   .home-hero::after {
