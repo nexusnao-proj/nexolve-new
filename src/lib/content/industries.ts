@@ -9,6 +9,10 @@ import type { Industry } from "./types";
 export const industries: Industry[] = [
   {
     slug: "fmcg",
+    cover: {
+      src: "/images/editorial/industry-fmcg.webp",
+      alt: "Unlabelled food packages moving along a conveyor under an inspection light",
+    },
     title: "FMCG",
     headline: "Procurement & Supply Chain Transformation for FMCG",
     excerpt:
@@ -54,6 +58,10 @@ export const industries: Industry[] = [
   },
   {
     slug: "oil-gas",
+    cover: {
+      src: "/images/editorial/industry-oil-gas.webp",
+      alt: "Illuminated refinery towers and pipework beside the water at twilight",
+    },
     title: "Oil & Gas",
     headline: "Procurement & Supply Chain Transformation for Oil & Gas",
     excerpt:
@@ -99,6 +107,10 @@ export const industries: Industry[] = [
   },
   {
     slug: "retail",
+    cover: {
+      src: "/images/editorial/industry-retail.webp",
+      alt: "Parcels in blue bins moving through an automated conveyor sorting facility",
+    },
     title: "Retail",
     headline: "Procurement & Supply Chain Transformation for Retail",
     excerpt:
@@ -144,6 +156,10 @@ export const industries: Industry[] = [
   },
   {
     slug: "banking",
+    cover: {
+      src: "/images/editorial/industry-banking.webp",
+      alt: "Secure black equipment case on a steel workbench inside a vault",
+    },
     title: "Banking",
     headline: "Procurement & Third-Party Risk for Banking",
     excerpt:
@@ -189,6 +205,10 @@ export const industries: Industry[] = [
   },
   {
     slug: "energy-mining",
+    cover: {
+      src: "/images/editorial/industry-energy-mining.webp",
+      alt: "Dump truck driving through a terraced open-pit mine at dusk",
+    },
     title: "Energy & Mining",
     headline: "Procurement & Supply Chain Transformation for Energy & Mining",
     excerpt:
@@ -234,6 +254,10 @@ export const industries: Industry[] = [
   },
   {
     slug: "manufacturing",
+    cover: {
+      src: "/images/editorial/industry-manufacturing.webp",
+      alt: "Robotic arm holding a metal turbine wheel beside a machine tool",
+    },
     title: "Manufacturing",
     headline: "Procurement & Supply Chain Transformation for Manufacturing",
     excerpt:

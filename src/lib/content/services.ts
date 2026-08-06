@@ -7,6 +7,10 @@ import type { Service } from "./types";
 export const services: Service[] = [
   {
     slug: "supply-chain-procurement-consulting",
+    cover: {
+      src: "/images/editorial/service-procurement-consulting.webp",
+      alt: "One professional reviewing technical plans and material samples at a steel worktable",
+    },
     title: "Supply Chain & Procurement Consulting",
     headline: "Supply Chain & Procurement Consulting",
     excerpt:
@@ -106,6 +110,10 @@ export const services: Service[] = [
   },
   {
     slug: "source-to-pay-platform-delivery",
+    cover: {
+      src: "/images/editorial/service-source-to-pay-platform-delivery.webp",
+      alt: "Three gloved workers arranging black cards and a metal grid beside a laptop",
+    },
     title: "Source-to-Pay Platform Delivery",
     headline: "Source-to-Pay Platform Delivery — SAP Ariba, Coupa & Oracle",
     excerpt:
@@ -212,6 +220,10 @@ export const services: Service[] = [
   },
   {
     slug: "erp-core-sap",
+    cover: {
+      src: "/images/editorial/service-erp-core-sap.webp",
+      alt: "Technician inspecting a row of server racks with a flashlight",
+    },
     title: "ERP & Core SAP",
     headline: "ERP & Core SAP — S/4HANA, ECC & Master Data",
     excerpt:
@@ -304,6 +316,10 @@ export const services: Service[] = [
   },
   {
     slug: "data-analytics-integrations",
+    cover: {
+      src: "/images/editorial/service-data-analytics-integrations.webp",
+      alt: "Hand adjusting a junction in transparent tubes connecting four black devices",
+    },
     title: "Data, Analytics & Integrations",
     headline: "Data, Analytics & Integration Services",
     excerpt:
@@ -398,6 +414,10 @@ export const services: Service[] = [
   },
   {
     slug: "software-digital-engineering",
+    cover: {
+      src: "/images/editorial/service-software-digital-engineering.webp",
+      alt: "Engineer working at a computer beside an exposed machine prototype",
+    },
     title: "Software & Digital Engineering",
     headline: "Software & Digital Engineering",
     excerpt:

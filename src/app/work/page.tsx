@@ -30,7 +30,7 @@ export default function WorkPage() {
           <Reveal group className="grid gap-5 sm:grid-cols-2">
             {caseStudies.map((cs) => (
               <div key={cs.slug} data-reveal>
-                <WorkCard caseStudy={cs} />
+                <WorkCard caseStudy={cs} sizes="(min-width: 640px) 50vw, 100vw" />
               </div>
             ))}
           </Reveal>

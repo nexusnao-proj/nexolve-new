@@ -4,6 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { Container } from "@/components/ui/Container";
+import { CardCover } from "@/components/ui/CardCover";
 import { IconChip } from "@/components/ui/Icon";
 import { ArrowIcon } from "@/components/ui/Button";
 import { Reveal } from "@/components/animation/Reveal";
@@ -34,21 +35,27 @@ export default function IndustriesPage() {
               <div key={industry.slug} data-reveal>
                 <Link
                   href={`/industries/${industry.slug}`}
-                  className="group flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card transition-shadow duration-300 hover:shadow-card-hover"
+                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover"
                 >
-                  <div className="flex items-center gap-4">
-                    <IconChip name={industry.icon} />
-                    <h2 className="text-xl font-extrabold text-ink group-hover:text-violet">
-                      {industry.title}
-                    </h2>
+                  <CardCover
+                    cover={industry.cover}
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                  />
+                  <div className="flex grow flex-col p-7">
+                    <div className="flex items-center gap-4">
+                      <IconChip name={industry.icon} />
+                      <h2 className="text-xl font-extrabold text-ink group-hover:text-violet">
+                        {industry.title}
+                      </h2>
+                    </div>
+                    <p className="mt-4 grow text-sm leading-relaxed text-ink-muted">
+                      {industry.excerpt}
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-violet">
+                      Explore {industry.title.toLowerCase()}
+                      <ArrowIcon className="transition-transform duration-200 group-hover:translate-x-1" />
+                    </span>
                   </div>
-                  <p className="mt-4 grow text-sm leading-relaxed text-ink-muted">
-                    {industry.excerpt}
-                  </p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-violet">
-                    Explore {industry.title.toLowerCase()}
-                    <ArrowIcon className="transition-transform duration-200 group-hover:translate-x-1" />
-                  </span>
                 </Link>
               </div>
             ))}

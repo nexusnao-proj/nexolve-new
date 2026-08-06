@@ -152,7 +152,16 @@ export function HeroVideoSequence({ className }: HeroVideoSequenceProps) {
   };
 
   return (
-    <div className={cn("absolute inset-0 overflow-hidden bg-[#0e1418]", className)} aria-hidden="true">
+    <div className={cn("absolute inset-0 overflow-hidden bg-[#08192a]", className)} aria-hidden="true">
+      {/* Reduced motion: hold the first clip's poster rather than an empty plate. */}
+      {prefersReducedMotion && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={POSTERS[0]}
+          alt=""
+          className="hero-film-clip absolute inset-0 h-full w-full object-cover"
+        />
+      )}
       {!prefersReducedMotion &&
         ([0, 1] as const).map((slot) => {
           const sourceIndex = slots[slot];
@@ -166,7 +175,7 @@ export function HeroVideoSequence({ className }: HeroVideoSequenceProps) {
                 videoRefs.current[slot] = el;
               }}
               className={cn(
-                "absolute inset-0 h-full w-full object-cover grayscale transition-opacity ease-out",
+                "hero-film-clip absolute inset-0 h-full w-full object-cover transition-opacity ease-out",
                 visible ? "opacity-100" : "opacity-0"
               )}
               style={{ transitionDuration: `${FADE_MS}ms` }}

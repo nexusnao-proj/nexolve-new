@@ -4,6 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { Container } from "@/components/ui/Container";
+import { CardCover } from "@/components/ui/CardCover";
 import { IconChip } from "@/components/ui/Icon";
 import { ArrowIcon } from "@/components/ui/Button";
 import { Reveal } from "@/components/animation/Reveal";
@@ -36,17 +37,23 @@ export default function ServicesPage() {
                 <TiltCard className="h-full">
                   <Link
                     href={`/services/${service.slug}`}
-                    className="group flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card transition-shadow duration-300 hover:shadow-card-hover"
+                    className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover"
                   >
-                    <IconChip name={service.icon} />
-                    <h2 className="mt-5 text-lg font-extrabold text-ink">{service.title}</h2>
-                    <p className="mt-2.5 grow text-sm leading-relaxed text-ink-muted">
-                      {service.excerpt}
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-violet">
-                      Explore service
-                      <ArrowIcon className="transition-transform duration-200 group-hover:translate-x-1" />
-                    </span>
+                    <CardCover
+                      cover={service.cover}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    />
+                    <div className="flex grow flex-col p-7">
+                      <IconChip name={service.icon} />
+                      <h2 className="mt-5 text-lg font-extrabold text-ink">{service.title}</h2>
+                      <p className="mt-2.5 grow text-sm leading-relaxed text-ink-muted">
+                        {service.excerpt}
+                      </p>
+                      <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-violet">
+                        Explore service
+                        <ArrowIcon className="transition-transform duration-200 group-hover:translate-x-1" />
+                      </span>
+                    </div>
                   </Link>
                 </TiltCard>
               </div>

@@ -19,7 +19,7 @@ import Link from "next/link";
 const initialState: ContactFormState = { status: "idle" };
 
 const inputCls =
-  "w-full rounded-xl border border-line bg-white px-4 py-3 text-base text-ink placeholder:text-ink-muted/60 transition-colors focus:border-ink focus:outline-none aria-[invalid=true]:border-ink";
+  "w-full rounded-[3px] border border-line bg-white px-4 py-3 text-base text-ink placeholder:text-ink-muted/60 transition-colors focus:border-navy-soft focus:outline-none aria-[invalid=true]:border-alert";
 
 function Field({
   label,

@@ -78,7 +78,10 @@ export function BlogIndex({ initialPosts }: { initialPosts: Post[] }) {
         <Reveal group className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((post) => (
             <div key={post.slug} data-reveal>
-              <PostCard post={post} />
+              <PostCard
+                post={post}
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              />
             </div>
           ))}
         </Reveal>

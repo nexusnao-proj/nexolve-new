@@ -9,6 +9,10 @@ import type { CaseStudy } from "./types";
 export const caseStudies: CaseStudy[] = [
   {
     slug: "conglomerate-ariba-full-suite",
+    cover: {
+      src: "/images/editorial/case-conglomerate-ariba.webp",
+      alt: "Woman arranging metal parts and material samples across a steel worktable",
+    },
     title: "Full-suite SAP Ariba delivery for a diversified conglomerate",
     client: "Regional conglomerate (name withheld under NDA)",
     industry: "Conglomerate",
@@ -40,6 +44,10 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "oil-gas-compliant-sourcing",
+    cover: {
+      src: "/images/editorial/case-oil-gas-sourcing.webp",
+      alt: "Hard-hat worker inspecting a sealed industrial valve beside a black equipment case",
+    },
     title: "Compliant sourcing and contracts for an oil & gas operator",
     client: "Oil & gas operator (name withheld under NDA)",
     industry: "Oil & Gas",
@@ -67,6 +75,10 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "retail-commerce-automation",
+    cover: {
+      src: "/images/editorial/case-retail-commerce.webp",
+      alt: "Cardboard boxes riding autonomous carts and conveyors through a warehouse",
+    },
     title: "Commerce automation across a retail supplier network",
     client: "Retail group (name withheld under NDA)",
     industry: "Retail",
@@ -94,6 +106,10 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "manufacturing-s4hana-rollout",
+    cover: {
+      src: "/images/editorial/case-manufacturing-s4hana.webp",
+      alt: "Technician holding a tablet beside a robotic machine working on a metal component",
+    },
     title: "S/4HANA procurement rollout across manufacturing entities",
     client: "Manufacturing group (name withheld under NDA)",
     industry: "Manufacturing",
