@@ -5,6 +5,7 @@ import { caseStudies } from "./case-studies";
 import { industries } from "./industries";
 import { posts } from "./posts";
 import { services } from "./services";
+import { solutions } from "./solutions";
 
 type CoverCandidate = {
   slug: string;
@@ -21,6 +22,7 @@ describe("content card covers", () => {
       caseStudies,
       industries,
       posts,
+      solutions,
     };
 
     for (const [collection, entries] of Object.entries(collections)) {
@@ -35,5 +37,11 @@ describe("content card covers", () => {
         ).toBe(true);
       }
     }
+  });
+
+  it("gives each platform layer its own cover image", () => {
+    const coverSources = solutions.map((solution) => solution.cover?.src);
+
+    expect(new Set(coverSources).size).toBe(solutions.length);
   });
 });

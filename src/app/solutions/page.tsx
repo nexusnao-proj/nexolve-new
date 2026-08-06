@@ -36,7 +36,6 @@ export default function SolutionsPage() {
               const relServices = solution.services
                 .map((s) => getService(s))
                 .filter((s): s is NonNullable<typeof s> => Boolean(s));
-              const coverService = relServices[0];
               return (
                 <Reveal key={solution.slug}>
                   <article
@@ -71,12 +70,10 @@ export default function SolutionsPage() {
                         </ul>
                       </div>
                       <div className="overflow-hidden rounded-2xl bg-neutral-light">
-                        {coverService && (
-                          <CardCover
-                            cover={coverService.cover}
-                            sizes="(min-width: 1024px) 35vw, 100vw"
-                          />
-                        )}
+                        <CardCover
+                          cover={solution.cover}
+                          sizes="(min-width: 1024px) 35vw, 100vw"
+                        />
                         <div className="p-6">
                           <h3 className="text-xs font-bold tracking-[0.18em] text-ink-muted uppercase">
                             Delivered by these service lines
