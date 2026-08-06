@@ -5,21 +5,21 @@ import { Reveal } from "@/components/animation/Reveal";
 import { ArrowIcon } from "@/components/ui/Button";
 
 const platforms = [
-  ["SAP Ariba", "/brand/proof/sap-ariba.png"],
-  ["Coupa", "/brand/proof/coupa.png"],
-  ["Oracle", "/brand/proof/oracle.png"],
-  ["SAP Fieldglass", "/brand/proof/sap-fieldglass.png"],
+  ["SAP Ariba", "/brand/proof/sap-ariba.webp"],
+  ["Coupa", "/brand/proof/coupa.webp"],
+  ["Oracle", "/brand/proof/oracle.webp"],
+  ["SAP Fieldglass", "/brand/proof/sap-fieldglass.webp"],
 ] as const;
 
 const enterprises = [
-  ["Engro Corporation", "/brand/proof/engro.png"],
-  ["United Energy Pakistan", "/brand/proof/uep.png"],
-  ["Packages Group", "/brand/proof/packages.png"],
-  ["Woolworths", "/brand/proof/woolworths.png"],
-  ["PanAust", "/brand/proof/panaust.png"],
-  ["Pakistan Beverage Limited", "/brand/proof/pbl.png"],
-  ["Alfalak", "/brand/proof/alfalak.png"],
-  ["National Foods", "/brand/proof/national-foods.png"],
+  ["Engro Corporation", "/brand/proof/engro.webp"],
+  ["United Energy Pakistan", "/brand/proof/uep.webp"],
+  ["Packages Group", "/brand/proof/packages.webp"],
+  ["Woolworths", "/brand/proof/woolworths.webp"],
+  ["PanAust", "/brand/proof/panaust.webp"],
+  ["Pakistan Beverage Limited", "/brand/proof/pbl.webp"],
+  ["Alfalak", "/brand/proof/alfalak.webp"],
+  ["National Foods", "/brand/proof/national-foods.webp"],
 ] as const;
 
 /**
