@@ -248,11 +248,12 @@
   content: "";
 }
 
+/* Source order is icon, dt (label), dd (value) so the definition list is
+   well-formed; `order` puts the value above the label visually. */
 .stat-tile {
   display: flex;
   min-height: 11.5rem;
   flex-direction: column;
-  justify-content: space-between;
   border: 1px solid rgb(255 255 255 / 0.16);
   border-radius: var(--card-radius);
   background: rgb(255 255 255 / 0.06);
@@ -266,11 +267,14 @@
 }
 
 .stat-tile__icon {
+  order: 1;
   color: rgb(255 255 255 / 0.68);
 }
 
 .stat-tile__value {
-  margin-top: 1.4rem;
+  order: 2;
+  /* Pushes the value/label pair to the foot of the tile. */
+  margin: auto 0 0;
   font-size: clamp(2.1rem, 4vw, 2.9rem);
   font-weight: 800;
   letter-spacing: -0.05em;
@@ -278,6 +282,7 @@
 }
 
 .stat-tile__label {
+  order: 3;
   margin-top: 0.55rem;
   color: rgb(255 255 255 / 0.62);
   font-size: 0.72rem;

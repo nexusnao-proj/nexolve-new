@@ -42,14 +42,15 @@ export function ImpactBand() {
             </p>
           </div>
 
+          {/* dt/dd must be direct children of a single div inside the dl, and
+              dt must precede dd. The visual order (value above label) is
+              restored with flex `order` in .stat-tile. */}
           <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
             {firmStats.map((stat) => (
               <div key={stat.label} className="stat-tile">
                 <Icon name={stat.icon} size={24} className="stat-tile__icon" />
-                <div>
-                  <dd className="stat-tile__value">{stat.value}</dd>
-                  <dt className="stat-tile__label">{stat.label}</dt>
-                </div>
+                <dt className="stat-tile__label">{stat.label}</dt>
+                <dd className="stat-tile__value">{stat.value}</dd>
               </div>
             ))}
           </dl>
