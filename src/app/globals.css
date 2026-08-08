@@ -25,8 +25,8 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(100deg, rgb(14 20 24 / 0.94) 0%, rgb(14 20 24 / 0.86) 32%, rgb(14 20 24 / 0.5) 66%, rgb(14 20 24 / 0.62) 100%),
-    linear-gradient(to bottom, rgb(14 20 24 / 0.8) 0%, transparent 26%, transparent 62%, rgb(14 20 24 / 0.96) 100%);
+    linear-gradient(100deg, rgb(14 20 24 / 0.68) 0%, rgb(14 20 24 / 0.5) 34%, rgb(14 20 24 / 0.14) 68%, rgb(14 20 24 / 0.22) 100%),
+    linear-gradient(to bottom, rgb(14 20 24 / 0.34) 0%, transparent 28%, transparent 64%, rgb(14 20 24 / 0.58) 100%);
   content: "";
   pointer-events: none;
 }
@@ -61,7 +61,7 @@
    the clips between two slots. */
 .hero-film-clip {
   object-position: center 48%;
-  filter: saturate(0.42) contrast(1.12) brightness(0.4) hue-rotate(-8deg);
+  filter: saturate(0.68) contrast(1.06) brightness(0.68) hue-rotate(-5deg);
 }
 
 .hero-film-shade {
@@ -964,7 +964,7 @@
   /* Portrait crops leave far less clear space, so lean harder on the wash. */
   .home-hero::after {
     background:
-      linear-gradient(rgb(14 20 24 / 0.92) 0%, rgb(14 20 24 / 0.72) 42%, rgb(14 20 24 / 0.97) 100%);
+      linear-gradient(rgb(14 20 24 / 0.66) 0%, rgb(14 20 24 / 0.42) 44%, rgb(14 20 24 / 0.7) 100%);
   }
 
   .hero-title {
