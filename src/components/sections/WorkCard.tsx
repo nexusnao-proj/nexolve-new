@@ -24,7 +24,7 @@ export function WorkCard({
   return (
     <Link
       href={`/work/${caseStudy.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover"
+      className="color-card group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover"
     >
       <div className={cn("h-1.5 w-full bg-gradient-to-r", accentBar[caseStudy.accent])} />
       <CardCover

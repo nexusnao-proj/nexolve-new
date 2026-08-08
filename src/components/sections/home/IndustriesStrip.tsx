@@ -20,7 +20,7 @@ export function IndustriesStrip() {
             <div key={industry.slug} data-reveal>
               <Link
                 href={`/industries/${industry.slug}`}
-                className="group flex h-full flex-col items-center gap-3 rounded-3xl border border-line bg-white px-4 py-7 text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
+                className="color-card group flex h-full flex-col items-center gap-3 rounded-3xl border border-line bg-white px-4 py-7 text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
               >
                 <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-gradient-brand-soft text-violet">
                   <Icon name={industry.icon} size={20} />

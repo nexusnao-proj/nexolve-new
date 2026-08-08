@@ -118,7 +118,7 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
                 <div key={service.slug} data-reveal>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow hover:shadow-card-hover"
+                    className="color-card group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow hover:shadow-card-hover"
                   >
                     <CardCover
                       cover={service.cover}

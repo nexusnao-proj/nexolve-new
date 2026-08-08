@@ -1573,3 +1573,398 @@ textarea {
     grid-row: auto;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Interactive colour response. Hover and keyboard focus use the same brand
+   signal so raised cards feel connected across index and detail pages.
+   --------------------------------------------------------------------------- */
+.color-card {
+  position: relative;
+  isolation: isolate;
+  transition:
+    background-color 320ms ease,
+    border-color 320ms ease,
+    box-shadow 320ms ease,
+    transform 320ms var(--ease-out-expo);
+}
+
+.color-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 3;
+  height: 3px;
+  background: var(--gradient-brand);
+  content: "";
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 480ms var(--ease-out-expo);
+}
+
+.color-card:hover,
+.color-card:focus-visible,
+.color-card:focus-within {
+  border-color: rgb(74 163 221 / 0.72) !important;
+  background-color: #0b2a44 !important;
+  color: #fff;
+  box-shadow: 0 24px 60px rgb(11 42 68 / 0.16) !important;
+  transform: translateY(-4px);
+}
+
+.color-card:hover::before,
+.color-card:focus-visible::before,
+.color-card:focus-within::before {
+  transform: scaleX(1);
+}
+
+.color-card img {
+  transition: filter 420ms ease, transform 500ms var(--ease-out-expo);
+}
+
+.color-card:hover img,
+.color-card:focus-visible img,
+.color-card:focus-within img {
+  filter: saturate(1.18) contrast(1.04);
+}
+
+.color-card h2,
+.color-card h3,
+.color-card svg,
+.color-card [class*="text-violet"] {
+  transition: color 280ms ease;
+}
+
+.color-card:hover h2,
+.color-card:hover h3,
+.color-card:focus-visible h2,
+.color-card:focus-visible h3,
+.color-card:focus-within h2,
+.color-card:focus-within h3 {
+  color: #fff;
+}
+
+.color-card:hover svg,
+.color-card:focus-visible svg,
+.color-card:focus-within svg,
+.color-card:hover [class*="text-violet"],
+.color-card:focus-visible [class*="text-violet"],
+.color-card:focus-within [class*="text-violet"] {
+  color: #7fd0ff !important;
+}
+
+.color-card:hover [class*="text-ink-muted"],
+.color-card:focus-visible [class*="text-ink-muted"],
+.color-card:focus-within [class*="text-ink-muted"] {
+  color: rgb(255 255 255 / 0.68) !important;
+}
+
+.color-card:hover [class*="text-ink"],
+.color-card:focus-visible [class*="text-ink"],
+.color-card:focus-within [class*="text-ink"] {
+  color: #fff !important;
+}
+
+.color-card:hover [class*="bg-neutral-light"],
+.color-card:focus-visible [class*="bg-neutral-light"],
+.color-card:focus-within [class*="bg-neutral-light"],
+.color-card:hover [class*="bg-gradient-brand-soft"],
+.color-card:focus-visible [class*="bg-gradient-brand-soft"],
+.color-card:focus-within [class*="bg-gradient-brand-soft"] {
+  border-color: rgb(255 255 255 / 0.2) !important;
+  background: rgb(255 255 255 / 0.1) !important;
+  color: #fff !important;
+}
+
+.proof-project__body,
+.service-matrix__body {
+  transition: background 340ms ease;
+}
+
+.proof-project:hover .proof-project__body,
+.proof-project:focus-visible .proof-project__body,
+.service-matrix__item:hover .service-matrix__body,
+.service-matrix__item:focus-visible .service-matrix__body {
+  background: linear-gradient(145deg, #0b2a44 0%, #14456b 100%);
+}
+
+.proof-project:hover h3,
+.proof-project:focus-visible h3,
+.service-matrix__item:hover h3,
+.service-matrix__item:focus-visible h3 {
+  color: #fff;
+}
+
+.proof-project:hover .nx-card__link,
+.proof-project:focus-visible .nx-card__link,
+.service-matrix__item:hover .nx-card__link,
+.service-matrix__item:focus-visible .nx-card__link {
+  border-color: rgb(255 255 255 / 0.18);
+  color: #7fd0ff;
+}
+
+.proof-project:hover .proof-project__body p,
+.proof-project:focus-visible .proof-project__body p,
+.service-matrix__item:hover .service-matrix__body p,
+.service-matrix__item:focus-visible .service-matrix__body p,
+.proof-project:hover .nx-card__head,
+.proof-project:focus-visible .nx-card__head,
+.service-matrix__item:hover .nx-card__head,
+.service-matrix__item:focus-visible .nx-card__head {
+  color: rgb(255 255 255 / 0.68);
+}
+
+.proof-project:hover .nx-card__index,
+.proof-project:focus-visible .nx-card__index,
+.service-matrix__item:hover .nx-card__index,
+.service-matrix__item:focus-visible .nx-card__index,
+.proof-project:hover .nx-card__icon,
+.proof-project:focus-visible .nx-card__icon,
+.service-matrix__item:hover .nx-card__icon,
+.service-matrix__item:focus-visible .nx-card__icon {
+  color: #7fd0ff;
+}
+
+.service-story__content,
+.service-story__icon {
+  transition:
+    background 340ms ease,
+    color 280ms ease,
+    transform 340ms var(--ease-out-expo);
+}
+
+.service-story:hover .service-story__content,
+.service-story:focus-visible .service-story__content {
+  background: linear-gradient(135deg, #0b2a44, #14456b);
+}
+
+.service-story:hover .service-story__content h2,
+.service-story:focus-visible .service-story__content h2 {
+  color: #fff;
+}
+
+.service-story:hover .service-story__content > p:not(.editorial-label),
+.service-story:focus-visible .service-story__content > p:not(.editorial-label) {
+  color: rgb(255 255 255 / 0.68);
+}
+
+.service-story:hover .service-story__content .editorial-label,
+.service-story:focus-visible .service-story__content .editorial-label,
+.service-story:hover .service-story__link,
+.service-story:focus-visible .service-story__link {
+  color: #7fd0ff;
+}
+
+.service-story:hover .service-story__content li,
+.service-story:focus-visible .service-story__content li {
+  border-color: rgb(255 255 255 / 0.2);
+  background: rgb(255 255 255 / 0.09);
+  color: #fff;
+}
+
+.service-story:hover .service-story__icon,
+.service-story:focus-visible .service-story__icon {
+  background: linear-gradient(135deg, #1a5a8a, #4aa3dd);
+  transform: rotate(-3deg) scale(1.06);
+}
+
+.work-ledger__item:hover,
+.work-ledger__item:focus-visible {
+  background: linear-gradient(135deg, #0b2a44, #14456b);
+  box-shadow: inset 4px 0 #4aa3dd, 0 16px 40px rgb(11 42 68 / 0.16);
+}
+
+.work-ledger__item:hover h2,
+.work-ledger__item:focus-visible h2 {
+  color: #fff;
+}
+
+.work-ledger__item:hover .editorial-label,
+.work-ledger__item:focus-visible .editorial-label,
+.work-ledger__item:hover .work-ledger__index,
+.work-ledger__item:focus-visible .work-ledger__index,
+.work-ledger__item:hover .work-ledger__stack span,
+.work-ledger__item:focus-visible .work-ledger__stack span,
+.work-ledger__item:hover .work-ledger__action,
+.work-ledger__item:focus-visible .work-ledger__action {
+  color: #7fd0ff;
+}
+
+.work-ledger__item:hover .work-ledger__content > p:not(.editorial-label),
+.work-ledger__item:focus-visible .work-ledger__content > p:not(.editorial-label) {
+  color: rgb(255 255 255 / 0.68);
+}
+
+.work-ledger__item:hover .work-ledger__action,
+.work-ledger__item:focus-visible .work-ledger__action {
+  border-color: rgb(127 208 255 / 0.45);
+}
+
+.industry-panel img,
+.industry-panel__wash,
+.industry-panel__icon,
+.industry-panel h2 {
+  transition:
+    filter 450ms ease,
+    background 350ms ease,
+    color 300ms ease,
+    transform 500ms var(--ease-out-expo);
+}
+
+.industry-panel:hover img,
+.industry-panel:focus-visible img {
+  filter: saturate(1.25) contrast(1.04);
+  transform: scale(1.045);
+}
+
+.industry-panel:hover .industry-panel__wash,
+.industry-panel:focus-visible .industry-panel__wash {
+  background:
+    radial-gradient(circle at 80% 20%, rgb(74 163 221 / 0.38), transparent 45%),
+    linear-gradient(to top, rgb(7 34 54 / 0.98), rgb(7 24 38 / 0.12) 74%);
+}
+
+.industry-panel:hover .industry-panel__icon,
+.industry-panel:focus-visible .industry-panel__icon {
+  border-color: #7fd0ff;
+  background: #1a5a8a;
+  transform: translateY(-3px);
+}
+
+.industry-panel:hover h2,
+.industry-panel:focus-visible h2 {
+  color: #7fd0ff;
+}
+
+.platform-atlas__layer:hover,
+.platform-atlas__layer:focus-within {
+  border-color: rgb(74 163 221 / 0.7);
+  background: linear-gradient(135deg, #0b2a44 0%, #14456b 100%);
+}
+
+.platform-atlas__layer:hover .platform-atlas__copy h2,
+.platform-atlas__layer:focus-within .platform-atlas__copy h2,
+.platform-atlas__layer:hover .platform-atlas__copy li,
+.platform-atlas__layer:focus-within .platform-atlas__copy li {
+  color: #fff;
+}
+
+.platform-atlas__layer:hover .platform-atlas__copy p,
+.platform-atlas__layer:focus-within .platform-atlas__copy p {
+  color: rgb(255 255 255 / 0.68);
+}
+
+.platform-atlas__layer:hover .platform-atlas__visual,
+.platform-atlas__layer:focus-within .platform-atlas__visual {
+  border-color: rgb(74 163 221 / 0.55);
+  box-shadow: 0 18px 46px rgb(11 42 68 / 0.16);
+}
+
+.insight-feature__content {
+  transition: background 360ms ease;
+}
+
+.insight-feature:hover .insight-feature__content,
+.insight-feature:focus-visible .insight-feature__content {
+  background: linear-gradient(135deg, rgb(20 69 107 / 0.6), rgb(4 20 33 / 0.18));
+}
+
+.insight-ledger__item:hover,
+.insight-ledger__item:focus-visible {
+  box-shadow: inset 3px 0 #4aa3dd;
+}
+
+.insight-ledger__item:hover h2,
+.insight-ledger__item:focus-visible h2 {
+  color: #7fd0ff;
+}
+
+.brand-panel__platform-wall li:hover,
+.brand-panel__platform-wall li:focus-within {
+  border-color: rgb(74 163 221 / 0.65);
+  background: linear-gradient(135deg, #0b2a44, #14456b);
+  color: #fff;
+}
+
+.leader-profile,
+.about-value,
+.about-stack__group {
+  transition:
+    background-color 320ms ease,
+    border-color 320ms ease,
+    box-shadow 320ms ease,
+    transform 320ms var(--ease-out-expo);
+}
+
+.leader-profile:hover,
+.leader-profile:focus-within {
+  border-color: rgb(74 163 221 / 0.64);
+  background-color: #0b2a44;
+  color: #fff;
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+}
+
+.leader-profile:hover h3,
+.leader-profile:focus-within h3 {
+  color: #fff;
+}
+
+.leader-profile:hover .leader-profile__role,
+.leader-profile:focus-within .leader-profile__role,
+.leader-profile:hover .leader-profile__bio,
+.leader-profile:focus-within .leader-profile__bio {
+  color: rgb(255 255 255 / 0.68);
+}
+
+.leader-profile:hover .leader-profile__credential,
+.leader-profile:focus-within .leader-profile__credential,
+.leader-profile:hover .editorial-label,
+.leader-profile:focus-within .editorial-label {
+  color: #7fd0ff;
+}
+
+.about-value:hover,
+.about-value:focus-within {
+  background: linear-gradient(145deg, #0b2a44, #14456b);
+}
+
+.about-value:hover h3,
+.about-value:focus-within h3 {
+  color: #fff;
+}
+
+.about-value:hover p,
+.about-value:focus-within p {
+  color: rgb(255 255 255 / 0.68);
+}
+
+.about-value:hover > span,
+.about-value:focus-within > span {
+  color: #7fd0ff;
+}
+
+.about-stack__group:hover,
+.about-stack__group:focus-within {
+  border-color: rgb(127 208 255 / 0.55);
+  background-color: rgb(4 20 33 / 0.72);
+  box-shadow: 0 20px 48px rgb(0 0 0 / 0.18);
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .color-card:hover,
+  .color-card:focus-visible,
+  .color-card:focus-within,
+  .service-story:hover .service-story__icon,
+  .service-story:focus-visible .service-story__icon,
+  .industry-panel:hover img,
+  .industry-panel:focus-visible img,
+  .industry-panel:hover .industry-panel__icon,
+  .industry-panel:focus-visible .industry-panel__icon,
+  .leader-profile:hover,
+  .leader-profile:focus-within,
+  .about-stack__group:hover,
+  .about-stack__group:focus-within {
+    transform: none;
+  }
+}

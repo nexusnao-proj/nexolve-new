@@ -166,7 +166,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
             <Reveal className="mt-6">
               <Link
                 href={`/work/${next.slug}`}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow hover:shadow-card-hover sm:flex-row"
+                className="color-card group flex flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow hover:shadow-card-hover sm:flex-row"
               >
                 <CardCover
                   cover={next.cover}

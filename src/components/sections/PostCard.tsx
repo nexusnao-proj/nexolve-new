@@ -16,7 +16,7 @@ export function PostCard({ post, sizes = "(min-width: 768px) 50vw, 100vw" }: Pos
     <article className="h-full">
       <Link
         href={`/blog/${post.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover"
+        className="color-card group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover"
       >
         <CardCover
           cover={post.cover}

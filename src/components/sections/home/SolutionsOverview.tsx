@@ -20,7 +20,7 @@ export function SolutionsOverview() {
             <div key={solution.slug} data-reveal>
               <Link
                 href={`/solutions#${solution.slug}`}
-                className="group flex h-full flex-col rounded-3xl border border-line bg-white p-8 shadow-card transition-shadow duration-300 hover:shadow-card-hover"
+                className="color-card group flex h-full flex-col rounded-3xl border border-line bg-white p-8 shadow-card transition-shadow duration-300 hover:shadow-card-hover"
               >
                 <div className="flex items-start justify-between gap-4">
                   <IconChip name={solution.icon} />

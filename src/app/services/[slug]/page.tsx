@@ -234,7 +234,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                 <div key={rel.slug} data-reveal>
                   <Link
                     href={`/services/${rel.slug}`}
-                    className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow hover:shadow-card-hover"
+                    className="color-card group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow hover:shadow-card-hover"
                   >
                     <CardCover
                       cover={rel.cover}
