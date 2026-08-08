@@ -5,23 +5,22 @@ type Variant = "primary" | "secondary" | "ghost" | "inverse" | "onDark";
 type Size = "md" | "lg";
 
 const base =
-  "group inline-flex min-h-11 items-center justify-center gap-3 border font-bold tracking-[-0.01em] transition-[background-color,color,border-color,transform] duration-300 select-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink disabled:cursor-not-allowed disabled:opacity-50";
+  "group inline-flex min-h-11 items-center justify-center gap-3 rounded-[3px] border font-bold tracking-[-0.01em] transition-[background-color,color,border-color,box-shadow,transform] duration-300 select-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-navy-soft disabled:cursor-not-allowed disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
   primary:
-    "border-alert bg-alert text-white hover:border-ink hover:bg-ink hover:text-white active:translate-y-px",
+    "border-alert bg-alert text-white shadow-[0_6px_18px_rgb(236_48_19/0.22)] hover:border-[#cf2a0f] hover:bg-[#cf2a0f] hover:shadow-[0_8px_24px_rgb(236_48_19/0.32)] active:translate-y-px",
   secondary:
-    "border-line bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-white active:translate-y-px",
-  ghost: "border-transparent bg-transparent text-ink hover:border-ink",
-  inverse:
-    "border-white bg-white text-ink hover:bg-ink hover:text-white active:translate-y-px",
+    "border-line bg-white text-ink shadow-card hover:border-navy-soft hover:text-navy active:translate-y-px",
+  ghost: "border-transparent bg-transparent text-ink hover:border-line hover:bg-white",
+  inverse: "border-white bg-white text-navy hover:bg-neutral-light active:translate-y-px",
   onDark:
-    "border-white/45 bg-transparent text-white hover:border-white hover:bg-white hover:text-ink active:translate-y-px",
+    "border-white/35 bg-white/5 text-white backdrop-blur-[2px] hover:border-white hover:bg-white hover:text-navy active:translate-y-px",
 };
 
 const sizes: Record<Size, string> = {
-  md: "px-5 py-2.5 text-sm",
-  lg: "min-h-13 px-7 py-3.5 text-[0.95rem]",
+  md: "px-5 py-2.5 text-[0.8125rem]",
+  lg: "min-h-12 px-6 py-3 text-sm",
 };
 
 type ButtonLinkProps = {

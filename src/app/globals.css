@@ -3,7 +3,9 @@
 
 /* Page-specific choreography only. Reusable tokens/patterns/motion live in src/theme/. */
 
-/* Hero */
+/* ---------------------------------------------------------------------------
+   Home hero — full-bleed footage under a navy wash, copy centred.
+   --------------------------------------------------------------------------- */
 .home-hero {
   position: relative;
   height: 100svh;
@@ -15,12 +17,32 @@
   padding-top: 72px;
 }
 
+/* Night wash, weighted left. Copy is flush left per the brand guidelines, so
+   the shade pools under the copy column and opens up on the right where the
+   footage and the mark can still be read. */
 .home-hero::after {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgb(14 20 24 / 0.58);
+  background:
+    linear-gradient(100deg, rgb(14 20 24 / 0.94) 0%, rgb(14 20 24 / 0.86) 32%, rgb(14 20 24 / 0.5) 66%, rgb(14 20 24 / 0.62) 100%),
+    linear-gradient(to bottom, rgb(14 20 24 / 0.8) 0%, transparent 26%, transparent 62%, rgb(14 20 24 / 0.96) 100%);
   content: "";
+  pointer-events: none;
+}
+
+/* Fine grid + top-edge shadow: gives the plate structure and keeps the fixed
+   header legible over bright frames. */
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(rgb(255 255 255 / 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.032) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: radial-gradient(85% 70% at 50% 46%, #000 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(85% 70% at 50% 46%, #000 0%, transparent 78%);
   pointer-events: none;
 }
 
@@ -34,40 +56,19 @@
   background: #0e1418;
 }
 
-.hero-film-media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Blue-steel duotone, graded down hard: the footage is atmosphere behind the
+   copy, not the subject. Opacity is left to HeroVideoSequence, which crossfades
+   the clips between two slots. */
+.hero-film-clip {
   object-position: center 48%;
-  opacity: 0;
-  filter: grayscale(0.96) contrast(1.08) brightness(0.75);
-  transition: opacity 900ms ease;
-}
-
-.hero-film-media.is-current {
-  z-index: 2;
-  opacity: 1;
-}
-
-.hero-film-media.is-next {
-  z-index: 1;
-}
-
-.hero-film-media.is-current.is-fading-out {
-  opacity: 0;
-}
-
-.hero-film-media.is-next.is-fading-in {
-  opacity: 1;
+  filter: saturate(0.42) contrast(1.12) brightness(0.4) hue-rotate(-8deg);
 }
 
 .hero-film-shade {
   position: absolute;
   inset: 0;
   z-index: 3;
-  background: rgb(0 0 0 / 0.1);
+  background: radial-gradient(120% 90% at 78% 42%, rgb(74 163 221 / 0.18), transparent 60%);
   pointer-events: none;
 }
 
@@ -75,17 +76,426 @@
   height: calc(100svh - 72px);
 }
 
+/* The live brand mark, sized and weighted to actually read. It sits to the
+   right of the copy column so its rotation stays visible instead of being
+   swallowed by the text it would otherwise sit behind. */
 .hero-matrix {
   position: absolute;
   z-index: 1;
   top: 50%;
-  right: clamp(-17rem, -10vw, -5rem);
-  width: min(68vw, 760px);
-  opacity: 0.34;
+  right: clamp(-9rem, -4vw, -2rem);
+  width: min(44vw, 460px);
+  opacity: 0.22;
   transform: translateY(-50%);
+  pointer-events: none;
 }
 
-/* Cinematic intelligence reel */
+/* Copy block is vertically centred in the stage but set flush left, ragged
+   right — brand guidelines slide 09. */
+.hero-stage {
+  display: grid;
+  flex: 1;
+  align-items: center;
+  justify-items: start;
+  padding-block: 2rem 1rem;
+}
+
+/* Wide enough that "We fix how large organisations" holds one line at the
+   display size; the lede is re-narrowed to a comfortable measure below. */
+.hero-copy {
+  max-width: 62rem;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: #7fd0ff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Trailing rule only: a leading rule would break the flush-left margin. */
+.hero-eyebrow::after {
+  width: clamp(1.5rem, 6vw, 3.5rem);
+  height: 1px;
+  background: rgb(127 208 255 / 0.5);
+  content: "";
+}
+
+.hero-title {
+  margin-top: 1.5rem;
+  font-size: clamp(2.35rem, 4.3vw, 4.15rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+
+/* Explicit lines, so "buy," can never orphan at the end of line one. */
+.hero-title__line {
+  display: block;
+  overflow: hidden;
+  /* Descenders would otherwise be clipped by the mask. */
+  padding-bottom: 0.08em;
+}
+
+.hero-title__line > span {
+  display: block;
+  transform: translateY(106%);
+  animation: hero-line-in 1050ms var(--ease-out-expo) 120ms forwards;
+}
+
+.hero-title__line:nth-child(2) > span {
+  animation-delay: 260ms;
+}
+
+.hero-title__accent {
+  color: #4aa3dd;
+}
+
+@keyframes hero-line-in {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.hero-lede {
+  margin-top: 1.5rem;
+  max-width: 38rem;
+  color: rgb(255 255 255 / 0.74);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+/* Credential rail: anchors the foot of the hero and hands off to the brand
+   panel below instead of leaving a dead field. */
+.hero-rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid rgb(255 255 255 / 0.14);
+  padding-block: 1.15rem 1.5rem;
+}
+
+.hero-rail > div + div {
+  border-left: 1px solid rgb(255 255 255 / 0.14);
+  padding-left: 1.5rem;
+}
+
+.hero-rail dt {
+  color: #fff;
+  font-size: clamp(0.82rem, 1.5vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hero-rail dd {
+  margin: 0.35rem 0 0;
+  color: rgb(255 255 255 / 0.5);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .hero-lede {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-stage {
+    padding-block: 3rem 1.5rem;
+  }
+
+  .hero-rail {
+    padding-block: 1.35rem 2rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Impact band — navy section carrying the firm statement and stat tiles.
+   --------------------------------------------------------------------------- */
+.impact-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #0b2a44;
+  color: #fff;
+}
+
+.impact-band__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.impact-band__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.16;
+  filter: saturate(0.5) brightness(0.7);
+}
+
+.impact-band__media::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(95deg, #0b2a44 0%, rgb(11 42 68 / 0.92) 45%, rgb(11 42 68 / 0.78) 100%);
+  content: "";
+}
+
+/* Source order is icon, dt (label), dd (value) so the definition list is
+   well-formed; `order` puts the value above the label visually. */
+.stat-tile {
+  display: flex;
+  min-height: 11.5rem;
+  flex-direction: column;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: var(--card-radius);
+  background: rgb(255 255 255 / 0.06);
+  padding: 1.15rem 1.1rem 1.25rem;
+  transition: background-color 300ms ease, border-color 300ms ease;
+}
+
+.stat-tile:hover {
+  border-color: rgb(74 163 221 / 0.6);
+  background: rgb(255 255 255 / 0.1);
+}
+
+.stat-tile__icon {
+  order: 1;
+  color: rgb(255 255 255 / 0.68);
+}
+
+.stat-tile__value {
+  order: 2;
+  /* Pushes the value/label pair to the foot of the tile. */
+  margin: auto 0 0;
+  font-size: clamp(2.1rem, 4vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.stat-tile__label {
+  order: 3;
+  margin-top: 0.55rem;
+  color: rgb(255 255 255 / 0.62);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+/* ---------------------------------------------------------------------------
+   Platform landscape — the stack panel.
+   --------------------------------------------------------------------------- */
+.hub-section {
+  width: 100%;
+  background:
+    linear-gradient(rgb(11 42 68 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(11 42 68 / 0.035) 1px, transparent 1px),
+    var(--paper);
+  background-size: 64px 64px;
+}
+
+.platform-stack {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  background: #fff;
+  box-shadow: var(--shadow-card);
+}
+
+/* Flat Deep Navy, no gradient. The identity is "precise, quiet and
+   engineered" — a graded bar reads as neither. */
+.platform-stack__head {
+  display: flex;
+  min-height: 3.4rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #0b2a44;
+  padding: 0.85rem 1.35rem;
+  color: rgb(255 255 255 / 0.72);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.platform-stack__head > span:first-child {
+  overflow: hidden;
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.platform-stack__mark {
+  width: 2rem;
+  flex: none;
+}
+
+.platform-stack__layers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: layer;
+}
+
+.platform-stack__layer {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  align-items: start;
+  gap: 0.4rem 1rem;
+  border-bottom: 1px solid var(--line);
+  padding: 1.25rem 1.35rem 1.35rem 1.55rem;
+  transition: background-color 320ms ease;
+}
+
+.platform-stack__layer:last-child {
+  border-bottom: none;
+}
+
+/* Flat 2px Signal Blue rule — the identity's rule weight, wiping in from the
+   top on hover. */
+.platform-stack__layer::before {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 2px;
+  background: #4aa3dd;
+  content: "";
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 480ms var(--ease-out-expo);
+}
+
+.platform-stack__layer:hover,
+.platform-stack__layer:focus-within {
+  background: #f3f2f2;
+}
+
+.platform-stack__layer:hover::before,
+.platform-stack__layer:focus-within::before {
+  transform: scaleY(1);
+}
+
+/* Set on the grid, not in a badge: a plain tabular index with a 2px Ink rule
+   beneath it. Flat Deep Navy on hover — no gradient fill. */
+.platform-stack__number {
+  display: grid;
+  width: 2.1rem;
+  height: 2.1rem;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  background: #fff;
+  color: #14456b;
+  font-size: 0.68rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  transition:
+    background-color 320ms ease,
+    border-color 320ms ease,
+    color 320ms ease;
+}
+
+.platform-stack__layer:hover .platform-stack__number,
+.platform-stack__layer:focus-within .platform-stack__number {
+  border-color: #0b2a44;
+  background: #0b2a44;
+  color: #fff;
+}
+
+.platform-stack__title {
+  display: flex;
+  min-height: 2.35rem;
+  align-items: center;
+  gap: 0.55rem;
+  color: #201e1d;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.platform-stack__title svg {
+  color: #8a8686;
+  transition: color 320ms ease;
+}
+
+.platform-stack__layer:hover .platform-stack__title svg,
+.platform-stack__layer:focus-within .platform-stack__title svg {
+  color: #14456b;
+}
+
+.platform-stack__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  grid-column: 2;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Square-cut, not pills. Pills read as consumer SaaS; the identity is a grid
+   system. The blue dot per chip is dropped too — twelve of them pushed the
+   page past the palette's 2% cyan/blue allowance. */
+.platform-stack__chips li {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  background: #fff;
+  padding: 0.32rem 0.7rem;
+  color: #5b5856;
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition:
+    border-color 320ms ease,
+    color 320ms ease;
+}
+
+.platform-stack__layer:hover .platform-stack__chips li,
+.platform-stack__layer:focus-within .platform-stack__chips li {
+  border-color: #201e1d;
+  color: #201e1d;
+}
+
+.platform-stack__foot {
+  display: flex;
+  min-height: 3.1rem;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  background: #f3f2f2;
+  padding: 0.8rem 1.35rem;
+  color: #201e1d;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Flat 2px Ink rule between the process words — the identity's rule weight. */
+.platform-stack__foot i {
+  height: 2px;
+  flex: 1;
+  margin-inline: 0.7rem;
+  background: #201e1d;
+  opacity: 0.12;
+}
+
+/* ---------------------------------------------------------------------------
+   Long-form / editorial blocks retained from the previous system.
+   --------------------------------------------------------------------------- */
 .reel-shell {
   background: #0e1418;
   color: #fff;
@@ -99,7 +509,7 @@
 .reel-item {
   position: relative;
   min-height: 76svh;
-  border-top: 1px solid rgb(255 255 255 / 0.18);
+  border-top: 1px solid rgb(255 255 255 / 0.14);
 }
 
 .reel-screen {
@@ -107,9 +517,10 @@
   top: 14svh;
   overflow: hidden;
   aspect-ratio: 16 / 9;
-  border: 1px solid rgb(255 255 255 / 0.26);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: var(--card-radius);
   background: #0e1418;
-  box-shadow: 0 40px 90px rgb(0 0 0 / 0.6);
+  box-shadow: 0 40px 90px rgb(0 0 0 / 0.5);
   transform: rotateY(-3deg) rotateX(1.5deg);
   transform-origin: center center;
   transition:
@@ -123,7 +534,7 @@
 
 .reel-screen:focus-within,
 .reel-item:hover .reel-screen {
-  border-color: rgb(255 255 255 / 0.7);
+  border-color: rgb(74 163 221 / 0.7);
   transform: rotateY(0) rotateX(0) scale(1.012);
 }
 
@@ -131,7 +542,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.08) brightness(0.72);
+  filter: saturate(0.6) contrast(1.05) brightness(0.7);
   transition:
     filter 700ms ease,
     transform 1000ms var(--ease-out-expo);
@@ -139,7 +550,7 @@
 
 .reel-item:hover .reel-video,
 .reel-screen:focus-within .reel-video {
-  filter: grayscale(1) contrast(1.02) brightness(0.82);
+  filter: saturate(0.85) contrast(1.02) brightness(0.85);
   transform: scale(1.025);
 }
 
@@ -149,7 +560,7 @@
   display: grid;
   place-items: center;
   background: repeating-linear-gradient(120deg, #0e1418 0, #0e1418 1px, #0b2a44 1px, #0b2a44 12px);
-  color: rgb(255 255 255 / 0.35);
+  color: rgb(255 255 255 / 0.3);
   font-size: clamp(4rem, 12vw, 10rem);
   font-variant-numeric: tabular-nums;
   font-weight: 800;
@@ -169,10 +580,11 @@
   grid-template-columns: 70px 0.7fr 1fr;
   gap: 1.5rem;
   min-height: 10rem;
-  border: 1px solid rgb(255 255 255 / 0.25);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: var(--card-radius);
   background: #0e1418;
   padding: 1.75rem;
-  box-shadow: 0 28px 70px rgb(0 0 0 / 0.55);
+  box-shadow: 0 28px 70px rgb(0 0 0 / 0.45);
   transform: rotateX(6deg) rotateY(-2deg);
 }
 
@@ -191,110 +603,11 @@
   transform: translateX(8%) rotateX(6deg) rotateY(-2deg);
 }
 
-/* Deliberate one-section navy exception: Nexolve platform landscape hub. */
-.hub-section {
-  width: 100%;
-  background:
-    linear-gradient(rgb(11 42 68 / 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(11 42 68 / 0.045) 1px, transparent 1px),
-    #f3f2f2;
-  background-size: 64px 64px;
-}
-
-.platform-stack {
-  min-width: 0;
-  overflow: hidden;
-  border: 2px solid #201e1d;
-  background: #fff;
-}
-
-.platform-stack__head,
-.platform-stack__foot {
-  display: flex;
-  align-items: center;
-  padding: 0.8rem 1rem;
-  color: #5b5856;
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.platform-stack__head {
-  min-height: 3.5rem;
-  justify-content: space-between;
-  border-bottom: 2px solid #201e1d;
-}
-
-.platform-stack__head > span:first-child {
-  overflow: hidden;
-  min-width: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.platform-stack__mark {
-  width: 2.5rem;
-  flex: none;
-}
-
-.platform-stack__layer {
-  display: grid;
-  min-height: 6rem;
-  grid-template-columns: 3rem minmax(8rem, 0.65fr) 1.35fr;
-  align-items: center;
-  gap: 1rem;
-  border-bottom: 1px solid #d9d7d4;
-  padding: 1rem;
-}
-
-.platform-stack__number {
-  align-self: start;
-  color: #1a5a8a;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-
-.platform-stack__layer h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-
-.platform-stack__layer > ul {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.35rem 1rem;
-  color: #5b5856;
-  font-size: 0.78rem;
-  line-height: 1.35;
-}
-
-.platform-stack__layer > ul li::before {
-  margin-right: 0.45rem;
-  color: #4aa3dd;
-  content: "—";
-}
-
-.platform-stack__foot {
-  min-height: 3.2rem;
-  justify-content: space-between;
-  color: #1a5a8a;
-}
-
-.platform-stack__foot i {
-  height: 1px;
-  flex: 1;
-  margin-inline: 0.7rem;
-  background: rgb(74 163 221 / 0.32);
-}
-
 /* A quiet image constellation between the compact hub and editorial case-study lens. */
 .production-constellation {
   position: relative;
   overflow: clip;
-  border-block: 1px solid #e4e3e1;
+  border-block: 1px solid var(--line);
   background: #fff;
   content-visibility: auto;
   contain-intrinsic-size: 1px 600px;
@@ -356,17 +669,17 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border: 1px solid rgb(32 30 29 / 0.1);
-  border-radius: 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   background: #d9d7d4;
-  box-shadow: 0 6px 16px rgb(11 42 68 / 0.08);
+  box-shadow: var(--shadow-card);
   transform: translateZ(0);
   backface-visibility: hidden;
 }
 
 .production-constellation__image {
   object-fit: cover;
-  filter: grayscale(1) contrast(1.03);
+  filter: saturate(0.55) contrast(1.03);
 }
 
 .production-constellation:not(.is-motion-paused) .production-constellation__ring,
@@ -378,8 +691,6 @@
 .production-constellation.is-motion-paused .production-constellation__face {
   animation-play-state: paused;
 }
-
-/* Composited-only face motion: counter-rotate against the ring (set at sm+). */
 
 .production-constellation__copy {
   position: relative;
@@ -505,14 +816,14 @@
   }
 
   .production-constellation__face:hover .production-constellation__image {
-    filter: grayscale(0.85) contrast(1.02);
+    filter: saturate(0.9) contrast(1.02);
     transform: scale(1.04);
   }
 }
 
 /* Delivery model — wide compact row, not a tall vertical timeline */
 .delivery-model {
-  background-color: #f3f2f2;
+  background-color: var(--paper);
 }
 
 .delivery-steps {
@@ -521,13 +832,13 @@
   padding: 0;
   display: grid;
   gap: 0;
-  border-top: 1px solid #201e1d;
+  border-top: 1px solid var(--line);
 }
 
 .delivery-step {
   position: relative;
   padding: 1.25rem 0 1.5rem;
-  border-bottom: 1px solid #d9d7d4;
+  border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
 
@@ -591,8 +902,8 @@
 
   .delivery-step {
     padding: 1.5rem 1.25rem 1.75rem 0;
-    border-bottom: 1px solid #d9d7d4;
-    border-right: 1px solid #d9d7d4;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
   }
 
   .delivery-step:nth-child(2n) {
@@ -610,7 +921,7 @@
   .delivery-step {
     padding: 1.75rem 1.5rem 1.75rem 0;
     border-bottom: none;
-    border-right: 1px solid #d9d7d4;
+    border-right: 1px solid var(--line);
   }
 
   .delivery-step:nth-child(2n) {
@@ -637,86 +948,125 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Responsive
+   --------------------------------------------------------------------------- */
 @media (max-width: 767px) {
   .home-hero {
     height: 100svh;
-    min-height: 660px;
-  }
-
-  .home-hero > div:not(.hero-matrix) {
-    min-height: 0;
+    min-height: 620px;
   }
 
   .home-hero__shell {
     height: calc(100svh - 72px);
   }
 
+  /* Portrait crops leave far less clear space, so lean harder on the wash. */
+  .home-hero::after {
+    background:
+      linear-gradient(rgb(14 20 24 / 0.92) 0%, rgb(14 20 24 / 0.72) 42%, rgb(14 20 24 / 0.97) 100%);
+  }
+
   .hero-title {
-    max-width: 9ch;
-    font-size: clamp(2.5rem, 11vw, 2.9rem);
-    line-height: 0.94;
+    font-size: clamp(2.15rem, 8.6vw, 2.85rem);
+    line-height: 1.04;
+  }
+
+  .hero-lede {
+    margin-top: 1.15rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .hero-matrix {
+    width: 30rem;
+    opacity: 0.09;
+  }
+
+  .hero-rail {
+    grid-template-columns: 1fr;
+    padding-block: 0;
+  }
+
+  .hero-rail > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    padding-block: 0.7rem;
+  }
+
+  .hero-rail > div:first-child {
+    border-top: none;
+  }
+
+  .hero-rail > div + div {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .hero-rail dd {
+    margin-top: 0;
+  }
+
+  .hero-film-clip {
+    object-position: 62% center;
   }
 
   .service-matrix__item {
     min-height: 0;
-    padding: 1.15rem;
   }
 
-  .service-matrix__item h3 {
-    margin-top: 0.85rem;
-    font-size: 1.05rem;
+  .service-matrix__item:last-child {
+    grid-column: span 2;
   }
 
-  .service-matrix__item > span:last-child {
-    margin-top: 1rem;
+  /* Two-up at this width: the cover and title carry the card, so the excerpt
+     is dropped rather than squeezed to three words a line. */
+  .service-matrix__body p {
+    display: none;
   }
 
-  .proof-project {
-    min-height: 0;
-    padding: 1.15rem;
+  /* Padding lives on the body — the cover bleeds to the card edge. */
+  .proof-project__body,
+  .service-matrix__body {
+    padding: 1.05rem 1rem 1.1rem;
   }
 
-  .proof-project h4 {
-    margin-top: 1rem;
-    font-size: 1.1rem;
-  }
-
-  .proof-project > span:last-child {
-    margin-top: 1rem;
-  }
-
-  .brand-proof__logo {
-    min-height: 4.5rem;
-    padding: 0.75rem;
-  }
-
-  .brand-proof__logo--platform {
-    min-height: 5.25rem;
-  }
-
-  .home-hero::after {
-    background: rgb(14 20 24 / 0.68);
-  }
-
-  .hero-matrix {
-    right: -11.5rem;
-    width: 30rem;
-    opacity: 0.2;
+  .proof-project h3 {
+    font-size: 1.15rem;
   }
 
   .platform-stack__layer {
-    min-height: 0;
-    grid-template-columns: 2.25rem 1fr;
-    gap: 0.65rem;
-    padding: 0.85rem;
+    grid-template-columns: 2.1rem 1fr;
+    gap: 0.35rem 0.7rem;
+    padding: 1rem 0.9rem 1.1rem 1.05rem;
   }
 
-  .platform-stack__layer > ul {
-    grid-column: 2;
+  .platform-stack__number {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.62rem;
   }
 
-  .hero-film-media {
-    object-position: 62% center;
+  .platform-stack__title {
+    min-height: 2rem;
+    font-size: 0.95rem;
+  }
+
+  .platform-stack__chips li {
+    padding: 0.26rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .stat-tile {
+    min-height: 9rem;
+    padding: 0.95rem 0.9rem 1rem;
+  }
+
+  .stat-tile__value {
+    margin-top: 0.9rem;
   }
 
   .reel-item {
@@ -752,6 +1102,11 @@
   .reel-video {
     transform: none !important;
   }
+  /* No delayed wipe — the headline must be present from the first frame. */
+  .hero-title__line > span {
+    animation: none;
+    transform: none;
+  }
   .reel-screen {
     position: relative;
     top: auto;
@@ -769,65 +1124,28 @@
   }
 }
 
-@media (max-width: 767px) and (max-height: 720px) {
-  .home-hero {
-    min-height: 100svh;
-  }
-
-  .home-hero__shell {
-    height: calc(100svh - 72px);
-    padding-block: 0.65rem;
-  }
-
-  .hero-copy {
-    padding-block: 0.5rem;
-  }
-
-  .hero-title {
-    margin-top: 0.8rem;
-    font-size: clamp(2.2rem, 10vw, 2.5rem);
-  }
-
-  .hero-lede {
-    margin-top: 0.8rem;
-    font-size: 0.82rem;
-    line-height: 1.45;
-  }
-
-  .hero-actions {
-    margin-top: 0.9rem;
-  }
-}
-
-@media (max-width: 767px) and (max-height: 620px) {
-  .hero-actions > :nth-child(2) {
-    display: none;
-  }
-}
-
+/* Short landscape viewports: tighten the stack so the rail stays on screen. */
 @media (min-width: 768px) and (max-height: 720px) {
   .home-hero {
-    min-height: 100svh;
+    height: 100svh;
+    min-height: 540px;
   }
 
   .home-hero__shell {
     height: calc(100svh - 72px);
-    padding-block: 0.75rem;
+  }
+
+  .hero-stage {
+    padding-block: 1rem 0.5rem;
   }
 
   .hero-title {
-    font-size: clamp(2.8rem, 4.6vw, 3.9rem);
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
   }
 
   .hero-lede {
-    margin-top: 0.85rem;
-    line-height: 1.5;
+    margin-top: 1.1rem;
   }
-
-  .hero-actions {
-    margin-top: 1rem;
-  }
-
 }
 
 /* First-visit intro splash: the inline script in the root layout adds

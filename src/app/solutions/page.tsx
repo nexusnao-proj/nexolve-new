@@ -5,6 +5,7 @@ import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { Container } from "@/components/ui/Container";
+import { CardCover } from "@/components/ui/CardCover";
 import { IconChip } from "@/components/ui/Icon";
 import { ArrowIcon } from "@/components/ui/Button";
 import { Reveal } from "@/components/animation/Reveal";
@@ -28,9 +29,9 @@ export default function SolutionsPage() {
           { name: "Solutions", path: "/solutions" },
         ]}
       />
-      <section className="bg-neutral-light">
-        <Container className="py-16 sm:py-20">
-          <div className="space-y-8">
+      <section className="surface-blueprint platform-atlas">
+        <Container className="relative py-16 sm:py-24">
+          <div className="platform-atlas__layers">
             {solutions.map((solution, index) => {
               const relServices = solution.services
                 .map((s) => getService(s))
@@ -39,10 +40,10 @@ export default function SolutionsPage() {
                 <Reveal key={solution.slug}>
                   <article
                     id={solution.slug}
-                    className="scroll-mt-24 rounded-3xl border border-line bg-white p-8 shadow-card sm:p-10"
+                    className="platform-atlas__layer group scroll-mt-24"
                   >
                     <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-                      <div>
+                      <div className="platform-atlas__copy">
                         <div className="flex items-center gap-4">
                           <IconChip name={solution.icon} />
                           <p className="text-xs font-bold tracking-[0.2em] text-violet uppercase">
@@ -68,23 +69,29 @@ export default function SolutionsPage() {
                           ))}
                         </ul>
                       </div>
-                      <div className="rounded-2xl bg-neutral-light p-6">
-                        <h3 className="text-xs font-bold tracking-[0.18em] text-ink-muted uppercase">
-                          Delivered by these service lines
-                        </h3>
-                        <ul className="mt-4 space-y-3">
-                          {relServices.map((service) => (
-                            <li key={service.slug}>
-                              <Link
-                                href={`/services/${service.slug}`}
-                                className="group flex items-center justify-between gap-3 rounded-xl border border-line bg-white px-4 py-3 text-sm font-bold text-ink transition-colors hover:text-violet"
-                              >
-                                {service.title}
-                                <ArrowIcon className="shrink-0 text-violet transition-transform group-hover:translate-x-1" />
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="platform-atlas__visual">
+                        <CardCover
+                          cover={solution.cover}
+                          sizes="(min-width: 1024px) 35vw, 100vw"
+                        />
+                        <div className="platform-atlas__services">
+                          <h3 className="text-xs font-bold tracking-[0.18em] text-ink-muted uppercase">
+                            Delivered by these service lines
+                          </h3>
+                          <ul className="mt-4 space-y-3">
+                            {relServices.map((service) => (
+                              <li key={service.slug}>
+                                <Link
+                                  href={`/services/${service.slug}`}
+                                  className="platform-atlas__service-link group/link"
+                                >
+                                  {service.title}
+                                  <ArrowIcon className="shrink-0 text-violet transition-transform group-hover/link:translate-x-1" />
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </article>

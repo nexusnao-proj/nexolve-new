@@ -145,7 +145,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             <Reveal group className="mt-8 grid gap-5 md:grid-cols-2">
               {related.map((rel) => (
                 <div key={rel.slug} data-reveal>
-                  <PostCard post={rel} />
+                  <PostCard post={rel} sizes="(min-width: 768px) 50vw, 100vw" />
                 </div>
               ))}
             </Reveal>

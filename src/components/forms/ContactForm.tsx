@@ -19,7 +19,7 @@ import Link from "next/link";
 const initialState: ContactFormState = { status: "idle" };
 
 const inputCls =
-  "w-full rounded-xl border border-line bg-white px-4 py-3 text-base text-ink placeholder:text-ink-muted/60 transition-colors focus:border-ink focus:outline-none aria-[invalid=true]:border-ink";
+  "w-full rounded-[3px] border border-navy/20 bg-[#f5f8fb] px-4 py-3 text-base text-ink shadow-[inset_0_1px_0_rgb(11_42_68/0.03)] placeholder:text-ink-muted/55 transition-[border-color,background-color,box-shadow] hover:border-navy-soft/45 hover:bg-white focus:border-blue focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue/15 disabled:cursor-not-allowed disabled:border-line disabled:bg-neutral-light disabled:text-ink-muted/55 aria-[invalid=true]:border-alert aria-[invalid=true]:bg-[#fff7f5] aria-[invalid=true]:ring-4 aria-[invalid=true]:ring-alert/10";
 
 function Field({
   label,
@@ -36,7 +36,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="mb-1.5 block text-sm font-bold text-ink">
+      <label htmlFor={htmlFor} className="mb-2 block text-sm font-bold text-navy">
         {label}
         {required ? (
           <span aria-hidden="true" className="text-ink">
@@ -49,7 +49,7 @@ function Field({
       </label>
       {children}
       {error && (
-        <p id={`${htmlFor}-error`} className="mt-1.5 text-sm font-medium text-ink" role="alert">
+        <p id={`${htmlFor}-error`} className="mt-1.5 text-sm font-semibold text-alert" role="alert">
           {error}
         </p>
       )}
@@ -145,7 +145,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-6">
+    <form onSubmit={onSubmit} noValidate className="space-y-7">
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label htmlFor={`${id}-website`}>Website</label>
         <input id={`${id}-website`} type="text" name="website" tabIndex={-1} autoComplete="off" />
@@ -320,7 +320,7 @@ export function ContactForm() {
             required
             aria-invalid={Boolean(errors.consent)}
             aria-describedby={errors.consent ? `${id}-consent-error` : undefined}
-            className="mt-1 size-5 shrink-0 accent-ink"
+            className="mt-1 size-5 shrink-0 accent-navy"
           />
           <label htmlFor={`${id}-consent`} className="text-sm leading-relaxed text-ink-muted">
             I agree that Nexolve Technologies may store and process this information to respond to my enquiry,
@@ -332,7 +332,7 @@ export function ContactForm() {
           </label>
         </div>
         {errors.consent && (
-          <p id={`${id}-consent-error`} className="mt-1.5 text-sm font-medium text-ink" role="alert">
+          <p id={`${id}-consent-error`} className="mt-1.5 text-sm font-semibold text-alert" role="alert">
             {errors.consent}
           </p>
         )}

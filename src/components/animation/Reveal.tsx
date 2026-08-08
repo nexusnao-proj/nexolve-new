@@ -5,7 +5,7 @@ import { createElement, useEffect, useRef, type CSSProperties } from "react";
 type RevealProps = {
   children: React.ReactNode;
   className?: string;
-  as?: "div" | "section" | "ul" | "li" | "span" | "header" | "figure";
+  as?: "div" | "section" | "ul" | "li" | "dl" | "span" | "header" | "figure";
   /** Delay before the animation starts, ms. */
   delay?: number;
   /** Initial vertical offset, px. */

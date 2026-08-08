@@ -10,19 +10,23 @@ html {
 body {
   margin: 0;
   overflow-x: clip;
-  background: #f3f2f2;
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Retire the previous soft card language across inherited routes. */
+/* Corporate card language: near-square corners, hairline borders, real elevation.
+   Inherited routes still write `rounded-3xl` etc.; normalise them all here. */
 .rounded-xl,
 .rounded-2xl,
-.rounded-3xl,
+.rounded-3xl {
+  border-radius: var(--card-radius);
+}
+
 .rounded-full {
-  border-radius: 2px;
+  border-radius: 999px;
 }
 
 main h1 {
@@ -49,8 +53,8 @@ textarea {
 }
 
 :focus-visible {
-  outline: 2px solid #0b2a44;
-  outline-offset: 4px;
+  outline: 2px solid #14456b;
+  outline-offset: 3px;
 }
 
 ::selection {
@@ -74,35 +78,116 @@ textarea {
 }
 
 .bg-grid {
-  background-color: #f3f2f2;
+  background-color: var(--paper);
   background-image:
-    linear-gradient(rgb(11 42 68 / 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(11 42 68 / 0.055) 1px, transparent 1px);
+    linear-gradient(rgb(11 42 68 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(11 42 68 / 0.04) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
 .bg-grid-dark {
   background-image:
-    linear-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
   background-size: 72px 72px;
 }
 
 .hairline-spectrum {
   height: 1px;
-  background: rgb(255 255 255 / 0.2);
+  background: rgb(255 255 255 / 0.14);
 }
 
 .editorial-label {
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
+/* ---------------------------------------------------------------------------
+   nx-card — the single surface primitive behind proof, service, work,
+   insight and industry cards. White plate, hairline border, quiet lift.
+   --------------------------------------------------------------------------- */
+.nx-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  background: #fff;
+  box-shadow: var(--shadow-card);
+  transition:
+    box-shadow 320ms ease,
+    border-color 320ms ease,
+    transform 320ms var(--ease-out-expo);
+}
+
+.nx-card:hover,
+.nx-card:focus-visible,
+.nx-card:focus-within {
+  border-color: rgb(20 69 107 / 0.55);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+}
+
+.nx-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-ink-muted, #5b5856);
+}
+
+.nx-card__index {
+  color: #0b2a44;
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+
+.nx-card__icon {
+  color: #8a8686;
+  transition: color 320ms ease;
+}
+
+.nx-card:hover .nx-card__icon {
+  color: #14456b;
+}
+
+.nx-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1a5a8a;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+/* Anchored to the base of the card, separated by a hairline, so the action
+   line stays on one baseline across a row of uneven-length cards. */
+.nx-card__link--footed {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.95rem;
+}
+
+/* Grid of nx-cards with a consistent gutter. */
+.nx-card-grid {
+  display: grid;
+  gap: 1px;
+}
+
+@media (min-width: 640px) {
+  .nx-card-grid {
+    gap: 0.75rem;
+  }
+}
+
 .editorial-row {
   position: relative;
-  border-top: 2px solid currentColor;
+  border-top: 1px solid var(--line);
   transition:
     padding-left 450ms var(--ease-out-expo),
     background-color 300ms ease;
@@ -113,7 +198,7 @@ textarea {
   top: -1px;
   left: 0;
   width: 0;
-  height: 2px;
+  height: 1px;
   background: var(--gradient-brand);
   content: "";
   transition: width 500ms var(--ease-out-expo);
@@ -127,20 +212,20 @@ textarea {
 .process-line {
   background: linear-gradient(
     90deg,
-    #201e1d 0 25%,
-    #8a877f 25% 25.3%,
-    #201e1d 25.3% 50%,
-    #8a877f 50% 50.3%,
-    #201e1d 50.3% 75%,
-    #8a877f 75% 75.3%,
-    #201e1d 75.3%
+    #0b2a44 0 25%,
+    #8a8686 25% 25.3%,
+    #0b2a44 25.3% 50%,
+    #8a8686 50% 50.3%,
+    #0b2a44 50.3% 75%,
+    #8a8686 75% 75.3%,
+    #0b2a44 75.3%
   );
 }
 
 .editorial-frame::after {
   position: absolute;
   inset: 0;
-  border: 1px solid rgb(32 30 29 / 0.18);
+  border: 1px solid var(--line);
   content: "";
   pointer-events: none;
 }
@@ -255,20 +340,12 @@ textarea {
   line-height: 1;
 }
 
-.page-hero::before {
-  position: absolute;
-  inset: 72px 0 auto;
-  height: 2px;
-  background: #0b2a44;
-  content: "";
-}
-
 .page-hero__mark {
   position: absolute;
   right: clamp(-8rem, -6vw, -2rem);
   bottom: clamp(-12rem, -11vw, -5rem);
   width: min(52vw, 640px);
-  opacity: 0.09;
+  opacity: 0.07;
 }
 
 .brand-cta__mark {
@@ -276,119 +353,1223 @@ textarea {
   right: clamp(-15rem, -10vw, -6rem);
   top: 50%;
   width: min(70vw, 760px);
-  opacity: 0.16;
+  opacity: 0.14;
   transform: translateY(-50%);
 }
 
-.proof-logo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--color-line);
-  border-left: 1px solid var(--color-line);
-}
-
-.brand-proof__logo {
-  display: grid;
-  min-height: 5.5rem;
-  place-items: center;
-  border-right: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
+/* ---------------------------------------------------------------------------
+   Brand panel — one white surface, two labelled ranks on a shared column
+   rhythm. No per-logo chrome and no hover motion: the marks carry themselves,
+   optical sizing and whitespace do the rest.
+   --------------------------------------------------------------------------- */
+.brand-panel {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   background: #fff;
-  padding: 1rem;
+  box-shadow: var(--shadow-card);
 }
 
-.brand-proof__logo--platform {
-  min-height: 6.5rem;
-  grid-column: span 1;
+.brand-panel__group {
+  padding: 1.75rem 1.5rem 2rem;
 }
 
-.proof-logo-grid .brand-proof__logo:nth-child(n + 5) {
-  min-height: 5rem;
+/* Pure white throughout — several supplied marks carry a baked-in white plate,
+   which shows as a visible rectangle against any tint. */
+.brand-panel__group + .brand-panel__group {
+  border-top: 1px solid var(--line);
+}
+
+.brand-panel__label {
+  color: #5b5856;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.brand-panel__row {
+  display: grid;
+  align-items: center;
+  gap: 2rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.brand-panel__row li {
+  display: grid;
+  place-items: center;
+}
+
+/* Optical sizing: every mark is capped by height so wordmarks and emblems read
+   at the same visual weight regardless of their intrinsic aspect ratio. */
+.brand-panel__row img {
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.brand-panel__row--platform {
+  margin-top: 1.5rem;
+}
+
+.brand-panel__row--platform img {
+  height: 2.5rem;
+}
+
+/* These marks ship with generous internal padding, so they need a taller cap
+   than the platform wordmarks to land at the same optical weight. */
+.brand-panel__row--enterprise {
+  margin-top: 1.1rem;
+  gap: 1rem 1.5rem;
+}
+
+.brand-panel__row--enterprise img {
+  height: 3.4rem;
 }
 
 @media (min-width: 640px) {
-  .proof-logo-grid {
-    grid-template-columns: repeat(8, minmax(0, 1fr));
+  .brand-panel__group {
+    padding: 2rem 2.25rem 2.25rem;
   }
 
-  .proof-logo-grid .brand-proof__logo--platform {
-    grid-column: span 2;
-    min-height: 7rem;
+  .brand-panel__row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2.25rem 2rem;
   }
 
-  .proof-logo-grid .brand-proof__logo:nth-child(n + 5) {
-    grid-column: span 1;
-    min-height: 5.5rem;
+  .brand-panel__row--platform img {
+    height: 2.9rem;
+  }
+
+  .brand-panel__row--enterprise {
+    gap: 1.25rem 2rem;
+  }
+
+  .brand-panel__row--enterprise img {
+    height: 4.1rem;
   }
 }
 
-.proof-project {
+@media (min-width: 1024px) {
+  .brand-panel__group {
+    padding: 2.25rem 2.75rem 2.5rem;
+  }
+
+  .brand-panel__row--platform img {
+    height: 3.1rem;
+  }
+
+  .brand-panel__row--enterprise img {
+    height: 4.4rem;
+  }
+}
+
+/* Proof + service cards share the nx-card surface. The proof card carries a
+   full-bleed cover, so its padding lives on an inner body instead. */
+.proof-project,
+.service-matrix__item {
+  position: relative;
   display: flex;
-  min-height: 16rem;
   flex-direction: column;
-  border: 1px solid var(--color-line);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
   background: #fff;
-  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
   transition:
-    background-color 250ms ease,
-    border-color 250ms ease,
-    color 250ms ease,
-    box-shadow 250ms ease;
+    box-shadow 320ms ease,
+    border-color 320ms ease,
+    transform 320ms var(--ease-out-expo);
+}
+
+/* The identity's 2px rule, used as the card's hover affordance. */
+.proof-project::after,
+.service-matrix__item::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-brand);
+  content: "";
+  transition: width 560ms var(--ease-out-expo);
+}
+
+.proof-project:hover::after,
+.proof-project:focus-visible::after,
+.service-matrix__item:hover::after,
+.service-matrix__item:focus-visible::after {
+  width: 100%;
+}
+
+.proof-project__body,
+.service-matrix__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.35rem 1.4rem 1.4rem;
+}
+
+/* Five across, so the body runs a little tighter than the proof card's three. */
+.service-matrix__body {
+  padding: 1.2rem 1.15rem 1.25rem;
 }
 
 .proof-project:hover,
-.proof-project:focus-visible {
-  border-color: #0b2a44;
-  background: #0b2a44;
-  color: #fff;
-  box-shadow: 0 12px 28px rgb(11 42 68 / 0.12);
-}
-
-.proof-project:hover h4,
-.proof-project:focus-visible h4 {
-  color: #fff;
-}
-
-.proof-project:hover p,
-.proof-project:focus-visible p,
-.proof-project:hover span,
-.proof-project:focus-visible span {
-  color: rgb(255 255 255 / 0.72);
-}
-
-.service-matrix__item {
-  display: flex;
-  min-height: 20rem;
-  flex-direction: column;
-  border: 1px solid var(--color-line);
-  border-radius: 1rem;
-  background: #fff;
-  padding: 1.4rem;
-  transition:
-    background-color 250ms ease,
-    border-color 250ms ease,
-    color 250ms ease,
-    box-shadow 250ms ease;
-}
-
+.proof-project:focus-visible,
 .service-matrix__item:hover,
 .service-matrix__item:focus-visible {
-  border-color: #0b2a44;
-  background: #0b2a44;
-  color: #fff;
-  box-shadow: 0 12px 28px rgb(11 42 68 / 0.12);
+  border-color: rgb(20 69 107 / 0.55);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
 }
 
-.service-matrix__item:hover p,
-.service-matrix__item:focus-visible p,
-.service-matrix__item:hover span,
-.service-matrix__item:focus-visible span {
-  color: rgb(255 255 255 / 0.72);
+.proof-project .nx-card__icon,
+.service-matrix__item .nx-card__icon {
+  color: #8a8686;
+  transition: color 320ms ease;
+}
+
+.proof-project:hover .nx-card__icon,
+.service-matrix__item:hover .nx-card__icon {
+  color: #14456b;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .matrix-mark--animated .matrix-mark__ring,
   .matrix-mark--animated .matrix-mark__core {
     animation: none;
+  }
+
+  .nx-card,
+  .proof-project,
+  .service-matrix__item {
+    transition: box-shadow 320ms ease, border-color 320ms ease;
+  }
+
+  .nx-card:hover,
+  .proof-project:hover,
+  .service-matrix__item:hover {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Client-review visual system: recurring brand surfaces, treated fields and
+   reusable technology marks. Decorative treatments never carry information.
+   --------------------------------------------------------------------------- */
+.surface-blueprint,
+.surface-network,
+.surface-dark-network {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.surface-blueprint {
+  background-color: #eef6fb;
+  background-image:
+    radial-gradient(circle at 82% 12%, rgb(74 163 221 / 0.2), transparent 26rem),
+    linear-gradient(rgb(11 42 68 / 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(11 42 68 / 0.055) 1px, transparent 1px);
+  background-size: auto, 56px 56px, 56px 56px;
+}
+
+.surface-network {
+  background-color: #f8fbfd;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgb(74 163 221 / 0.16) 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 64%, rgb(11 42 68 / 0.11) 0 2px, transparent 3px),
+    linear-gradient(112deg, transparent 20%, rgb(20 69 107 / 0.055) 20.15%, transparent 20.3% 66%, rgb(74 163 221 / 0.07) 66.15%, transparent 66.3%);
+  background-size: 92px 92px, 128px 128px, 100% 100%;
+}
+
+.surface-dark-network {
+  background-color: #0b2a44;
+  background-image:
+    radial-gradient(circle at 85% 16%, rgb(74 163 221 / 0.24), transparent 28rem),
+    linear-gradient(rgb(255 255 255 / 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.055) 1px, transparent 1px);
+  background-size: auto, 72px 72px, 72px 72px;
+  color: #fff;
+}
+
+.technology-mark {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.technology-mark__visual {
+  display: grid;
+  width: 3rem;
+  height: 2.35rem;
+  flex: none;
+  place-items: center;
+  border: 1px solid rgb(11 42 68 / 0.12);
+  border-radius: 3px;
+  background: #fff;
+  padding: 0.35rem;
+  color: #14456b;
+}
+
+.technology-mark__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.technology-mark__name {
+  overflow: hidden;
+  color: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+}
+
+.technology-mark--compact {
+  gap: 0.45rem;
+}
+
+.technology-mark--compact .technology-mark__visual {
+  width: 2rem;
+  height: 1.65rem;
+  border-color: rgb(11 42 68 / 0.09);
+  padding: 0.22rem;
+}
+
+.technology-mark--compact .technology-mark__name {
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.brand-panel__platform-wall {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.brand-panel__platform-wall li {
+  display: flex;
+  min-height: 5.5rem;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, #fff, #f5faff);
+  padding: 1rem;
+  transition: transform 320ms var(--ease-out-expo), box-shadow 320ms ease;
+}
+
+.brand-panel__platform-wall li:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+}
+
+.brand-panel__platform-wall .technology-mark__visual {
+  width: 5.4rem;
+  height: 2.7rem;
+  border: 0;
+  padding: 0;
+}
+
+.brand-marquee {
+  margin-inline: -1.5rem;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.brand-marquee__item {
+  display: grid;
+  width: 12rem;
+  height: 8.5rem;
+  flex: none;
+  place-items: center;
+  border-right: 1px solid var(--line);
+  background: #fff;
+  padding: 1rem 1.35rem;
+}
+
+.brand-marquee__item img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 6.25rem;
+  object-fit: contain;
+}
+
+@media (max-width: 639px) {
+  .brand-marquee__item {
+    width: 10.5rem;
+    height: 7.25rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .brand-marquee__item img {
+    max-height: 5.4rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .brand-panel__platform-wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .brand-panel__platform-wall {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Services: the approved reference language is an alternating editorial path. */
+.service-story-list {
+  border-top: 1px solid rgb(11 42 68 / 0.18);
+}
+
+.service-story {
+  display: grid;
+  border-bottom: 1px solid rgb(11 42 68 / 0.18);
+  background: rgb(255 255 255 / 0.66);
+  transition: background-color 320ms ease, box-shadow 320ms ease;
+}
+
+.service-story:hover,
+.service-story:focus-visible {
+  background: #fff;
+  box-shadow: 0 24px 70px rgb(11 42 68 / 0.12);
+}
+
+.service-story__visual {
+  position: relative;
+  min-height: 16rem;
+  overflow: hidden;
+}
+
+.service-story__visual > div {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.service-story__visual::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, transparent 48%, rgb(11 42 68 / 0.54));
+  content: "";
+  pointer-events: none;
+}
+
+.service-story__number {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 0.8rem;
+  z-index: 2;
+  color: rgb(255 255 255 / 0.9);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  line-height: 1;
+}
+
+.service-story__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 4.5rem);
+}
+
+.service-story__icon {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1.5rem;
+  place-items: center;
+  background: linear-gradient(135deg, #0b2a44, #1a5a8a);
+  color: #fff;
+}
+
+.service-story__content h2 {
+  max-width: 24ch;
+  margin-top: 0.8rem;
+  color: #201e1d;
+  font-size: clamp(1.75rem, 4vw, 2.7rem);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.service-story__content > p:not(.editorial-label) {
+  max-width: 42rem;
+  margin-top: 1.1rem;
+  color: #5b5856;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+.service-story__content ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-story__content li {
+  border: 1px solid rgb(11 42 68 / 0.16);
+  background: #eef6fb;
+  padding: 0.4rem 0.65rem;
+  color: #14456b;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.service-story__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.7rem;
+  color: #1a5a8a;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+@media (min-width: 900px) {
+  .service-story {
+    grid-template-columns: minmax(0, 1.03fr) minmax(0, 0.97fr);
+    min-height: 30rem;
+  }
+
+  .service-story:nth-child(even) .service-story__visual {
+    order: 2;
+  }
+}
+
+/* Work: case studies read as a ledger, not as another tile wall. */
+.work-ledger__list {
+  border-top: 1px solid rgb(11 42 68 / 0.2);
+}
+
+.work-ledger__item {
+  display: grid;
+  align-items: center;
+  gap: 1.25rem;
+  border-bottom: 1px solid rgb(11 42 68 / 0.2);
+  padding: 1.25rem 0;
+  transition: background-color 300ms ease, padding-inline 450ms var(--ease-out-expo);
+}
+
+.work-ledger__item:hover,
+.work-ledger__item:focus-visible {
+  background: rgb(255 255 255 / 0.82);
+  padding-inline: 1rem;
+}
+
+.work-ledger__index {
+  color: #14456b;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.work-ledger__media {
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.work-ledger__content h2 {
+  margin-top: 0.55rem;
+  color: #201e1d;
+  font-size: clamp(1.35rem, 3vw, 2.05rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.work-ledger__content > p:not(.editorial-label) {
+  margin-top: 0.8rem;
+  color: #5b5856;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.work-ledger__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.work-ledger__stack span {
+  color: #14456b;
+  font-size: 0.68rem;
+  font-weight: 750;
+}
+
+.work-ledger__stack span + span::before {
+  margin-right: 0.4rem;
+  color: #4aa3dd;
+  content: "/";
+}
+
+.work-ledger__action {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgb(11 42 68 / 0.2);
+  color: #14456b;
+}
+
+@media (min-width: 768px) {
+  .work-ledger__item {
+    grid-template-columns: 2rem minmax(14rem, 0.58fr) minmax(0, 1fr) auto;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    padding-block: 1.5rem;
+  }
+}
+
+/* Industries: asymmetric image-led panels on a live, technical field. */
+.industry-field__grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.industry-panel {
+  position: relative;
+  min-height: 25rem;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  background: #0e1418;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 0.2);
+}
+
+.industry-panel > div:first-child {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.industry-panel__wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(7 24 38 / 0.96), rgb(7 24 38 / 0.18) 72%);
+  transition: background-color 350ms ease;
+}
+
+.industry-panel__content {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  padding: 1.5rem;
+  color: #fff;
+}
+
+.industry-panel__icon {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  background: rgb(11 42 68 / 0.7);
+  color: #7fd0ff;
+  backdrop-filter: blur(8px);
+}
+
+.industry-panel__index {
+  color: rgb(255 255 255 / 0.62);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.industry-panel h2 {
+  margin-top: 1.25rem;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+}
+
+.industry-panel p {
+  max-width: 38rem;
+  margin-top: 0.75rem;
+  color: rgb(255 255 255 / 0.7);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.industry-panel__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  color: #7fd0ff;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+@media (min-width: 900px) {
+  .industry-field__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .industry-panel {
+    grid-column: span 5;
+  }
+
+  .industry-panel:nth-child(4n + 1),
+  .industry-panel:nth-child(4n + 4) {
+    grid-column: span 7;
+  }
+}
+
+/* Insights: one feature story followed by an editorial index. */
+.insight-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  list-style: none;
+}
+
+.insight-filter {
+  min-height: 2.8rem;
+  border-right: 1px solid rgb(255 255 255 / 0.14);
+  padding: 0.65rem 0.9rem;
+  color: rgb(255 255 255 / 0.62);
+  font-size: 0.72rem;
+  font-weight: 750;
+  transition: background-color 250ms ease, color 250ms ease;
+}
+
+.insight-filter:hover,
+.insight-filter.is-active {
+  background: #fff;
+  color: #0b2a44;
+}
+
+.insight-feature {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  background: rgb(4 20 33 / 0.72);
+  box-shadow: 0 28px 80px rgb(0 0 0 / 0.28);
+}
+
+.insight-feature__media > div {
+  height: 100%;
+  min-height: 20rem;
+  aspect-ratio: auto;
+}
+
+.insight-feature__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.insight-feature__meta,
+.insight-ledger__meta {
+  margin-top: 1rem;
+  color: rgb(255 255 255 / 0.52);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.insight-feature h2 {
+  margin-top: 1.1rem;
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 750;
+  letter-spacing: -0.05em;
+  line-height: 1.06;
+}
+
+.insight-feature__content > p:not(.editorial-label):not(.insight-feature__meta) {
+  margin-top: 1.2rem;
+  color: rgb(255 255 255 / 0.68);
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+.insight-feature__content > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.7rem;
+  color: #7fd0ff;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.insight-ledger {
+  margin-top: 2rem;
+  border-top: 1px solid rgb(255 255 255 / 0.18);
+}
+
+.insight-ledger__item {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 1rem;
+  align-items: start;
+  border-bottom: 1px solid rgb(255 255 255 / 0.18);
+  padding: 1.5rem 0;
+  transition: padding-inline 400ms var(--ease-out-expo), background-color 250ms ease;
+}
+
+.insight-ledger__item:hover,
+.insight-ledger__item:focus-visible {
+  background: rgb(255 255 255 / 0.06);
+  padding-inline: 1rem;
+}
+
+.insight-ledger__index {
+  color: #7fd0ff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.insight-ledger__item h2 {
+  margin-top: 0.55rem;
+  color: #fff;
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.insight-ledger__item div > p:last-child {
+  max-width: 54rem;
+  margin-top: 0.65rem;
+  color: rgb(255 255 255 / 0.58);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.insight-ledger__arrow {
+  margin-top: 0.2rem;
+  color: #7fd0ff;
+}
+
+@media (min-width: 900px) {
+  .insight-feature {
+    grid-template-columns: 1.1fr 0.9fr;
+    min-height: 34rem;
+  }
+}
+
+/* Platform atlas: distinct raised layers with alternating cool gradients. */
+.platform-atlas__layers {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.platform-atlas__layer {
+  border: 1px solid rgb(11 42 68 / 0.16);
+  background: linear-gradient(135deg, rgb(255 255 255 / 0.98), rgb(229 242 250 / 0.94));
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow-card);
+  transition: transform 350ms var(--ease-out-expo), box-shadow 350ms ease;
+}
+
+.platform-atlas__layer:nth-child(even) {
+  background: linear-gradient(135deg, #fff, #edf4f9 58%, #dceef8);
+}
+
+.platform-atlas__layer:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+.platform-atlas__visual {
+  overflow: hidden;
+  border: 1px solid rgb(11 42 68 / 0.12);
+  background: rgb(255 255 255 / 0.62);
+  box-shadow: 0 14px 36px rgb(11 42 68 / 0.1);
+}
+
+.platform-atlas__services {
+  padding: 1.25rem;
+}
+
+.platform-atlas__service-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-top: 1px solid rgb(11 42 68 / 0.13);
+  padding: 0.8rem 0;
+  color: #201e1d;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.platform-atlas__service-link:hover {
+  color: #1a5a8a;
+}
+
+/* Discovery form: blue page, raised white work surface and explicit states. */
+.page-hero--blue {
+  border-color: rgb(255 255 255 / 0.14);
+  background:
+    radial-gradient(circle at 84% 32%, rgb(127 208 255 / 0.2), transparent 24rem),
+    linear-gradient(135deg, #0b2a44, #14456b);
+  color: #fff;
+}
+
+.page-hero--blue h1,
+.page-hero--blue p,
+.page-hero--blue a,
+.page-hero--blue li {
+  color: #fff;
+}
+
+.page-hero--blue p {
+  opacity: 0.75;
+}
+
+.page-hero--blue .page-hero__mark {
+  opacity: 0.17;
+}
+
+.discovery-expectations {
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.discovery-expectation {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.16);
+  padding-block: 1.25rem;
+}
+
+.discovery-expectation__icon {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgb(127 208 255 / 0.35);
+  background: rgb(255 255 255 / 0.06);
+  color: #7fd0ff;
+}
+
+.discovery-expectation h3 {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.discovery-expectation p {
+  margin-top: 0.3rem;
+  color: rgb(255 255 255 / 0.58);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.discovery-direct {
+  border: 1px solid rgb(255 255 255 / 0.16);
+  background: rgb(255 255 255 / 0.055);
+  padding: 1.25rem;
+}
+
+.discovery-direct ul {
+  margin: 1rem 0 0;
+  padding: 0;
+  color: rgb(255 255 255 / 0.68);
+  font-size: 0.82rem;
+  line-height: 1.8;
+  list-style: none;
+}
+
+.discovery-form {
+  border-top: 4px solid #4aa3dd;
+  background: #fff;
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  box-shadow: 0 35px 90px rgb(0 0 0 / 0.32);
+}
+
+.discovery-form__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+  color: #14456b;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.discovery-form input:not([type="checkbox"]):not(:placeholder-shown),
+.discovery-form textarea:not(:placeholder-shown),
+.discovery-form select:valid {
+  border-color: rgb(20 69 107 / 0.42);
+  background: #fff;
+}
+
+/* About: high-impact record band, profile surface and shared stack marks. */
+.about-record {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(115deg, #081d2f, #0b2a44 55%, #14456b);
+  color: #fff;
+}
+
+.about-record::after {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  content: "";
+  pointer-events: none;
+}
+
+.about-record__stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0;
+  margin-top: 2.5rem;
+  border: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.about-record__stat {
+  display: flex;
+  min-height: 12rem;
+  flex-direction: column;
+  border-bottom: 1px solid rgb(255 255 255 / 0.16);
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02));
+  padding: 1.25rem;
+}
+
+.about-record__stat svg {
+  color: #7fd0ff;
+}
+
+.about-record__stat dt {
+  order: 3;
+  margin-top: 0.5rem;
+  color: rgb(255 255 255 / 0.58);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.about-record__stat dd {
+  order: 2;
+  margin: auto 0 0;
+  background: linear-gradient(90deg, #fff, #7fd0ff);
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+}
+
+.leader-profile {
+  display: grid;
+  gap: 1.75rem;
+  border: 1px solid rgb(11 42 68 / 0.14);
+  background: rgb(255 255 255 / 0.9);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow-card);
+}
+
+.leader-profile__avatar {
+  display: grid;
+  width: 7.5rem;
+  height: 8.5rem;
+  place-items: center;
+  background:
+    linear-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+    linear-gradient(135deg, #0b2a44, #1a5a8a);
+  background-size: 20px 20px, 20px 20px, auto;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.leader-profile h3 {
+  margin-top: 0.6rem;
+  color: #201e1d;
+  font-size: 1.7rem;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+
+.leader-profile__role {
+  margin-top: 0.25rem;
+  color: #5b5856;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.leader-profile__credential {
+  margin-top: 0.35rem;
+  color: #14456b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.leader-profile__bio {
+  max-width: 44rem;
+  margin-top: 1rem;
+  color: #5b5856;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.about-values {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.about-value {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.6rem 1rem;
+  border-bottom: 1px solid var(--line);
+  padding: 1.5rem 0;
+}
+
+.about-value > span {
+  grid-row: span 2;
+  color: #4aa3dd;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.about-value h3 {
+  color: #201e1d;
+  font-size: 1.05rem;
+  font-weight: 750;
+}
+
+.about-value p {
+  color: #5b5856;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.about-stack__grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.about-stack__group {
+  border: 1px solid rgb(255 255 255 / 0.16);
+  background: rgb(255 255 255 / 0.055);
+  padding: 1.25rem;
+}
+
+.about-stack__head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.14);
+  padding-bottom: 0.9rem;
+}
+
+.about-stack__head span {
+  color: #7fd0ff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.about-stack__head h3 {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.about-stack__group ul {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-stack__group .technology-mark {
+  color: rgb(255 255 255 / 0.74);
+}
+
+.about-stack__group .technology-mark__visual {
+  border-color: rgb(255 255 255 / 0.13);
+  background: rgb(255 255 255 / 0.96);
+}
+
+@media (min-width: 640px) {
+  .about-record__stats,
+  .about-stack__grid,
+  .about-values {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-record__stat:nth-child(odd) {
+    border-right: 1px solid rgb(255 255 255 / 0.16);
+  }
+
+  .leader-profile {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-record__stats,
+  .about-stack__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .about-record__stat {
+    border-right: 1px solid rgb(255 255 255 / 0.16);
+    border-bottom: 0;
+  }
+
+  .about-record__stat:last-child {
+    border-right: 0;
+  }
+
+  .about-values {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .about-value {
+    grid-template-columns: 1fr;
+    border-right: 1px solid var(--line);
+    padding: 1.5rem;
+  }
+
+  .about-value:last-child {
+    border-right: 0;
+  }
+
+  .about-value > span {
+    grid-row: auto;
   }
 }

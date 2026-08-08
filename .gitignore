@@ -38,6 +38,11 @@ next-env.d.ts
 # vercel
 .vercel
 
+# Editorial cover masters. Only the .webp derivatives are referenced by the
+# content layer (and enforced by covers.test.ts); the .png sources are ~46MB
+# and would sit in git history forever. Keep them local.
+/public/images/editorial/*.png
+
 # local promo / generated video assets (hero sequence 1–4 stays tracked)
 /public/video/*
 !/public/video/1.mp4

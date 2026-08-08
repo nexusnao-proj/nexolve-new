@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CaseStudy } from "@/lib/content/types";
 import { ArrowIcon } from "@/components/ui/Button";
+import { CardCover } from "@/components/ui/CardCover";
 import { cn } from "@/lib/utils";
 
 const accentBar: Record<CaseStudy["accent"], string> = {
@@ -10,14 +11,26 @@ const accentBar: Record<CaseStudy["accent"], string> = {
   pink: "from-[#1a5a8a] to-[#0b2a44]",
 };
 
+type WorkCardProps = {
+  caseStudy: CaseStudy;
+  sizes?: string;
+};
+
 /** Case-study card used on /work and the home page. */
-export function WorkCard({ caseStudy }: { caseStudy: CaseStudy }) {
+export function WorkCard({
+  caseStudy,
+  sizes = "(min-width: 768px) 50vw, 100vw",
+}: WorkCardProps) {
   return (
     <Link
       href={`/work/${caseStudy.slug}`}
       className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover"
     >
       <div className={cn("h-1.5 w-full bg-gradient-to-r", accentBar[caseStudy.accent])} />
+      <CardCover
+        cover={caseStudy.cover}
+        sizes={sizes}
+      />
       <div className="flex grow flex-col p-7">
         <p className="text-xs font-bold tracking-[0.16em] text-ink-muted uppercase">
           {caseStudy.industry}
