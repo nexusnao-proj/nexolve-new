@@ -16,7 +16,12 @@ export function organizationSchema() {
     "@id": `${site.url}/#organization`,
     name: site.name,
     url: site.url,
-    logo: absoluteUrl("/brand/nexolve-horizontal.svg"),
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/brand/logo-dark-screen.png"),
+      width: 912,
+      height: 192,
+    },
     slogan: site.tagline,
     description: site.description,
     ...(sameAs.length > 0 ? { sameAs } : {}),
@@ -41,7 +46,7 @@ export function professionalServiceSchema() {
     "@id": `${site.url}/#professionalservice`,
     name: site.name,
     url: site.url,
-    image: absoluteUrl("/brand/nexolve-horizontal.svg"),
+    image: absoluteUrl("/nexolve-social-preview.png"),
     description: site.description,
     parentOrganization: { "@id": `${site.url}/#organization` },
   };

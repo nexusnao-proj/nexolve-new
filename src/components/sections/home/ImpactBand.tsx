@@ -6,7 +6,7 @@ import { Icon } from "@/components/ui/Icon";
 
 const firmStats: { value: string; label: string; icon: IconName }[] = [
   { value: "15+", label: "Enterprise programmes", icon: "compass" },
-  { value: "24+", label: "Years combined delivery", icon: "book" },
+  { value: "10+", label: "Years combined delivery", icon: "book" },
   { value: "9", label: "Platforms & modules", icon: "layers" },
   { value: "2", label: "Delivery regions", icon: "flow" },
 ];
@@ -37,8 +37,8 @@ export function ImpactBand() {
             </h2>
             <p className="mt-6 max-w-xl text-[0.9375rem] leading-7 text-white/60">
               We design how organisations source, buy and pay. We then implement, integrate and stay
-              through adoption. Process credibility, platform depth and software engineering
-              remain under one roof.
+              through adoption. Process credibility, platform depth and software engineering remain
+              under one roof.
             </p>
           </div>
 

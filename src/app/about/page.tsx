@@ -25,7 +25,7 @@ const trackRecord: { value: string; label: string; icon: IconName; image: string
     image: "/images/editorial/case-conglomerate-ariba.webp",
   },
   {
-    value: "24+",
+    value: "10+",
     label: "Years combined delivery",
     icon: "calendar",
     image: "/images/editorial/service-procurement-consulting.webp",

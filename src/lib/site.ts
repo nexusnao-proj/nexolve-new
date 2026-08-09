@@ -7,7 +7,7 @@ export const site = {
   legalName: "Nexolve Technologies",
   tagline: "Procurement, solved.",
   description:
-    "Nexolve Technologies is a procurement and supply chain transformation firm working across APAC and the Middle East. We design how organisations source, buy and pay, then implement it on SAP, Coupa and Oracle — with the integration, analytics and software engineering delivered by the same accountable team.",
+    "Procurement and supply chain transformation across SAP, Coupa and Oracle, delivered by one accountable consulting, integration and engineering team.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.nexolvetech.com",
   email: "info@nexolvetech.com",
   address: "APAC & Middle East",
@@ -34,7 +34,10 @@ export const mainNav: { label: string; href: string; children?: NavItem[] }[] = 
 
 export const footerNav = {
   services: [
-    { label: "Supply Chain & Procurement Consulting", href: "/services/supply-chain-procurement-consulting" },
+    {
+      label: "Supply Chain & Procurement Consulting",
+      href: "/services/supply-chain-procurement-consulting",
+    },
     { label: "Source-to-Pay Platform Delivery", href: "/services/source-to-pay-platform-delivery" },
     { label: "ERP & Core SAP", href: "/services/erp-core-sap" },
     { label: "Data, Analytics & Integrations", href: "/services/data-analytics-integrations" },
