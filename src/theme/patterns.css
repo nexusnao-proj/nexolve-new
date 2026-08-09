@@ -1676,20 +1676,6 @@ textarea {
   padding-bottom: 1rem;
 }
 
-.discovery-form__confidential {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.discovery-form__confidential i {
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 50%;
-  background: #59b9f2;
-  box-shadow: 0 0 0 4px rgb(89 185 242 / 0.1);
-}
-
 .discovery-form__body {
   display: grid;
   gap: 1.6rem;

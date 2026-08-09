@@ -71,9 +71,6 @@ export default function ContactPage() {
             <div className="discovery-form">
               <div className="discovery-form__head">
                 <span>Tell us about the work</span>
-                <span className="discovery-form__confidential">
-                  <i aria-hidden="true" /> Confidential
-                </span>
               </div>
               <ContactForm />
             </div>
