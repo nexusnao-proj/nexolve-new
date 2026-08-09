@@ -96,6 +96,7 @@ export const postCategories = [
 export type PostCategory = (typeof postCategories)[number];
 
 export type IconName =
+  | "user"
   | "compass"
   | "chip"
   | "bot"

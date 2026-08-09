@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { leadership, values, techStack } from "@/lib/content/company";
 import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
@@ -16,12 +17,34 @@ export const metadata = buildMetadata({
   path: "/about",
 });
 
-const trackRecord: { value: string; label: string; icon: IconName }[] = [
-  { value: "15+", label: "Enterprise programmes", icon: "building" },
-  { value: "24+", label: "Years combined delivery", icon: "calendar" },
-  { value: "9", label: "Platforms and modules", icon: "layers" },
-  { value: "2", label: "Delivery regions", icon: "globe" },
+const trackRecord: { value: string; label: string; icon: IconName; image: string }[] = [
+  {
+    value: "15+",
+    label: "Enterprise programmes",
+    icon: "building",
+    image: "/images/editorial/case-conglomerate-ariba.webp",
+  },
+  {
+    value: "24+",
+    label: "Years combined delivery",
+    icon: "calendar",
+    image: "/images/editorial/service-procurement-consulting.webp",
+  },
+  {
+    value: "9",
+    label: "Platforms and modules",
+    icon: "layers",
+    image: "/images/editorial/solution-integration-build.webp",
+  },
+  {
+    value: "2",
+    label: "Delivery regions",
+    icon: "globe",
+    image: "/images/editorial/urban-systems.webp",
+  },
 ];
+
+const valueIcons: IconName[] = ["flow", "briefcase", "compass", "badge"];
 
 export default function AboutPage() {
   return (
@@ -57,7 +80,8 @@ export default function AboutPage() {
               </p>
               <p>
                 We are precise about scope, plain about risk and honest about timing. We name the
-                platform, the module and the date, then stay close enough to delivery to be measured.
+                platform, the module and the date, then stay close enough to delivery to be
+                measured.
               </p>
             </div>
           </Reveal>
@@ -69,20 +93,41 @@ export default function AboutPage() {
           <Reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="editorial-label text-core-cyan">Evidence</p>
-              <h2 id="track-record-title" className="mt-4 text-3xl font-bold tracking-[-0.04em] text-white">
+              <h2
+                id="track-record-title"
+                className="mt-4 text-3xl font-bold tracking-[-0.04em] text-white"
+              >
                 Our track record
               </h2>
             </div>
             <p className="max-w-md text-sm leading-6 text-white/65">
-              Delivery experience measured across live programmes, platform depth and operating regions.
+              Delivery experience measured across live programmes, platform depth and operating
+              regions.
             </p>
           </Reveal>
-          <Reveal group as="dl" className="about-record__stats">
+          <Reveal group as="dl" className="about-evidence">
             {trackRecord.map((stat) => (
-              <div key={stat.label} data-reveal className="about-record__stat">
-                <Icon name={stat.icon} size={23} />
-                <dt>{stat.label}</dt>
-                <dd>{stat.value}</dd>
+              <div key={stat.label} data-reveal className="about-evidence__metric">
+                <div className="about-evidence__visual" aria-hidden="true">
+                  <Image
+                    src={stat.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  />
+                </div>
+                <div className="about-evidence__top" aria-hidden="true">
+                  <span className="about-evidence__icon">
+                    <Icon name={stat.icon} size={22} />
+                  </span>
+                </div>
+                <div className="about-evidence__body">
+                  <dd>{stat.value}</dd>
+                  <dt>{stat.label}</dt>
+                </div>
+                <span className="about-evidence__meter" aria-hidden="true">
+                  <i />
+                </span>
               </div>
             ))}
           </Reveal>
@@ -99,8 +144,11 @@ export default function AboutPage() {
           <Reveal group className="mt-12 grid max-w-4xl gap-6">
             {leadership.map((person) => (
               <article key={person.name} data-reveal className="leader-profile">
-                <div className="leader-profile__avatar" aria-label={`${person.name} profile image placeholder`}>
-                  MY
+                <div
+                  className="leader-profile__avatar"
+                  aria-label={`${person.name} profile avatar`}
+                >
+                  <Icon name="user" size={52} />
                 </div>
                 <div>
                   <p className="editorial-label text-navy-soft">Leadership</p>
@@ -113,31 +161,40 @@ export default function AboutPage() {
             ))}
           </Reveal>
           <p className="mt-5 max-w-3xl text-xs leading-5 text-ink-muted">
-            Additional team profiles and approved photographs will be added when supplied with consent.
+            Additional team profiles and approved photographs will be added when supplied with
+            consent.
           </p>
         </Container>
       </section>
 
-      <section className="bg-white">
+      <section className="about-principles-section">
         <Container className="py-16 sm:py-24">
           <SectionHeading
             eyebrow="Why Nexolve"
             title="Four reasons teams bring us in"
             lede="These are the delivery standards we accept being held to."
           />
-          <Reveal group className="about-values mt-10">
+          <Reveal group className="about-principles mt-10">
             {values.map((value, index) => (
-              <div key={value.title} data-reveal className="about-value">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{value.title}</h3>
-                <p>{value.description}</p>
-              </div>
+              <article key={value.title} data-reveal className="about-principle">
+                <span className="about-principle__number" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="about-principle__body">
+                  <span className="about-principle__label">Delivery principle</span>
+                  <h3>{value.title}</h3>
+                  <p>{value.description}</p>
+                </div>
+                <span className="about-principle__icon" aria-hidden="true">
+                  <Icon name={valueIcons[index] ?? "compass"} size={23} />
+                </span>
+              </article>
             ))}
           </Reveal>
         </Container>
       </section>
 
-      <section className="surface-dark-network about-stack">
+      <section className="surface-dark-network about-architecture">
         <Container className="relative py-16 sm:py-24">
           <SectionHeading
             eyebrow="Platform landscape"
@@ -145,12 +202,17 @@ export default function AboutPage() {
             lede="Four connected layers from source-to-pay through the integration fabric."
             dark
           />
-          <Reveal group className="about-stack__grid">
+          <Reveal group className="about-architecture__layers">
             {techStack.map((group, index) => (
-              <div key={group.group} data-reveal className="about-stack__group">
-                <div className="about-stack__head">
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <h3>{group.group}</h3>
+              <article key={group.group} data-reveal className="about-architecture__layer">
+                <div className="about-architecture__head">
+                  <span className="about-architecture__node" aria-hidden="true">
+                    L{String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <span>Architecture layer</span>
+                    <h3>{group.group}</h3>
+                  </div>
                 </div>
                 <ul>
                   {group.items.map((item) => (
@@ -159,8 +221,12 @@ export default function AboutPage() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))}
+          </Reveal>
+          <Reveal className="about-architecture__legend">
+            <span aria-hidden="true" />
+            <p>Connected from business process to integration fabric</p>
           </Reveal>
         </Container>
       </section>

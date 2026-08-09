@@ -6,6 +6,12 @@ import { cn } from "@/lib/utils";
  * guidance: SVG for simple schematic visuals only). Decorative by default.
  */
 const paths: Record<IconName, React.ReactNode> = {
+  user: (
+    <>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4.5 21c.8-4.5 3.3-7 7.5-7s6.7 2.5 7.5 7" />
+    </>
+  ),
   compass: (
     <>
       <circle cx="12" cy="12" r="9" />

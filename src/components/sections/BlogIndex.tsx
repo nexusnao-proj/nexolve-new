@@ -103,7 +103,10 @@ export function BlogIndex({ initialPosts }: { initialPosts: Post[] }) {
                 className="insight-ledger__item group"
               >
                 <span className="insight-ledger__index">{String(index + 2).padStart(2, "0")}</span>
-                <div>
+                <div className="insight-ledger__media">
+                  <CardCover cover={post.cover} sizes="(min-width: 900px) 180px, 34vw" />
+                </div>
+                <div className="insight-ledger__content">
                   <p className="insight-ledger__meta">
                     {post.category} · {minutesFor(post)} min read · {formatDate(post.date)}
                   </p>
