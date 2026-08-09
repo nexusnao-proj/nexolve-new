@@ -1511,12 +1511,20 @@ textarea {
   opacity: 0.17;
 }
 
-/* Contact: a single, high-contrast discovery workspace. */
+/* Contact: the site's light editorial system paired with one deep-navy anchor panel. */
 .contact-workspace {
   position: relative;
   min-height: 100svh;
   overflow: hidden;
-  background: radial-gradient(circle at 88% 8%, rgb(74 163 221 / 0.14), transparent 24rem), #eaf0f4;
+  background:
+    radial-gradient(circle at 88% 8%, rgb(74 163 221 / 0.18), transparent 24rem),
+    linear-gradient(rgb(11 42 68 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(11 42 68 / 0.045) 1px, transparent 1px), #f3f7fa;
+  background-size:
+    auto,
+    64px 64px,
+    64px 64px,
+    auto;
   padding-block: calc(72px + clamp(1rem, 2vw, 2rem)) clamp(1rem, 2vw, 2rem);
 }
 
@@ -1528,9 +1536,9 @@ textarea {
   display: grid;
   min-height: calc(100svh - 72px - clamp(2rem, 4vw, 4rem));
   overflow: hidden;
-  border: 1px solid rgb(11 42 68 / 0.15);
-  background: #0d171d;
-  box-shadow: 0 32px 90px rgb(11 42 68 / 0.18);
+  border: 1px solid rgb(11 42 68 / 0.16);
+  background: #fff;
+  box-shadow: 0 28px 70px rgb(11 42 68 / 0.14);
 }
 
 .contact-workspace__intro,
@@ -1545,7 +1553,7 @@ textarea {
   background:
     linear-gradient(rgb(255 255 255 / 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgb(255 255 255 / 0.025) 1px, transparent 1px),
-    radial-gradient(circle at 0 0, rgb(74 163 221 / 0.09), transparent 22rem), #0c151a;
+    radial-gradient(circle at 0 0, rgb(74 163 221 / 0.16), transparent 22rem), #0b2a44;
   background-size:
     64px 64px,
     64px 64px,
@@ -1576,7 +1584,7 @@ textarea {
 .contact-workspace__intro h1 {
   max-width: 8.2ch;
   margin-top: 1.35rem;
-  font-size: clamp(3rem, 5vw, 4.6rem);
+  font-size: clamp(3rem, 4.5vw, 4.25rem);
   font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 0.98;
@@ -1647,14 +1655,22 @@ textarea {
 
 .contact-workspace__form-panel {
   height: 100%;
-  border-top: 1px solid rgb(127 208 255 / 0.13);
-  background: radial-gradient(circle at 100% 0, rgb(74 163 221 / 0.07), transparent 20rem), #101f26;
+  border-top: 1px solid rgb(11 42 68 / 0.12);
+  background:
+    radial-gradient(circle at 100% 0, rgb(74 163 221 / 0.1), transparent 20rem),
+    linear-gradient(rgb(11 42 68 / 0.027) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(11 42 68 / 0.027) 1px, transparent 1px), #fff;
+  background-size:
+    auto,
+    64px 64px,
+    64px 64px,
+    auto;
 }
 
 .discovery-form {
   height: 100%;
   padding: clamp(2rem, 5vw, 4.25rem);
-  color: #fff;
+  color: #201e1d;
 }
 
 .discovery-form__head,
@@ -1663,7 +1679,7 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  color: rgb(255 255 255 / 0.4);
+  color: #7a858d;
   font-size: 0.63rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -1672,7 +1688,7 @@ textarea {
 
 .discovery-form__head {
   margin-bottom: 2.3rem;
-  border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  border-bottom: 1px solid rgb(11 42 68 / 0.12);
   padding-bottom: 1rem;
 }
 
@@ -1688,12 +1704,12 @@ textarea {
 }
 
 .discovery-form__section + .discovery-form__section {
-  border-top: 1px solid rgb(255 255 255 / 0.11);
+  border-top: 1px solid rgb(11 42 68 / 0.12);
   padding-top: 1.65rem;
 }
 
 .discovery-form__section-head h2 {
-  color: #7fd0ff;
+  color: #14456b;
   font: inherit;
 }
 
@@ -1717,17 +1733,17 @@ textarea {
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 0.5rem;
-  color: rgb(255 255 255 / 0.9);
+  color: #201e1d;
   font-size: 0.8rem;
   font-weight: 700;
 }
 
 .discovery-field__required {
-  color: #7fd0ff;
+  color: #ec3013;
 }
 
 .discovery-field__optional {
-  color: rgb(255 255 255 / 0.3);
+  color: #83909a;
   font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -1737,14 +1753,14 @@ textarea {
 .discovery-input {
   width: 100%;
   min-height: 3.1rem;
-  border: 1px solid rgb(127 208 255 / 0.16);
+  border: 1px solid rgb(11 42 68 / 0.18);
   border-radius: 2px;
   outline: none;
-  background: rgb(4 12 17 / 0.48);
+  background: #f5f8fa;
   padding: 0.82rem 0.9rem;
-  color: #fff;
+  color: #201e1d;
   font-size: 0.86rem;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.018);
+  box-shadow: inset 0 1px 0 rgb(11 42 68 / 0.025);
   transition:
     border-color 180ms ease,
     background-color 180ms ease,
@@ -1752,18 +1768,18 @@ textarea {
 }
 
 .discovery-input::placeholder {
-  color: rgb(255 255 255 / 0.28);
+  color: #8a969e;
 }
 
 .discovery-input:hover {
-  border-color: rgb(127 208 255 / 0.35);
-  background: rgb(4 12 17 / 0.62);
+  border-color: rgb(20 69 107 / 0.42);
+  background: #fff;
 }
 
 .discovery-input:focus {
-  border-color: #59b9f2;
-  background: rgb(4 12 17 / 0.75);
-  box-shadow: 0 0 0 3px rgb(89 185 242 / 0.1);
+  border-color: #4aa3dd;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgb(74 163 221 / 0.12);
 }
 
 .discovery-input[aria-invalid="true"] {
@@ -1772,8 +1788,8 @@ textarea {
 }
 
 .discovery-input option {
-  background: #101f26;
-  color: #fff;
+  background: #fff;
+  color: #201e1d;
 }
 
 textarea.discovery-input {
@@ -1783,13 +1799,13 @@ textarea.discovery-input {
 
 .discovery-field__error {
   margin-top: 0.4rem;
-  color: #ff9a8a;
+  color: #cf2a0f;
   font-size: 0.72rem;
   font-weight: 650;
 }
 
 .discovery-consent {
-  border-top: 1px solid rgb(255 255 255 / 0.11);
+  border-top: 1px solid rgb(11 42 68 / 0.12);
   padding-top: 1.4rem;
 }
 
@@ -1804,18 +1820,18 @@ textarea.discovery-input {
   height: 1.05rem;
   flex: none;
   margin-top: 0.16rem;
-  accent-color: #59b9f2;
+  accent-color: #14456b;
 }
 
 .discovery-consent label,
 .discovery-form__note {
-  color: rgb(255 255 255 / 0.42);
+  color: #6c7881;
   font-size: 0.72rem;
   line-height: 1.55;
 }
 
 .discovery-consent a {
-  color: #7fd0ff;
+  color: #14456b;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -1824,7 +1840,7 @@ textarea.discovery-input {
   border: 1px solid rgb(255 117 95 / 0.25);
   background: rgb(255 117 95 / 0.08);
   padding: 0.8rem 1rem;
-  color: #ffb2a6;
+  color: #b12610;
   font-size: 0.78rem;
   font-weight: 650;
 }
@@ -1832,16 +1848,16 @@ textarea.discovery-input {
 .discovery-submit {
   width: fit-content;
   min-width: 10rem;
-  border-color: #59b9f2;
-  background: #59b9f2;
-  color: #07131b;
-  box-shadow: 0 9px 28px rgb(74 163 221 / 0.18);
+  border-color: #ec3013;
+  background: #ec3013;
+  color: #fff;
+  box-shadow: 0 9px 28px rgb(236 48 19 / 0.2);
 }
 
 .discovery-submit:hover {
-  border-color: #7fd0ff;
-  background: #7fd0ff;
-  box-shadow: 0 12px 32px rgb(74 163 221 / 0.28);
+  border-color: #cf2a0f;
+  background: #cf2a0f;
+  box-shadow: 0 12px 32px rgb(236 48 19 / 0.3);
 }
 
 .discovery-submit span {
@@ -1857,8 +1873,8 @@ textarea.discovery-input {
   display: grid;
   min-height: 28rem;
   place-content: center;
-  border: 1px solid rgb(127 208 255 / 0.18);
-  background: rgb(4 12 17 / 0.28);
+  border: 1px solid rgb(11 42 68 / 0.15);
+  background: #f5f8fa;
   padding: 3rem;
   text-align: center;
 }
@@ -1870,8 +1886,8 @@ textarea.discovery-input {
   place-items: center;
   margin-inline: auto;
   border-radius: 50%;
-  background: #59b9f2;
-  color: #07131b;
+  background: #14456b;
+  color: #fff;
 }
 
 .discovery-success h2 {
@@ -1883,13 +1899,13 @@ textarea.discovery-input {
 .discovery-success p {
   max-width: 28rem;
   margin: 0.75rem auto 0;
-  color: rgb(255 255 255 / 0.52);
+  color: #6c7881;
   font-size: 0.85rem;
   line-height: 1.6;
 }
 
 .discovery-success a {
-  color: #7fd0ff;
+  color: #14456b;
   font-weight: 700;
   text-decoration: underline;
 }
@@ -1907,7 +1923,7 @@ textarea.discovery-input {
 
   .contact-workspace__form-panel {
     border-top: 0;
-    border-left: 1px solid rgb(127 208 255 / 0.12);
+    border-left: 1px solid rgb(11 42 68 / 0.12);
   }
 }
 
