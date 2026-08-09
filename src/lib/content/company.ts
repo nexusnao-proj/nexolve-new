@@ -95,7 +95,13 @@ export const values = [
 export const techStack: { group: string; items: string[] }[] = [
   {
     group: "Source to Pay",
-    items: ["SAP Ariba", "Coupa", "Oracle Procurement", "SAP Fieldglass", "Commerce Automation / DSN"],
+    items: [
+      "SAP Ariba",
+      "Coupa",
+      "Oracle Procurement",
+      "SAP Fieldglass",
+      "Commerce Automation / DSN",
+    ],
   },
   {
     group: "Core ERP",
@@ -116,8 +122,6 @@ export const careers = {
   intro:
     "We are a team of procurement consultants, platform architects and engineers who like delivered programmes more than decks about them. As Nexolve grows, open roles will be published here.",
   openRoles: [] as { title: string; type: string; location: string; href: string }[],
-  openRolesPlaceholder:
-    "[Placeholder: open positions — publish verified roles here when hiring]",
   perks: [
     "Work on enterprise programmes that actually go live",
     "Small senior team — your decisions ship into production",
