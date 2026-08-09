@@ -1,6 +1,5 @@
 import { site } from "@/lib/site";
 import { buildMetadata } from "@/lib/seo";
-import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/animation/Reveal";
@@ -34,62 +33,53 @@ const expectations: { title: string; description: string; icon: IconName }[] = [
 
 export default function ContactPage() {
   return (
-    <>
-      <PageHero
-        eyebrow="Contact"
-        title="Book a discovery session"
-        lede="Tell us about your source-to-pay estate and we will make the first reply useful. Everything you share is treated confidentially."
-        className="page-hero--blue"
-        crumbs={[
-          { name: "Home", path: "/" },
-          { name: "Contact", path: "/contact" },
-        ]}
-      />
-      <section className="surface-dark-network discovery-section">
-        <Container className="relative py-14 sm:py-20">
-          <div className="grid gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:gap-16">
-            <div className="space-y-10 lg:sticky lg:top-28 lg:self-start">
-              <Reveal>
-                <p className="editorial-label text-core-cyan">What happens next</p>
-                <h2 className="mt-4 max-w-md text-3xl leading-tight font-bold tracking-[-0.04em] text-white">
-                  A useful conversation starts with context.
-                </h2>
-              </Reveal>
-              <Reveal group className="discovery-expectations">
-                {expectations.map((item) => (
-                  <div key={item.title} data-reveal className="discovery-expectation">
-                    <span className="discovery-expectation__icon">
-                      <Icon name={item.icon} size={20} />
-                    </span>
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </Reveal>
-              <Reveal className="discovery-direct">
-                <p className="editorial-label text-white/55">Direct contact</p>
-                <ul>
-                  <li>{site.email}</li>
-                  <li>www.nexolvetech.com</li>
-                  <li>{site.address}</li>
-                  <li>PSEB registered</li>
-                </ul>
-              </Reveal>
-            </div>
-            <Reveal delay={100}>
-              <div className="discovery-form">
-                <div className="discovery-form__head">
-                  <span>Discovery brief</span>
-                  <span>Confidential</span>
-                </div>
-                <ContactForm />
-              </div>
+    <section className="contact-workspace">
+      <Container className="contact-workspace__container">
+        <div className="contact-workspace__frame">
+          <aside className="contact-workspace__intro">
+            <Reveal>
+              <p className="contact-workspace__eyebrow">Contact</p>
+              <h1>Book a discovery session</h1>
+              <p className="contact-workspace__lede">
+                Tell us roughly what you are working with. We will make the first reply useful and
+                treat everything you share confidentially.
+              </p>
             </Reveal>
-          </div>
-        </Container>
-      </section>
-    </>
+
+            <Reveal group className="discovery-expectations">
+              {expectations.map((item) => (
+                <div key={item.title} data-reveal className="discovery-expectation">
+                  <span className="discovery-expectation__icon">
+                    <Icon name={item.icon} size={19} />
+                  </span>
+                  <div>
+                    <h2>{item.title}</h2>
+                    <p>{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </Reveal>
+
+            <Reveal className="discovery-direct">
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+              <p>APAC &amp; Middle East</p>
+              <p>PSEB registered</p>
+            </Reveal>
+          </aside>
+
+          <Reveal delay={100} className="contact-workspace__form-panel">
+            <div className="discovery-form">
+              <div className="discovery-form__head">
+                <span>Tell us about the work</span>
+                <span className="discovery-form__confidential">
+                  <i aria-hidden="true" /> Confidential
+                </span>
+              </div>
+              <ContactForm />
+            </div>
+          </Reveal>
+        </div>
+      </Container>
+    </section>
   );
 }
