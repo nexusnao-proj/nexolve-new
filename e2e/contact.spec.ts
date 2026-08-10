@@ -28,6 +28,6 @@ test.describe("contact form", () => {
 
     await page.getByRole("button", { name: "Send enquiry" }).click();
     await expect(page.getByRole("heading", { name: "Enquiry ready to send" })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Open email to info@nexolvetech.com/ })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Open email to info@nexolvetechnologies.com/ })).toBeVisible();
   });
 });

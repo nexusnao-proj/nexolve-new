@@ -89,7 +89,7 @@ everything.
 ## Contact form
 
 Client-side form with shared Zod validation, a honeypot field, and `mailto:` delivery to
-`info@nexolvetech.com`. Submitting opens the visitor’s email app with a drafted enquiry. There is
+`info@nexolvetechnologies.com`. Submitting opens the visitor’s email app with a drafted enquiry. There is
 no server action or Resend dependency — suitable for static Cloudflare Pages hosting.
 
 ## SEO

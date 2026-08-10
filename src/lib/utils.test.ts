@@ -27,6 +27,6 @@ describe("formatDate", () => {
 describe("isPlaceholder", () => {
   it("detects placeholder strings", () => {
     expect(isPlaceholder("[Placeholder: business email]")).toBe(true);
-    expect(isPlaceholder("info@nexolvetech.com")).toBe(false);
+    expect(isPlaceholder("info@nexolvetechnologies.com")).toBe(false);
   });
 });

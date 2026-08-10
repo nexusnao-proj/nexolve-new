@@ -17,8 +17,8 @@ const input: ContactInput = {
 
 describe("buildContactMailto", () => {
   it("builds a mailto URL with encoded subject and body fields", () => {
-    const href = buildContactMailto("info@nexolvetech.com", input);
-    expect(href.startsWith("mailto:info@nexolvetech.com?")).toBe(true);
+    const href = buildContactMailto("info@nexolvetechnologies.com", input);
+    expect(href.startsWith("mailto:info@nexolvetechnologies.com?")).toBe(true);
     const qs = new URL(href).searchParams;
     expect(qs.get("subject")).toBe(
       "Nexolve enquiry — Source-to-Pay Platform Delivery (SAP Ariba, Coupa, Oracle)",
@@ -36,7 +36,7 @@ describe("buildContactMailto", () => {
   });
 
   it("omits empty optional company/phone lines", () => {
-    const href = buildContactMailto("info@nexolvetech.com", {
+    const href = buildContactMailto("info@nexolvetechnologies.com", {
       ...input,
       company: "",
       phone: "",
