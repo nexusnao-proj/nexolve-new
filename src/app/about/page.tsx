@@ -160,10 +160,6 @@ export default function AboutPage() {
               </article>
             ))}
           </Reveal>
-          <p className="mt-5 max-w-3xl text-xs leading-5 text-ink-muted">
-            Additional team profiles and approved photographs will be added when supplied with
-            consent.
-          </p>
         </Container>
       </section>
 
