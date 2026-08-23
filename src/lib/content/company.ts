@@ -62,7 +62,6 @@ export const leadership = [
   {
     name: "Maaz Younus Chottani",
     role: "Chief Executive Officer",
-    credential: "SAP Ariba Architect · Techno-Functional Consultant",
     bio: "Founded Nexolve in 2024 out of years of hands-on delivery with leading consulting firms and large enterprises — 15+ enterprise programmes spanning sourcing, contracts, supplier management, P2P, ERP integration and analytics across APAC and the Middle East.",
   },
 ] as const;

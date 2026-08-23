@@ -154,7 +154,6 @@ export default function AboutPage() {
                   <p className="editorial-label text-navy-soft">Leadership</p>
                   <h3>{person.name}</h3>
                   <p className="leader-profile__role">{person.role}</p>
-                  <p className="leader-profile__credential">{person.credential}</p>
                   <p className="leader-profile__bio">{person.bio}</p>
                 </div>
               </article>
