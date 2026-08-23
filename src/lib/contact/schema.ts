@@ -48,7 +48,11 @@ export const contactSchema = z.object({
     .trim()
     .email("Please enter a valid work email address.")
     .max(200, "Email looks too long."),
-  company: z.string().trim().max(160, "Company name looks too long.").optional().or(z.literal("")),
+  company: z
+    .string()
+    .trim()
+    .min(1, "Please enter your company name.")
+    .max(160, "Company name looks too long."),
   phone: z.string().trim().max(40, "Phone number looks too long.").optional().or(z.literal("")),
   service: z.enum(serviceOptions, { errorMap: () => ({ message: "Please choose a service." }) }),
   budget: z.enum(budgetOptions, { errorMap: () => ({ message: "Please choose a budget range." }) }),

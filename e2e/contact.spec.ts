@@ -9,6 +9,7 @@ test.describe("contact form", () => {
     await page.getByRole("button", { name: "Send enquiry" }).click();
     await expect(page.getByText("Please review the highlighted fields.")).toBeVisible();
     await expect(page.getByText("Please enter your name.")).toBeVisible();
+    await expect(page.getByText("Please enter your company name.")).toBeVisible();
     const nameInput = page.getByLabel(/^Name/);
     await expect(nameInput).toHaveAttribute("aria-invalid", "true");
   });
@@ -17,6 +18,7 @@ test.describe("contact form", () => {
     await page.goto("/contact");
     await page.getByLabel(/^Name/).fill("Playwright Tester");
     await page.getByLabel(/Work email/).fill("tester@example.com");
+    await page.getByLabel(/^Company/).fill("Example Ltd");
     await page.getByLabel(/Service required/).selectOption("Source-to-Pay Platform Delivery (SAP Ariba, Coupa, Oracle)");
     await page.getByLabel(/Project budget/).selectOption("$25k – $50k");
     await page.getByLabel(/Expected timeline/).selectOption("1 – 3 months");

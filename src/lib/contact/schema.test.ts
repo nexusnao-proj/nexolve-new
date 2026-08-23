@@ -20,9 +20,14 @@ describe("contactSchema", () => {
     expect(result.success).toBe(true);
   });
 
-  it("accepts empty optional fields", () => {
-    const result = contactSchema.safeParse({ ...validInput, company: "", phone: "" });
+  it("accepts an empty optional phone field", () => {
+    const result = contactSchema.safeParse({ ...validInput, phone: "" });
     expect(result.success).toBe(true);
+  });
+
+  it("rejects an empty company field", () => {
+    const result = contactSchema.safeParse({ ...validInput, company: "" });
+    expect(result.success).toBe(false);
   });
 
   it("rejects an invalid email", () => {

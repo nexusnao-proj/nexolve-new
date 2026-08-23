@@ -177,6 +177,19 @@ export function ContactForm() {
               placeholder="you@company.com"
             />
           </Field>
+          <Field label="Company" htmlFor={`${id}-company`} error={errors.company} required>
+            <input
+              id={`${id}-company`}
+              name="company"
+              type="text"
+              autoComplete="organization"
+              required
+              aria-invalid={Boolean(errors.company)}
+              aria-describedby={errors.company ? `${id}-company-error` : undefined}
+              className={inputCls}
+              placeholder="Company name"
+            />
+          </Field>
         </div>
         <Field
           label="Project description"
@@ -296,17 +309,6 @@ export function ContactForm() {
           <span>Helpful context</span>
         </div>
         <div className="discovery-form__grid">
-          <Field label="Company" htmlFor={`${id}-company`} error={errors.company}>
-            <input
-              id={`${id}-company`}
-              name="company"
-              type="text"
-              autoComplete="organization"
-              aria-invalid={Boolean(errors.company)}
-              className={inputCls}
-              placeholder="Company name"
-            />
-          </Field>
           <Field label="Phone" htmlFor={`${id}-phone`} error={errors.phone}>
             <input
               id={`${id}-phone`}
