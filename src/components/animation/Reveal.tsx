@@ -63,7 +63,10 @@ export function Reveal({
       },
       { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
     );
-    io.observe(el);
+    // A tall group may never reach the observer's percentage threshold when
+    // only its first item is visible. Observe that first item so the group
+    // reveals as soon as its content enters the viewport.
+    io.observe(group ? (targets[0] ?? el) : el);
     return () => io.disconnect();
   }, [delay, y, group]);
 
