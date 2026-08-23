@@ -20,20 +20,20 @@ export default function BlogPage() {
       <PageHero
         eyebrow="Insights"
         title="Thinking from the build floor"
-        lede="No thought-leadership fluff — practical lessons from procurement and supply chain programmes across APAC and the Middle East."
+        lede="Practical lessons from procurement and supply chain programmes across APAC and the Middle East, written for teams responsible for delivery."
         crumbs={[
           { name: "Home", path: "/" },
           { name: "Insights", path: "/blog" },
         ]}
       />
-      <section className="bg-neutral-light">
-        <Container className="py-14 sm:py-20">
+      <section className="surface-dark-network insights-page">
+        <Container className="relative py-14 sm:py-20">
           <BlogIndex initialPosts={initialPosts} />
         </Container>
       </section>
       <CtaSection
         title="Prefer answers to articles?"
-        lede="If a question here touches your business, skip the reading list — ask us directly."
+        lede="If a question here touches your business, skip the reading list and ask us directly."
       />
     </>
   );

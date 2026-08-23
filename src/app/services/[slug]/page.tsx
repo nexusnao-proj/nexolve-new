@@ -9,6 +9,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { Container } from "@/components/ui/Container";
+import { CardCover } from "@/components/ui/CardCover";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { IconChip } from "@/components/ui/Icon";
 import { ArrowIcon, ButtonLink } from "@/components/ui/Button";
@@ -233,17 +234,23 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                 <div key={rel.slug} data-reveal>
                   <Link
                     href={`/services/${rel.slug}`}
-                    className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 shadow-card transition-shadow hover:shadow-card-hover"
+                    className="color-card group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow hover:shadow-card-hover"
                   >
-                    <IconChip name={rel.icon} className="size-10 rounded-xl" />
-                    <h3 className="mt-4 text-base font-extrabold text-ink group-hover:text-violet">
-                      {rel.title}
-                    </h3>
-                    <p className="mt-2 grow text-sm leading-relaxed text-ink-muted">{rel.excerpt}</p>
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-violet">
-                      Learn more
-                      <ArrowIcon className="transition-transform group-hover:translate-x-1" />
-                    </span>
+                    <CardCover
+                      cover={rel.cover}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    />
+                    <div className="flex grow flex-col p-6">
+                      <IconChip name={rel.icon} className="size-10 rounded-xl" />
+                      <h3 className="mt-4 text-base font-extrabold text-ink group-hover:text-violet">
+                        {rel.title}
+                      </h3>
+                      <p className="mt-2 grow text-sm leading-relaxed text-ink-muted">{rel.excerpt}</p>
+                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-violet">
+                        Learn more
+                        <ArrowIcon className="transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </div>
                   </Link>
                 </div>
               ))}

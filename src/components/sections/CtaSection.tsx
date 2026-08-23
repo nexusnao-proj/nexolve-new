@@ -14,18 +14,26 @@ export function CtaSection({
   secondaryHref = "/services",
 }: Props) {
   return (
-    <section className="brand-cta relative overflow-hidden border-y-2 border-white/20 bg-navy">
+    <section className="brand-cta relative overflow-hidden bg-navy">
       <MatrixMark dark animated className="brand-cta__mark" />
-      <Container className="relative max-w-[1440px] py-16 sm:py-24 lg:px-12">
-        <Reveal>
-          <p className="editorial-label text-white/55">Procurement, solved.</p>
-          <h2 className="mt-6 max-w-4xl text-5xl leading-[0.94] font-extrabold tracking-[-0.05em] text-balance text-white sm:text-7xl lg:text-[5.75rem]">{title}</h2>
-          <div className="mt-8 grid gap-7 border-t-2 border-white/20 pt-7 lg:grid-cols-[1fr_auto] lg:items-end">
-            <p className="max-w-xl text-base leading-7 text-white/55 sm:text-lg">{lede}</p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href={primaryHref} size="lg">{primaryLabel}<ArrowIcon /></ButtonLink>
-              <ButtonLink href={secondaryHref} size="lg" variant="onDark">{secondaryLabel}</ButtonLink>
-            </div>
+      <Container className="relative max-w-[1440px] py-14 sm:py-20 lg:px-12">
+        <Reveal className="grid gap-9 lg:grid-cols-[1.15fr_auto] lg:items-center lg:gap-14">
+          <div>
+            <p className="editorial-label text-white/50">Procurement, solved.</p>
+            <h2 className="mt-5 max-w-2xl text-4xl leading-[1.02] font-extrabold tracking-[-0.045em] text-balance text-white sm:text-5xl lg:text-[3.5rem]">
+              {title}
+            </h2>
+            <p className="mt-5 max-w-xl text-[0.9375rem] leading-7 text-white/55">{lede}</p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
+            <ButtonLink href={primaryHref} size="lg">
+              {primaryLabel}
+              <ArrowIcon />
+            </ButtonLink>
+            <ButtonLink href={secondaryHref} size="lg" variant="onDark">
+              {secondaryLabel}
+              <ArrowIcon />
+            </ButtonLink>
           </div>
         </Reveal>
       </Container>

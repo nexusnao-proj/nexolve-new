@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Archivo } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { socialImage } from "@/lib/seo";
 import { organizationSchema, professionalServiceSchema, webSiteSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SkipLink } from "@/components/layout/SkipLink";
@@ -23,6 +24,16 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  category: "Business consulting and technology services",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   keywords: [
     "procurement consulting",
     "supply chain transformation",
@@ -44,13 +55,33 @@ export const metadata: Metadata = {
     url: "/",
     title: "Nexolve Technologies — Procurement & Supply Chain Transformation",
     description: site.description,
+    images: [socialImage],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nexolve Technologies — Procurement & Supply Chain Transformation",
     description: site.description,
+    images: [socialImage],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/brand/nexolve-app-icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/brand/nexolve-app-icon.svg",
+  },
   verification: {
     google: "J27VBUMqXeiktonbVPWP1XPrKkvNRmDRg6YUnN3umrA",
   },

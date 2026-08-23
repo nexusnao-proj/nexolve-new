@@ -30,7 +30,7 @@ export function InsightsPreview() {
         <Reveal group className="mt-12 grid gap-5 md:grid-cols-3">
           {latest.map((post) => (
             <div key={post.slug} data-reveal>
-              <PostCard post={post} />
+              <PostCard post={post} sizes="(min-width: 768px) 33vw, 100vw" />
             </div>
           ))}
         </Reveal>

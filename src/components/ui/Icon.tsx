@@ -6,6 +6,12 @@ import { cn } from "@/lib/utils";
  * guidance: SVG for simple schematic visuals only). Decorative by default.
  */
 const paths: Record<IconName, React.ReactNode> = {
+  user: (
+    <>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4.5 21c.8-4.5 3.3-7 7.5-7s6.7 2.5 7.5 7" />
+    </>
+  ),
   compass: (
     <>
       <circle cx="12" cy="12" r="9" />
@@ -142,6 +148,39 @@ const paths: Record<IconName, React.ReactNode> = {
     <>
       <path d="M12 16c-1.5-4.5-.5-8.5 3.5-11.5 2-1.5 4.5-2 4.5-2s-.5 2.5-2 4.5c-3 4-7 5-11.5 3.5" />
       <path d="M9 15c-2 .5-3.5 2.5-4 6 3.5-.5 5.5-2 6-4m1.5-8.5h.01" />
+    </>
+  ),
+  calendar: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 10h18M8 3v4m8-4v4" />
+    </>
+  ),
+  users: (
+    <>
+      <circle cx="9" cy="8" r="3.5" />
+      <path d="M2.5 19.5c.8-3.2 3-5 6.5-5s5.7 1.8 6.5 5" />
+      <circle cx="17" cy="9" r="2.5" />
+      <path d="M15.2 14.2c2.4.4 4.3 1.8 4.8 4.3" />
+    </>
+  ),
+  shield: (
+    <>
+      <path d="M12 3 4.5 6.5v5.2c0 4.6 3.1 8.7 7.5 9.8 4.4-1.1 7.5-5.2 7.5-9.8V6.5L12 3Z" />
+      <path d="m9 12 2 2 4-4" />
+    </>
+  ),
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 2.8 3.8 5.8 3.8 9s-1.3 6.2-3.8 9c-2.5-2.8-3.8-5.8-3.8-9s1.3-6.2 3.8-9Z" />
+    </>
+  ),
+  badge: (
+    <>
+      <rect x="5" y="3" width="14" height="18" rx="2" />
+      <circle cx="12" cy="9" r="2.5" />
+      <path d="M8.5 16.5c.9-1.5 2.1-2.2 3.5-2.2s2.6.7 3.5 2.2" />
     </>
   ),
 };

@@ -7,6 +7,7 @@ import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { Container } from "@/components/ui/Container";
+import { CardCover } from "@/components/ui/CardCover";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { IconChip } from "@/components/ui/Icon";
 import { ArrowIcon } from "@/components/ui/Button";
@@ -117,16 +118,22 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
                 <div key={service.slug} data-reveal>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 shadow-card transition-shadow hover:shadow-card-hover"
+                    className="color-card group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow hover:shadow-card-hover"
                   >
-                    <IconChip name={service.icon} className="size-10 rounded-xl" />
-                    <h3 className="mt-4 grow text-base font-extrabold text-ink group-hover:text-violet">
-                      {service.title}
-                    </h3>
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-violet">
-                      Learn more
-                      <ArrowIcon className="transition-transform group-hover:translate-x-1" />
-                    </span>
+                    <CardCover
+                      cover={service.cover}
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    />
+                    <div className="flex grow flex-col p-6">
+                      <IconChip name={service.icon} className="size-10 rounded-xl" />
+                      <h3 className="mt-4 grow text-base font-extrabold text-ink group-hover:text-violet">
+                        {service.title}
+                      </h3>
+                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-violet">
+                        Learn more
+                        <ArrowIcon className="transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </div>
                   </Link>
                 </div>
               ))}

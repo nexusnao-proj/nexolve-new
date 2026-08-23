@@ -8,6 +8,10 @@ import type { Post } from "./types";
 export const posts: Post[] = [
   {
     slug: "ariba-programmes-stall-after-stage-two",
+    cover: {
+      src: "/images/editorial/insight-ariba-stage-two.webp",
+      alt: "Four people studying a wall-mounted network of metal conduits",
+    },
     title: "Why Ariba programmes stall after stage two",
     excerpt:
       "Most Ariba implementations configure sourcing and stop. The value sits in stages three and four — integration and adoption — and that is where planning usually runs out.",
@@ -44,6 +48,10 @@ export const posts: Post[] = [
   },
   {
     slug: "spend-baseline-before-savings",
+    cover: {
+      src: "/images/editorial/insight-spend-baseline.webp",
+      alt: "Two people arranging white and grey sample tiles on a black table",
+    },
     title: "The spend baseline comes before the savings claim",
     excerpt:
       "Every procurement function claims savings. Few can show a baseline that finance signed. Until that exists, every number is negotiable.",
@@ -80,6 +88,10 @@ export const posts: Post[] = [
   },
   {
     slug: "guided-buying-easiest-route",
+    cover: {
+      src: "/images/editorial/insight-guided-buying.webp",
+      alt: "Worker retrieving a part from organized storage drawers",
+    },
     title: "Guided buying works when it is the easiest route, not the mandated one",
     excerpt:
       "Maverick buying is rarely defiance. It is a rational response to a compliant route that is slower than the workaround. Fix the route, not the policy memo.",
@@ -116,6 +128,10 @@ export const posts: Post[] = [
   },
   {
     slug: "s4hana-migration-master-data-first",
+    cover: {
+      src: "/images/editorial/insight-s4hana-master-data.webp",
+      alt: "Worker sorting identical metal cylinders into compartment trays",
+    },
     title: "S/4HANA migration: the master data decision you make too late",
     excerpt:
       "Every S/4HANA programme says data migration is a workstream. Few treat it as the critical path it is. The cutover date will not move because the data is not ready.",
@@ -152,6 +168,10 @@ export const posts: Post[] = [
   },
   {
     slug: "integration-fabric-release-cycles",
+    cover: {
+      src: "/images/editorial/insight-integration-fabric.webp",
+      alt: "Technician inspecting a cable connection on a large black equipment frame",
+    },
     title: "Integration is a product you maintain, not a project you finish",
     excerpt:
       "Ariba releases quarterly. S/4HANA patches. APIs version. An integration estate without monitoring and ownership decays on a schedule you did not choose.",
@@ -188,6 +208,10 @@ export const posts: Post[] = [
   },
   {
     slug: "supplier-portals-build-or-configure",
+    cover: {
+      src: "/images/editorial/insight-supplier-portals.webp",
+      alt: "Warehouse worker using a tablet at a counter beside steel lockers",
+    },
     title: "Supplier portals: when to configure, when to build",
     excerpt:
       "Ariba already gives suppliers a network. A custom portal earns its cost only for journeys the platform does not serve well. Here is the honest decision frame.",

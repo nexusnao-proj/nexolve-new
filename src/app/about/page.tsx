@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { leadership, values, techStack } from "@/lib/content/company";
 import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
@@ -5,13 +6,45 @@ import { CtaSection } from "@/components/sections/CtaSection";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/animation/Reveal";
+import { Icon } from "@/components/ui/Icon";
+import { TechnologyMark } from "@/components/ui/TechnologyMark";
+import type { IconName } from "@/lib/content/types";
 
 export const metadata = buildMetadata({
   title: "About Nexolve Technologies",
   description:
-    "Nexolve Technologies is a procurement and supply chain transformation firm working across APAC and the Middle East — consulting, platform delivery, integration and software engineering from one accountable team.",
+    "Nexolve Technologies is a procurement and supply chain transformation firm working across APAC and the Middle East.",
   path: "/about",
 });
+
+const trackRecord: { value: string; label: string; icon: IconName; image: string }[] = [
+  {
+    value: "15+",
+    label: "Enterprise programmes",
+    icon: "building",
+    image: "/images/editorial/case-conglomerate-ariba.webp",
+  },
+  {
+    value: "10+",
+    label: "Years combined delivery",
+    icon: "calendar",
+    image: "/images/editorial/service-procurement-consulting.webp",
+  },
+  {
+    value: "9",
+    label: "Platforms and modules",
+    icon: "layers",
+    image: "/images/editorial/solution-integration-build.webp",
+  },
+  {
+    value: "2",
+    label: "Delivery regions",
+    icon: "globe",
+    image: "/images/editorial/urban-systems.webp",
+  },
+];
+
+const valueIcons: IconName[] = ["flow", "briefcase", "compass", "badge"];
 
 export default function AboutPage() {
   return (
@@ -19,99 +52,110 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="Built on delivery, not on a pitch deck"
-        lede="Nexolve Technologies is a consulting firm with an engineering bench — founded in 2024 out of years of hands-on delivery with leading consulting firms and large enterprises."
+        lede="Nexolve Technologies is a consulting firm with an engineering bench, founded in 2024 after years of hands-on delivery with leading consultancies and large enterprises."
         crumbs={[
           { name: "Home", path: "/" },
           { name: "About", path: "/about" },
         ]}
       />
 
-      <section className="border-y border-line bg-white">
-        <Container className="py-16 sm:py-24">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <Reveal>
-              <h2 className="text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
-                What we believe
+      <section className="surface-blueprint about-belief">
+        <Container className="relative py-16 sm:py-24">
+          <Reveal className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+            <div>
+              <p className="editorial-label text-navy-soft">What we believe</p>
+              <h2 className="mt-4 text-3xl leading-tight font-bold tracking-[-0.04em] text-ink sm:text-4xl">
+                Own the outcome, not just the work package.
               </h2>
-              <div className="mt-5 space-y-4 text-base leading-relaxed text-ink-muted">
-                <p>
-                  We specialise in procurement and supply chain transformation — designing how
-                  organisations source, buy and pay, then implementing the platforms and
-                  integrations that run it.
-                </p>
-                <p>
-                  Our team has been part of 15+ enterprise programmes spanning sourcing,
-                  contracts, supplier management, P2P, ERP integration and analytics. That
-                  combination — process credibility plus platform and software engineering
-                  under one roof — is what lets us own an outcome rather than a work package.
-                </p>
-                <p>
-                  We are precise, plain, specific about scope and honest about risk. We name
-                  the platform, the module and the date. We never oversell a timeline.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={120}>
-              <div className="border-l border-line pl-8 sm:pl-10">
-                <p className="text-xs font-bold tracking-[0.18em] text-ink-muted uppercase">
-                  The team
-                </p>
-                <p className="mt-4 text-base leading-relaxed text-ink-muted">
-                  A senior, hands-on team of procurement consultants, platform architects and
-                  engineers — small enough that the people you meet are the people who deliver.
-                </p>
-                <dl className="mt-6 grid grid-cols-2 gap-6">
-                  <div>
-                    <dt className="sr-only">Enterprise programmes</dt>
-                    <dd className="text-3xl font-extrabold tracking-tight text-navy">15+</dd>
-                    <dd className="mt-1 text-xs font-bold tracking-[0.14em] text-ink-muted uppercase">Enterprise programmes</dd>
-                  </div>
-                  <div>
-                    <dt className="sr-only">Years combined delivery</dt>
-                    <dd className="text-3xl font-extrabold tracking-tight text-navy">24+</dd>
-                    <dd className="mt-1 text-xs font-bold tracking-[0.14em] text-ink-muted uppercase">Years combined delivery</dd>
-                  </div>
-                  <div>
-                    <dt className="sr-only">Platforms and modules</dt>
-                    <dd className="text-3xl font-extrabold tracking-tight text-navy">9</dd>
-                    <dd className="mt-1 text-xs font-bold tracking-[0.14em] text-ink-muted uppercase">Platforms & modules</dd>
-                  </div>
-                  <div>
-                    <dt className="sr-only">Delivery regions</dt>
-                    <dd className="text-3xl font-extrabold tracking-tight text-navy">2</dd>
-                    <dd className="mt-1 text-xs font-bold tracking-[0.14em] text-ink-muted uppercase">Delivery regions</dd>
-                  </div>
-                </dl>
-              </div>
-            </Reveal>
-          </div>
+            </div>
+            <div className="space-y-5 text-base leading-8 text-ink-muted">
+              <p>
+                We specialise in procurement and supply chain transformation. We design how
+                organisations source, buy and pay, then implement the platforms and integrations
+                that run the process.
+              </p>
+              <p>
+                Process credibility, platform depth and software engineering sit in one team. That
+                combination lets us stay accountable from design through adoption.
+              </p>
+              <p>
+                We are precise about scope, plain about risk and honest about timing. We name the
+                platform, the module and the date, then stay close enough to delivery to be
+                measured.
+              </p>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
-      <section className="bg-neutral-light" aria-label="Leadership">
-        <Container className="py-16 sm:py-24">
+      <section className="about-record" aria-labelledby="track-record-title">
+        <Container className="relative py-16 sm:py-20">
+          <Reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="editorial-label text-core-cyan">Evidence</p>
+              <h2
+                id="track-record-title"
+                className="mt-4 text-3xl font-bold tracking-[-0.04em] text-white"
+              >
+                Our track record
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-6 text-white/65">
+              Delivery experience measured across live programmes, platform depth and operating
+              regions.
+            </p>
+          </Reveal>
+          <Reveal group as="dl" className="about-evidence">
+            {trackRecord.map((stat) => (
+              <div key={stat.label} data-reveal className="about-evidence__metric">
+                <div className="about-evidence__visual" aria-hidden="true">
+                  <Image
+                    src={stat.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  />
+                </div>
+                <div className="about-evidence__top" aria-hidden="true">
+                  <span className="about-evidence__icon">
+                    <Icon name={stat.icon} size={22} />
+                  </span>
+                </div>
+                <div className="about-evidence__body">
+                  <dd>{stat.value}</dd>
+                  <dt>{stat.label}</dt>
+                </div>
+                <span className="about-evidence__meter" aria-hidden="true">
+                  <i />
+                </span>
+              </div>
+            ))}
+          </Reveal>
+        </Container>
+      </section>
+
+      <section className="surface-network" aria-label="Leadership">
+        <Container className="relative py-16 sm:py-24">
           <SectionHeading
             eyebrow="Leadership"
             title="The people accountable for the work"
-            lede="You deal with the people who set the standard — and who still sit in delivery."
+            lede="You deal with the people who set the standard and who still sit in delivery."
           />
-          <Reveal group className="mt-12 grid max-w-3xl gap-10">
+          <Reveal group className="mt-12 grid max-w-4xl gap-6">
             {leadership.map((person) => (
-              <article key={person.name} data-reveal className="group rounded-3xl border border-line bg-white p-8 shadow-card sm:p-10">
-                <span aria-hidden="true" className="block h-1 w-10 rounded-full bg-gradient-brand" />
-                <div className="mt-6">
-                  <h3 className="text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
-                    {person.name}
-                  </h3>
-                  <p className="mt-1 text-sm font-semibold tracking-wide text-ink-muted">
-                    {person.role}
-                  </p>
-                  <p className="mt-1 text-xs font-bold tracking-[0.14em] text-navy uppercase">
-                    {person.credential}
-                  </p>
-                  <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-muted">
-                    {person.bio}
-                  </p>
+              <article key={person.name} data-reveal className="leader-profile">
+                <div
+                  className="leader-profile__avatar"
+                  aria-label={`${person.name} profile avatar`}
+                >
+                  <Icon name="user" size={52} />
+                </div>
+                <div>
+                  <p className="editorial-label text-navy-soft">Leadership</p>
+                  <h3>{person.name}</h3>
+                  <p className="leader-profile__role">{person.role}</p>
+                  <p className="leader-profile__credential">{person.credential}</p>
+                  <p className="leader-profile__bio">{person.bio}</p>
                 </div>
               </article>
             ))}
@@ -119,52 +163,66 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-white">
+      <section className="about-principles-section">
         <Container className="py-16 sm:py-24">
           <SectionHeading
             eyebrow="Why Nexolve"
             title="Four reasons teams bring us in"
-            lede="These aren't wall posters. They're the standards we accept being held to."
+            lede="These are the delivery standards we accept being held to."
           />
-          <Reveal group className="mt-10 grid gap-4 sm:grid-cols-2">
-            {values.map((value) => (
-              <div
-                key={value.title}
-                data-reveal
-                className="rounded-3xl border border-line bg-neutral-light p-7 shadow-card"
-              >
-                <span aria-hidden="true" className="block h-1 w-10 rounded-full bg-gradient-brand" />
-                <h3 className="mt-4 text-lg font-extrabold text-ink">{value.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted">{value.description}</p>
-              </div>
+          <Reveal group className="about-principles mt-10">
+            {values.map((value, index) => (
+              <article key={value.title} data-reveal className="about-principle">
+                <span className="about-principle__number" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="about-principle__body">
+                  <span className="about-principle__label">Delivery principle</span>
+                  <h3>{value.title}</h3>
+                  <p>{value.description}</p>
+                </div>
+                <span className="about-principle__icon" aria-hidden="true">
+                  <Icon name={valueIcons[index] ?? "compass"} size={23} />
+                </span>
+              </article>
             ))}
           </Reveal>
         </Container>
       </section>
 
-      <section className="border-t border-line bg-neutral-light">
-        <Container className="py-16 sm:py-24">
+      <section className="surface-dark-network about-architecture">
+        <Container className="relative py-16 sm:py-24">
           <SectionHeading
             eyebrow="Platform landscape"
             title="The stack we work across"
-            lede="Four layers, from the source-to-pay platform down to the integration fabric."
+            lede="Four connected layers from source-to-pay through the integration fabric."
+            dark
           />
-          <Reveal group className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {techStack.map((group) => (
-              <div key={group.group} data-reveal className="rounded-3xl border border-line bg-white p-6">
-                <h3 className="text-sm font-extrabold tracking-wide text-ink">{group.group}</h3>
-                <ul className="mt-4 flex flex-wrap gap-2">
+          <Reveal group className="about-architecture__layers">
+            {techStack.map((group, index) => (
+              <article key={group.group} data-reveal className="about-architecture__layer">
+                <div className="about-architecture__head">
+                  <span className="about-architecture__node" aria-hidden="true">
+                    L{String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <span>Architecture layer</span>
+                    <h3>{group.group}</h3>
+                  </div>
+                </div>
+                <ul>
                   {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-full bg-neutral-light px-3 py-1 text-xs font-semibold text-ink-muted"
-                    >
-                      {item}
+                    <li key={item}>
+                      <TechnologyMark name={item} compact />
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))}
+          </Reveal>
+          <Reveal className="about-architecture__legend">
+            <span aria-hidden="true" />
+            <p>Connected from business process to integration fabric</p>
           </Reveal>
         </Container>
       </section>

@@ -1,9 +1,10 @@
 import { site } from "@/lib/site";
 import { buildMetadata } from "@/lib/seo";
-import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/animation/Reveal";
+import { Icon } from "@/components/ui/Icon";
+import type { IconName } from "@/lib/content/types";
 
 export const metadata = buildMetadata({
   title: "Book a Discovery Session — Contact Nexolve",
@@ -12,73 +13,70 @@ export const metadata = buildMetadata({
   path: "/contact",
 });
 
-const expectations = [
+const expectations: { title: string; description: string; icon: IconName }[] = [
   {
     title: "A reply within one business day",
-    description: "From a person who read your message — not an autoresponder.",
+    description: "From a person who read your message, not an autoresponder.",
+    icon: "calendar",
   },
   {
     title: "An honest first assessment",
-    description: "Including 'this doesn't need us' when that's the truth.",
+    description: "Including ‘this does not need us’ when that is the truth.",
+    icon: "compass",
   },
   {
     title: "A concrete next step",
-    description: "Usually a short call, then a scoped, fixed-price proposal.",
+    description: "Usually a short call followed by a scoped proposal.",
+    icon: "flow",
   },
 ];
 
 export default function ContactPage() {
   return (
-    <>
-      <PageHero
-        eyebrow="Contact"
-        title="Book a discovery session"
-        lede="The more you can tell us about your source-to-pay estate, the more useful our first reply will be. Everything you share is treated confidentially."
-        crumbs={[
-          { name: "Home", path: "/" },
-          { name: "Contact", path: "/contact" },
-        ]}
-      />
-      <section className="border-t border-line bg-white">
-        <Container className="py-14 sm:py-20">
-          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="space-y-8 lg:sticky lg:top-28 lg:self-start">
-              <Reveal group className="space-y-4">
-                {expectations.map((item, i) => (
-                  <div key={item.title} data-reveal className="flex items-start gap-4">
-                    <span
-                      aria-hidden="true"
-                      className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-brand text-sm font-extrabold text-white"
-                    >
-                      {i + 1}
-                    </span>
-                    <div>
-                      <h2 className="text-base font-extrabold text-ink">{item.title}</h2>
-                      <p className="mt-1 text-sm leading-relaxed text-ink-muted">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </Reveal>
-              <Reveal className="rounded-3xl border border-line bg-neutral-light p-7">
-                <h2 className="text-xs font-bold tracking-[0.18em] text-ink-muted uppercase">
-                  Direct contact
-                </h2>
-                <ul className="mt-4 space-y-2 text-sm text-ink-muted">
-                  <li>{site.email}</li>
-                  <li>www.nexolvetech.com</li>
-                  <li>{site.address}</li>
-                  <li>PSEB registered</li>
-                </ul>
-              </Reveal>
-            </div>
-            <Reveal delay={100}>
-              <ContactForm />
+    <section className="contact-workspace">
+      <Container className="contact-workspace__container">
+        <div className="contact-workspace__frame">
+          <aside className="contact-workspace__intro">
+            <Reveal>
+              <p className="contact-workspace__eyebrow">Contact</p>
+              <h1>Book a discovery session</h1>
+              <p className="contact-workspace__lede">
+                Tell us roughly what you are working with. We will make the first reply useful and
+                treat everything you share confidentially.
+              </p>
             </Reveal>
-          </div>
-        </Container>
-      </section>
-    </>
+
+            <Reveal group className="discovery-expectations">
+              {expectations.map((item) => (
+                <div key={item.title} data-reveal className="discovery-expectation">
+                  <span className="discovery-expectation__icon">
+                    <Icon name={item.icon} size={19} />
+                  </span>
+                  <div>
+                    <h2>{item.title}</h2>
+                    <p>{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </Reveal>
+
+            <Reveal className="discovery-direct">
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+              <p>APAC &amp; Middle East</p>
+              <p>PSEB registered</p>
+            </Reveal>
+          </aside>
+
+          <Reveal delay={100} className="contact-workspace__form-panel">
+            <div className="discovery-form">
+              <div className="discovery-form__head">
+                <span>Tell us about the work</span>
+              </div>
+              <ContactForm />
+            </div>
+          </Reveal>
+        </div>
+      </Container>
+    </section>
   );
 }

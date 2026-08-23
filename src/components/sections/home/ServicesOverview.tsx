@@ -43,7 +43,7 @@ export function ServicesOverview() {
               <TiltCard className="h-full">
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card transition-shadow duration-300 hover:shadow-card-hover"
+                  className="color-card group flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card transition-shadow duration-300 hover:shadow-card-hover"
                 >
                   <IconChip name={service.icon} />
                   <h3 className="mt-5 text-lg font-extrabold text-ink">{service.title}</h3>

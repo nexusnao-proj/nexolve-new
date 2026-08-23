@@ -45,6 +45,6 @@ export const generalFaq: Faq[] = [
   {
     question: "How do we get in touch?",
     answer:
-      "Email info@nexolvetech.com with a line about your landscape, or use the contact form. A discovery session is short, specific, and does not commit you to anything.",
+      "Email info@nexolvetechnologies.com with a line about your landscape, or use the contact form. A discovery session is short, specific, and does not commit you to anything.",
   },
 ];

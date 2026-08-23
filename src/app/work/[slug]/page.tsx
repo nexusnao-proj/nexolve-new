@@ -8,6 +8,7 @@ import { isPlaceholder } from "@/lib/utils";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { Container } from "@/components/ui/Container";
+import { CardCover } from "@/components/ui/CardCover";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ArrowIcon } from "@/components/ui/Button";
 import { Reveal } from "@/components/animation/Reveal";
@@ -165,17 +166,24 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
             <Reveal className="mt-6">
               <Link
                 href={`/work/${next.slug}`}
-                className="group flex items-center justify-between gap-4 rounded-3xl border border-line bg-white p-7 shadow-card transition-shadow hover:shadow-card-hover"
+                className="color-card group flex flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-shadow hover:shadow-card-hover sm:flex-row"
               >
-                <div>
-                  <p className="text-xs font-bold tracking-[0.16em] text-ink-muted uppercase">
-                    {next.industry}
-                  </p>
-                  <p className="mt-2 text-lg font-extrabold text-ink group-hover:text-violet">
-                    {next.title}
-                  </p>
+                <CardCover
+                  cover={next.cover}
+                  sizes="(min-width: 640px) 18rem, 100vw"
+                  className="sm:w-72"
+                />
+                <div className="flex grow items-center justify-between gap-4 p-7">
+                  <div>
+                    <p className="text-xs font-bold tracking-[0.16em] text-ink-muted uppercase">
+                      {next.industry}
+                    </p>
+                    <p className="mt-2 text-lg font-extrabold text-ink group-hover:text-violet">
+                      {next.title}
+                    </p>
+                  </div>
+                  <ArrowIcon className="size-6 shrink-0 text-violet transition-transform group-hover:translate-x-1" />
                 </div>
-                <ArrowIcon className="size-6 shrink-0 text-violet transition-transform group-hover:translate-x-1" />
               </Link>
             </Reveal>
           </Container>

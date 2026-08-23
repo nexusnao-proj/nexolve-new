@@ -8,8 +8,14 @@ export type ProcessStep = {
   description: string;
 };
 
+export type ContentCover = {
+  src: `/images/editorial/${string}.webp`;
+  alt: string;
+};
+
 export type Service = {
   slug: string;
+  cover: ContentCover;
   /** Short label used in nav, cards and related lists. */
   title: string;
   /** SEO page title (H1). */
@@ -29,6 +35,7 @@ export type Service = {
 
 export type Industry = {
   slug: string;
+  cover: ContentCover;
   title: string;
   headline: string;
   excerpt: string;
@@ -42,6 +49,7 @@ export type Industry = {
 
 export type CaseStudy = {
   slug: string;
+  cover: ContentCover;
   title: string;
   client: string;
   industry: string;
@@ -65,6 +73,7 @@ export type PostSection = {
 
 export type Post = {
   slug: string;
+  cover: ContentCover;
   title: string;
   excerpt: string;
   category: PostCategory;
@@ -87,6 +96,7 @@ export const postCategories = [
 export type PostCategory = (typeof postCategories)[number];
 
 export type IconName =
+  | "user"
   | "compass"
   | "chip"
   | "bot"
@@ -109,4 +119,9 @@ export type IconName =
   | "cap"
   | "building"
   | "briefcase"
-  | "rocket";
+  | "rocket"
+  | "calendar"
+  | "users"
+  | "shield"
+  | "globe"
+  | "badge";

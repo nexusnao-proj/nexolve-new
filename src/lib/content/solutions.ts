@@ -1,4 +1,4 @@
-import type { IconName } from "./types";
+import type { ContentCover, IconName } from "./types";
 
 /**
  * Platform landscape — the stack Nexolve works across, rendered on /solutions
@@ -7,6 +7,7 @@ import type { IconName } from "./types";
  */
 export type Solution = {
   slug: string;
+  cover: ContentCover;
   title: string;
   outcome: string;
   description: string;
@@ -18,6 +19,10 @@ export type Solution = {
 export const solutions: Solution[] = [
   {
     slug: "source-to-pay",
+    cover: {
+      src: "/images/editorial/solution-source-to-pay.webp",
+      alt: "Procurement specialist arranging supplier material samples beside a blank contract folder",
+    },
     title: "Source to Pay",
     outcome: "One platform chain from sourcing to payment, adopted by the business",
     description:
@@ -33,6 +38,10 @@ export const solutions: Solution[] = [
   },
   {
     slug: "core-erp",
+    cover: {
+      src: "/images/editorial/solution-core-erp.webp",
+      alt: "Engineer inspecting rows of server modules beneath vertical cabling in a technical facility",
+    },
     title: "Core ERP",
     outcome: "An SAP core that procurement transactions post to cleanly",
     description:
@@ -48,6 +57,10 @@ export const solutions: Solution[] = [
   },
   {
     slug: "intelligence",
+    cover: {
+      src: "/images/editorial/solution-intelligence.webp",
+      alt: "Three analysts studying an abstract network of glowing data points on a glass wall",
+    },
     title: "Intelligence",
     outcome: "Spend, savings and adoption everyone reads the same way",
     description:
@@ -63,6 +76,10 @@ export const solutions: Solution[] = [
   },
   {
     slug: "integration-build",
+    cover: {
+      src: "/images/editorial/solution-integration-build.webp",
+      alt: "Technician walking beneath organized black cable routes in an industrial technology hall",
+    },
     title: "Integration & Build",
     outcome: "An estate that stays connected through every release cycle",
     description:

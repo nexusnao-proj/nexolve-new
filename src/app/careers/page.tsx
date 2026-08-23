@@ -36,7 +36,10 @@ export default function CareersPage() {
                 data-reveal
                 className="flex items-start gap-4 rounded-2xl border border-line bg-neutral-light p-6"
               >
-                <span aria-hidden="true" className="mt-2 size-2 shrink-0 rounded-full bg-gradient-brand" />
+                <span
+                  aria-hidden="true"
+                  className="mt-2 size-2 shrink-0 rounded-full bg-gradient-brand"
+                />
                 <p className="text-base leading-relaxed font-semibold text-ink">{perk}</p>
               </div>
             ))}
@@ -68,8 +71,8 @@ export default function CareersPage() {
                   No open roles are published right now.
                 </p>
                 <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-muted">
-                  {careers.openRolesPlaceholder} — but strong engineers, designers and
-                  strategists are always worth meeting. Introduce yourself via the contact page.
+                  Strong engineers, designers and strategists are always worth meeting. Introduce
+                  yourself via the contact page.
                 </p>
               </div>
             )}
