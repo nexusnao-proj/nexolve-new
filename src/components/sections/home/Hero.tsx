@@ -58,11 +58,11 @@ export function Hero() {
               key={credential.label}
               className={credential.focal ? "hero-rail__item--focal" : undefined}
             >
-              <Icon name={credential.icon} size={22} className="hero-rail__icon" />
-              <span>
-                <dt>{credential.value}</dt>
-                <dd>{credential.label}</dd>
-              </span>
+              <dt>
+                <Icon name={credential.icon} size={22} className="hero-rail__icon" />
+                <span>{credential.value}</span>
+              </dt>
+              <dd>{credential.label}</dd>
             </div>
           ))}
         </dl>

@@ -8,7 +8,7 @@ export const site = {
   tagline: "Procurement, solved.",
   description:
     "Procurement and supply chain transformation across SAP, Coupa and Oracle, delivered by one accountable consulting, integration and engineering team.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.nexolvetech.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.nexolvetechnologies.com",
   email: "info@nexolvetechnologies.com",
   address: "APAC & Middle East",
   social: {

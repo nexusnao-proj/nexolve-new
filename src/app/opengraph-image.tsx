@@ -89,7 +89,7 @@ export default function OpenGraphImage() {
             textTransform: "uppercase",
           }}
         >
-          nexolvetech.com
+          nexolvetechnologies.com
         </div>
       </div>
 
