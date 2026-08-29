@@ -14,12 +14,24 @@ test.describe("contact form", () => {
     await expect(nameInput).toHaveAttribute("aria-invalid", "true");
   });
 
-  test("shows success UI after valid submit (mailto path)", async ({ page }) => {
+  test("submits valid data to the contact API and shows success", async ({ page }) => {
+    let submitted: Record<string, unknown> | undefined;
+    await page.route("**/api/contact", async (route) => {
+      submitted = route.request().postDataJSON() as Record<string, unknown>;
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ message: "Thanks — your enquiry has been sent." }),
+      });
+    });
+
     await page.goto("/contact");
     await page.getByLabel(/^Name/).fill("Playwright Tester");
     await page.getByLabel(/Work email/).fill("tester@example.com");
     await page.getByLabel(/^Company/).fill("Example Ltd");
-    await page.getByLabel(/Service required/).selectOption("Source-to-Pay Platform Delivery (SAP Ariba, Coupa, Oracle)");
+    await page
+      .getByLabel(/Service required/)
+      .selectOption("Source-to-Pay Platform Delivery (SAP Ariba, Coupa, Oracle)");
     await page.getByLabel(/Project budget/).selectOption("$25k – $50k");
     await page.getByLabel(/Expected timeline/).selectOption("1 – 3 months");
     await page.getByLabel(/How did you find Nexolve/).selectOption("Search engine");
@@ -29,7 +41,11 @@ test.describe("contact form", () => {
     await page.getByLabel(/I agree that Nexolve/).check();
 
     await page.getByRole("button", { name: "Send enquiry" }).click();
-    await expect(page.getByRole("heading", { name: "Enquiry ready to send" })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Open email to info@nexolvetechnologies.com/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Enquiry sent" })).toBeVisible();
+    expect(submitted).toMatchObject({
+      name: "Playwright Tester",
+      email: "tester@example.com",
+      company: "Example Ltd",
+    });
   });
 });

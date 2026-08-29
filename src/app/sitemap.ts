@@ -28,7 +28,7 @@ export const sitemapStaticPages: readonly StaticPage[] = [
   { path: "/careers", lastModified: "2026-08-09" },
   { path: "/process", lastModified: "2026-08-02" },
   { path: "/blog", lastModified: "2026-08-08" },
-  { path: "/contact", lastModified: "2026-08-09" },
+  { path: "/contact", lastModified: "2026-08-29" },
   { path: "/faq", lastModified: "2026-08-02" },
   { path: "/privacy-policy", lastModified: "2026-08-02" },
   { path: "/terms", lastModified: "2026-08-02" },

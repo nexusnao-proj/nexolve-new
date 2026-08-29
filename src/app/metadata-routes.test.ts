@@ -44,7 +44,7 @@ describe("sitemap metadata route", () => {
 describe("robots metadata route", () => {
   it("allows public crawling and advertises the canonical sitemap", () => {
     expect(robots()).toEqual({
-      rules: { userAgent: "*", allow: "/" },
+      rules: { userAgent: "*", allow: "/", disallow: "/api/" },
       sitemap: "https://www.nexolvetechnologies.com/sitemap.xml",
     });
   });

@@ -38,11 +38,7 @@ export const sourceOptions = [
 ] as const;
 
 export const contactSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, "Please enter your name.")
-    .max(120, "Name looks too long."),
+  name: z.string().trim().min(2, "Please enter your name.").max(120, "Name looks too long."),
   email: z
     .string()
     .trim()
@@ -75,7 +71,7 @@ export const contactSchema = z.object({
 export type ContactInput = z.infer<typeof contactSchema>;
 
 export type ContactFormState = {
-  status: "idle" | "success" | "error";
+  status: "idle" | "submitting" | "success" | "error";
   message?: string;
   fieldErrors?: Partial<Record<keyof ContactInput, string>>;
 };

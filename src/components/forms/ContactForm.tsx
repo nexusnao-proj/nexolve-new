@@ -10,7 +10,6 @@ import {
   type ContactFormState,
   type ContactInput,
 } from "@/lib/contact/schema";
-import { buildContactMailto } from "@/lib/contact/mailto";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
@@ -58,20 +57,19 @@ function Field({
 
 export function ContactForm() {
   const [state, setState] = useState<ContactFormState>(initialState);
-  const [mailtoHref, setMailtoHref] = useState<string | null>(null);
   const id = useId();
   const errors = state.fieldErrors ?? {};
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
     if (typeof formData.get("website") === "string" && formData.get("website") !== "") {
       setState({
         status: "success",
         message: "Thanks — we'll be in touch shortly.",
       });
-      setMailtoHref(null);
       return;
     }
 
@@ -103,14 +101,39 @@ export function ContactForm() {
       return;
     }
 
-    const href = buildContactMailto(site.email, parsed.data);
-    setMailtoHref(href);
-    window.location.href = href;
-    setState({
-      status: "success",
-      message:
-        "Your email app should open with a drafted message. Send it to complete your enquiry. If nothing opened, use the email link below.",
-    });
+    setState({ status: "submitting", message: "Sending your enquiry…" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...raw, website: formData.get("website") }),
+      });
+      const result = (await response.json()) as {
+        message?: string;
+        fieldErrors?: ContactFormState["fieldErrors"];
+      };
+
+      if (!response.ok) {
+        setState({
+          status: "error",
+          message: result.message ?? "We couldn't send your enquiry. Please try again.",
+          fieldErrors: result.fieldErrors,
+        });
+        return;
+      }
+
+      form.reset();
+      setState({
+        status: "success",
+        message: result.message ?? "Thanks — your enquiry has been sent.",
+      });
+    } catch {
+      setState({
+        status: "error",
+        message: "We couldn't reach the email service. Please try again or email us directly.",
+      });
+    }
   }
 
   if (state.status === "success") {
@@ -127,13 +150,11 @@ export function ContactForm() {
             />
           </svg>
         </span>
-        <h2>Enquiry ready to send</h2>
+        <h2>Enquiry sent</h2>
         <p>{state.message}</p>
-        {mailtoHref && (
-          <p className="mt-4">
-            <a href={mailtoHref}>Open email to {site.email}</a>
-          </p>
-        )}
+        <p className="mt-4">
+          You can also contact us at <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
       </div>
     );
   }
@@ -356,11 +377,17 @@ export function ContactForm() {
         </p>
       )}
 
-      <Button type="submit" size="lg" className="discovery-submit">
-        Send enquiry <span aria-hidden="true">→</span>
+      <Button
+        type="submit"
+        size="lg"
+        className="discovery-submit"
+        disabled={state.status === "submitting"}
+      >
+        {state.status === "submitting" ? "Sending…" : "Send enquiry"}{" "}
+        <span aria-hidden="true">→</span>
       </Button>
       <p className="discovery-form__note">
-        Opens your email app with a drafted message to {site.email}.
+        Sent securely to {site.email}. We normally reply within one business day.
       </p>
     </form>
   );

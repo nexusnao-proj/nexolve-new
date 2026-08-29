@@ -23,21 +23,21 @@ pnpm dev                      # http://localhost:3000
 
 ## Scripts
 
-| Command             | Purpose                                         |
-| ------------------- | ----------------------------------------------- |
-| `pnpm dev`          | Development server                              |
-| `pnpm build`        | Static export to `out/`                         |
-| `pnpm preview`      | Serve `out/` locally (port 3000)                |
-| `pnpm start`        | Node server — not used for static hosting       |
-| `pnpm lint`         | ESLint (next/core-web-vitals + TS)              |
-| `pnpm typecheck`    | `tsc --noEmit` (strict)                         |
-| `pnpm validate:seo` | Validate exported sitemap, metadata, and routes |
-| `pnpm test`         | Vitest unit tests (schema, content, utils)      |
-| `pnpm test:e2e`     | Playwright e2e (requires `pnpm build` first)    |
-| `pnpm format`       | Prettier write                                  |
+| Command             | Purpose                                      |
+| ------------------- | -------------------------------------------- |
+| `pnpm dev`          | Development server                           |
+| `pnpm build`        | Production Next.js build                     |
+| `pnpm preview`      | Run the production build locally (port 3000) |
+| `pnpm start`        | Run the production Next.js server            |
+| `pnpm lint`         | ESLint (next/core-web-vitals + TS)           |
+| `pnpm typecheck`    | `tsc --noEmit` (strict)                      |
+| `pnpm validate:seo` | Validate live sitemap, metadata, and routes  |
+| `pnpm test`         | Vitest unit tests (schema, content, utils)   |
+| `pnpm test:e2e`     | Playwright e2e (requires `pnpm build` first) |
+| `pnpm format`       | Prettier write                               |
 
 Before deploying run: `pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm validate:seo`.
-For e2e: `pnpm build` first, then `pnpm test:e2e` (Playwright serves `out/` via `pnpm preview`).
+For e2e: `pnpm build` first, then `pnpm test:e2e` (Playwright starts the production server).
 
 ## Architecture
 
@@ -48,6 +48,7 @@ src/
     industries/[slug]     # 6 sector pages
     work/[slug]           # Case-study system
     blog/[slug]           # Insights articles (category filter is client-side)
+    api/contact/route.ts  # Server-side SMTP delivery
     sitemap.ts robots.ts manifest.ts opengraph-image.tsx icon.svg
   components/
     layout/               # Header (a11y dropdown + focus-trapped drawer), Footer, SkipLink
@@ -55,7 +56,7 @@ src/
     ui/                   # Container, Button, SectionHeading, Icon set, Logo
     animation/            # Reveal (IO + anime.js), SmoothScroll (Lenis), Marquee, TiltCard
     three/                # HeroVisual orchestrator + RibbonScene (lazy R3F)
-    forms/                # ContactForm (client Zod + mailto)
+    forms/                # ContactForm (client Zod + API submission)
     seo/                  # JsonLd, Breadcrumbs
     consent/              # CookieConsent + consent-gated GA4 loader
   lib/
@@ -63,7 +64,7 @@ src/
     seo.ts schema.ts      # Metadata builder + JSON-LD builders
     content/              # Typed content layer: services, industries, case studies,
                           # posts, FAQ, solutions, company. CMS-swappable.
-    contact/              # Zod schema + mailto helper (static-friendly)
+    contact/              # Shared Zod schema + plain-text email builder
 ```
 
 **Content layer:** all copy lives in `src/lib/content/*` as typed data. Swapping to MDX or a
@@ -73,14 +74,14 @@ tests.
 
 ## Animation & 3D decisions
 
-| Effect                        | Technology & why                                                                 |
-| ----------------------------- | -------------------------------------------------------------------------------- |
-| Hero 3D ribbon                | React Three Fiber — the one WebGL moment. Lazy-loaded (`next/dynamic`), WebGL-detected, DPR-clamped, reduced geometry on mobile, paused off-screen & on hidden tabs, disposed on unmount. Static SVG/CSS poster is the loading state **and** the complete non-WebGL fallback. |
-| Scroll reveals                | anime.js + IntersectionObserver. Transform/opacity only, run once.               |
-| Connection-line drawing       | CSS `stroke-dashoffset` (no JS animation lib), IO-triggered.                     |
-| Smooth scrolling              | Lenis (the engine inside Locomotive Scroll v5) — chosen over Locomotive v4 because it preserves native scroll semantics, keyboard nav and browser history. Desktop fine-pointer only. |
-| Card depth                    | CSS `perspective` tilt (rAF-throttled pointer), fine pointers only.              |
-| Marquee                       | Pure CSS animation, paused when off-screen.                                      |
+| Effect                  | Technology & why                                                                                                                                                                                                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hero 3D ribbon          | React Three Fiber — the one WebGL moment. Lazy-loaded (`next/dynamic`), WebGL-detected, DPR-clamped, reduced geometry on mobile, paused off-screen & on hidden tabs, disposed on unmount. Static SVG/CSS poster is the loading state **and** the complete non-WebGL fallback. |
+| Scroll reveals          | anime.js + IntersectionObserver. Transform/opacity only, run once.                                                                                                                                                                                                            |
+| Connection-line drawing | CSS `stroke-dashoffset` (no JS animation lib), IO-triggered.                                                                                                                                                                                                                  |
+| Smooth scrolling        | Lenis (the engine inside Locomotive Scroll v5) — chosen over Locomotive v4 because it preserves native scroll semantics, keyboard nav and browser history. Desktop fine-pointer only.                                                                                         |
+| Card depth              | CSS `perspective` tilt (rAF-throttled pointer), fine pointers only.                                                                                                                                                                                                           |
+| Marquee                 | Pure CSS animation, paused when off-screen.                                                                                                                                                                                                                                   |
 
 **Reduced motion:** `prefers-reduced-motion` disables smooth scroll, the WebGL scene (poster
 shown instead), tilt, marquee, reveals and parallax — all content remains fully visible.
@@ -89,9 +90,9 @@ everything.
 
 ## Contact form
 
-Client-side form with shared Zod validation, a honeypot field, and `mailto:` delivery to
-`info@nexolvetechnologies.com`. Submitting opens the visitor’s email app with a drafted enquiry. There is
-no server action or Resend dependency — suitable for static Cloudflare Pages hosting.
+The form validates on both client and server, includes a honeypot and basic per-instance IP rate
+limit, and sends through Hostinger SMTP to `info@nexolvetechnologies.com`. SMTP credentials remain
+server-only in Vercel environment variables. The visitor's address is used as `Reply-To`.
 
 ## SEO
 
@@ -104,30 +105,23 @@ no server action or Resend dependency — suitable for static Cloudflare Pages h
 
 ## Security
 
-- CSP + security headers in `public/_headers` (applied by Cloudflare Pages). GA hosts are
-  included so enabling `NEXT_PUBLIC_GA_ID` does not require a CSP edit.
-- Form: client-side Zod validation, honeypot, mailto delivery (no server secrets).
+- CSP and security headers are configured in `next.config.ts` and applied by Vercel.
+- Form: client/server Zod validation, honeypot, basic rate limiting, same-origin checks and
+  server-only SMTP credentials.
 - No client-side secrets; analytics load only after explicit consent.
 
-## Deployment (Cloudflare Pages)
+## Deployment (Vercel)
 
 1. Push this repository to GitHub.
-2. In Cloudflare: **Workers & Pages → Create → Connect to Git**.
-3. Build settings:
-
-| Setting | Value |
-| --- | --- |
-| Framework preset | Next.js (Static HTML Export) |
-| Build command | `npx next build` or `pnpm build` |
-| Build output directory | `out` |
-| Root directory | `/` |
-
-4. Set any optional analytics variables under Environment variables. The canonical production
-   origin is intentionally fixed in `src/lib/site.ts` so previews cannot emit competing URLs.
-5. Deploy. After first deploy: verify `https://<domain>/sitemap.xml`, submit it in Google Search
+2. Import the repository into Vercel using the Next.js framework preset.
+3. Add all SMTP variables from `.env.example` under **Settings → Environment Variables**. Use the
+   actual `info@` mailbox password for `SMTP_PASS`; never commit it.
+4. Add any optional analytics variables. The canonical production origin is intentionally fixed in
+   `src/lib/site.ts` so previews cannot emit competing URLs.
+5. Deploy. Verify `https://<domain>/sitemap.xml`, submit it in Google Search
    Console, and confirm the OG image renders via a share debugger.
 
-Local static preview: `pnpm build && pnpm preview`.
+Local production preview: `pnpm build && pnpm preview`.
 
 ## Content replacement guide
 
@@ -149,6 +143,7 @@ one. Priority order:
 ## Checklists
 
 **Performance** (target: Lighthouse mobile ≥ 90, LCP < 2.5s, INP < 200ms, CLS < 0.1)
+
 - [x] Three.js excluded from initial bundles (dynamic import; home first-load ≈ 124 kB)
 - [x] Hero text server-rendered; 3D is decorative with fixed-aspect container (no CLS)
 - [x] Self-hosted font via next/font (swap), single family
@@ -158,14 +153,16 @@ one. Priority order:
 - [ ] Run Lighthouse against the production domain after deploy (numbers depend on hosting)
 
 **SEO**
+
 - [x] Unique title/description/canonical per page; OG/Twitter cards; OG image
 - [x] sitemap.xml, robots.txt, manifest, favicon, breadcrumbs, semantic URLs
 - [x] Structured data (Organization, WebSite, ProfessionalService, Service, Article,
-  BreadcrumbList, FAQPage) matching visible content only
+      BreadcrumbList, FAQPage) matching visible content only
 - [x] Canonical production domain fixed to `https://www.nexolvetechnologies.com`
 - [ ] Submit sitemap in Google Search Console; verify rich results
 
 **Accessibility (WCAG 2.2 AA)**
+
 - [x] Skip link, landmarks, heading order, focus-visible styles
 - [x] Keyboard-complete header dropdown + focus-trapped mobile drawer (Esc closes)
 - [x] Form labels, aria-invalid, role=alert errors, touch targets ≥ 44px
