@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getService, services } from "@/lib/content/services";
+import { industries } from "@/lib/content/industries";
+import { caseStudies } from "@/lib/content/case-studies";
+import { publishedPosts } from "@/lib/content/posts";
 import { buildMetadata } from "@/lib/seo";
 import { faqSchema, serviceSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -21,11 +24,7 @@ export function generateStaticParams(): Params[] {
   return services.map((s) => ({ slug: s.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
@@ -44,6 +43,15 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   const related = service.related
     .map((r) => getService(r))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
+  const relatedIndustries = industries
+    .filter((industry) => industry.services.includes(service.slug))
+    .slice(0, 3);
+  const relatedWork = caseStudies
+    .filter((caseStudy) => caseStudy.relatedServices.includes(service.slug))
+    .slice(0, 3);
+  const relatedInsights = publishedPosts
+    .filter((post) => post.relatedServices.includes(service.slug))
+    .slice(0, 3);
 
   return (
     <>
@@ -72,10 +80,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       {/* Problems */}
       <section className="border-y border-line bg-white">
         <Container className="py-16 sm:py-24">
-          <SectionHeading
-            eyebrow="Problems we solve"
-            title="Sound familiar?"
-          />
+          <SectionHeading eyebrow="Problems we solve" title="Sound familiar?" />
           <Reveal group className="mt-10 grid gap-4 sm:grid-cols-2">
             {service.problems.map((problem) => (
               <div
@@ -107,7 +112,10 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                 data-reveal
                 className="rounded-3xl border border-line bg-white p-6 shadow-card"
               >
-                <span aria-hidden="true" className="block h-1 w-10 rounded-full bg-gradient-brand" />
+                <span
+                  aria-hidden="true"
+                  className="block h-1 w-10 rounded-full bg-gradient-brand"
+                />
                 <h3 className="mt-4 text-base font-extrabold text-ink">{cap.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">{cap.description}</p>
               </div>
@@ -202,7 +210,10 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                 data-reveal
                 className="flex items-start gap-4 rounded-2xl border border-line bg-white p-5 shadow-card"
               >
-                <span aria-hidden="true" className="mt-2 size-2 shrink-0 rounded-full bg-gradient-brand" />
+                <span
+                  aria-hidden="true"
+                  className="mt-2 size-2 shrink-0 rounded-full bg-gradient-brand"
+                />
                 <p className="text-base leading-relaxed font-semibold text-ink">{benefit}</p>
               </div>
             ))}
@@ -245,7 +256,9 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                       <h3 className="mt-4 text-base font-extrabold text-ink group-hover:text-violet">
                         {rel.title}
                       </h3>
-                      <p className="mt-2 grow text-sm leading-relaxed text-ink-muted">{rel.excerpt}</p>
+                      <p className="mt-2 grow text-sm leading-relaxed text-ink-muted">
+                        {rel.excerpt}
+                      </p>
                       <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-violet">
                         Learn more
                         <ArrowIcon className="transition-transform group-hover:translate-x-1" />
@@ -255,6 +268,70 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                 </div>
               ))}
             </Reveal>
+          </Container>
+        </section>
+      )}
+
+      {(relatedIndustries.length > 0 || relatedWork.length > 0 || relatedInsights.length > 0) && (
+        <section className="border-t border-line bg-neutral-light">
+          <Container className="py-14 sm:py-18">
+            <SectionHeading
+              eyebrow="Explore further"
+              title="Related sector experience and thinking"
+            />
+            <div className="mt-8 grid gap-8 md:grid-cols-3">
+              {relatedIndustries.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-extrabold text-ink">Industries</h3>
+                  <ul className="mt-3 space-y-2">
+                    {relatedIndustries.map((industry) => (
+                      <li key={industry.slug}>
+                        <Link
+                          className="text-sm font-semibold text-violet hover:underline"
+                          href={`/industries/${industry.slug}`}
+                        >
+                          {industry.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {relatedWork.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-extrabold text-ink">Case studies</h3>
+                  <ul className="mt-3 space-y-2">
+                    {relatedWork.map((caseStudy) => (
+                      <li key={caseStudy.slug}>
+                        <Link
+                          className="text-sm font-semibold text-violet hover:underline"
+                          href={`/work/${caseStudy.slug}`}
+                        >
+                          {caseStudy.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {relatedInsights.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-extrabold text-ink">Insights</h3>
+                  <ul className="mt-3 space-y-2">
+                    {relatedInsights.map((post) => (
+                      <li key={post.slug}>
+                        <Link
+                          className="text-sm font-semibold text-violet hover:underline"
+                          href={`/blog/${post.slug}`}
+                        >
+                          {post.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </Container>
         </section>
       )}

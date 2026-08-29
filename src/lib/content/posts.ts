@@ -16,6 +16,7 @@ export const posts: Post[] = [
     excerpt:
       "Most Ariba implementations configure sourcing and stop. The value sits in stages three and four — integration and adoption — and that is where planning usually runs out.",
     category: "SAP Ariba",
+    status: "published",
     date: "2026-06-18",
     author: { name: "Nexolve Technologies", role: "Delivery team" },
     sections: [
@@ -45,6 +46,7 @@ export const posts: Post[] = [
       },
     ],
     related: ["guided-buying-easiest-route", "spend-baseline-before-savings"],
+    relatedServices: ["source-to-pay-platform-delivery", "data-analytics-integrations"],
   },
   {
     slug: "spend-baseline-before-savings",
@@ -56,6 +58,7 @@ export const posts: Post[] = [
     excerpt:
       "Every procurement function claims savings. Few can show a baseline that finance signed. Until that exists, every number is negotiable.",
     category: "Analytics",
+    status: "published",
     date: "2026-05-27",
     author: { name: "Nexolve Technologies", role: "Delivery team" },
     sections: [
@@ -85,6 +88,7 @@ export const posts: Post[] = [
       },
     ],
     related: ["ariba-programmes-stall-after-stage-two", "integration-fabric-release-cycles"],
+    relatedServices: ["data-analytics-integrations", "supply-chain-procurement-consulting"],
   },
   {
     slug: "guided-buying-easiest-route",
@@ -96,6 +100,7 @@ export const posts: Post[] = [
     excerpt:
       "Maverick buying is rarely defiance. It is a rational response to a compliant route that is slower than the workaround. Fix the route, not the policy memo.",
     category: "Source-to-Pay",
+    status: "published",
     date: "2026-04-30",
     author: { name: "Nexolve Technologies", role: "Delivery team" },
     sections: [
@@ -125,6 +130,7 @@ export const posts: Post[] = [
       },
     ],
     related: ["ariba-programmes-stall-after-stage-two", "supplier-portals-build-or-configure"],
+    relatedServices: ["source-to-pay-platform-delivery", "supply-chain-procurement-consulting"],
   },
   {
     slug: "s4hana-migration-master-data-first",
@@ -136,6 +142,7 @@ export const posts: Post[] = [
     excerpt:
       "Every S/4HANA programme says data migration is a workstream. Few treat it as the critical path it is. The cutover date will not move because the data is not ready.",
     category: "ERP & SAP",
+    status: "published",
     date: "2026-03-19",
     author: { name: "Nexolve Technologies", role: "Delivery team" },
     sections: [
@@ -165,6 +172,7 @@ export const posts: Post[] = [
       },
     ],
     related: ["integration-fabric-release-cycles", "spend-baseline-before-savings"],
+    relatedServices: ["erp-core-sap", "data-analytics-integrations"],
   },
   {
     slug: "integration-fabric-release-cycles",
@@ -176,6 +184,7 @@ export const posts: Post[] = [
     excerpt:
       "Ariba releases quarterly. S/4HANA patches. APIs version. An integration estate without monitoring and ownership decays on a schedule you did not choose.",
     category: "Integration",
+    status: "published",
     date: "2026-02-12",
     author: { name: "Nexolve Technologies", role: "Delivery team" },
     sections: [
@@ -205,6 +214,7 @@ export const posts: Post[] = [
       },
     ],
     related: ["s4hana-migration-master-data-first", "spend-baseline-before-savings"],
+    relatedServices: ["data-analytics-integrations", "software-digital-engineering"],
   },
   {
     slug: "supplier-portals-build-or-configure",
@@ -216,6 +226,7 @@ export const posts: Post[] = [
     excerpt:
       "Ariba already gives suppliers a network. A custom portal earns its cost only for journeys the platform does not serve well. Here is the honest decision frame.",
     category: "Software Engineering",
+    status: "published",
     date: "2026-01-22",
     author: { name: "Nexolve Technologies", role: "Delivery team" },
     sections: [
@@ -245,15 +256,22 @@ export const posts: Post[] = [
       },
     ],
     related: ["guided-buying-easiest-route", "ariba-programmes-stall-after-stage-two"],
+    relatedServices: ["software-digital-engineering", "source-to-pay-platform-delivery"],
   },
 ];
 
+function isPublished(post: Post, now = new Date()): boolean {
+  return post.status === "published" && new Date(`${post.date}T00:00:00Z`) <= now;
+}
+
+export const publishedPosts = posts.filter((post) => isPublished(post));
+
 export function getPost(slug: string): Post | undefined {
-  return posts.find((p) => p.slug === slug);
+  return publishedPosts.find((p) => p.slug === slug);
 }
 
 export function getPostsByCategory(category?: string): Post[] {
-  const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+  const sorted = [...publishedPosts].sort((a, b) => b.date.localeCompare(a.date));
   if (!category) return sorted;
   return sorted.filter((p) => p.category === category);
 }

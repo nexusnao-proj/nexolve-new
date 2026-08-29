@@ -23,19 +23,20 @@ pnpm dev                      # http://localhost:3000
 
 ## Scripts
 
-| Command             | Purpose                                      |
-| ------------------- | -------------------------------------------- |
-| `pnpm dev`          | Development server                           |
-| `pnpm build`        | Static export to `out/`                      |
-| `pnpm preview`      | Serve `out/` locally (port 3000)             |
-| `pnpm start`        | Node server — not used for static hosting    |
-| `pnpm lint`         | ESLint (next/core-web-vitals + TS)           |
-| `pnpm typecheck`    | `tsc --noEmit` (strict)                      |
-| `pnpm test`         | Vitest unit tests (schema, content, utils)   |
-| `pnpm test:e2e`     | Playwright e2e (requires `pnpm build` first) |
-| `pnpm format`       | Prettier write                               |
+| Command             | Purpose                                         |
+| ------------------- | ----------------------------------------------- |
+| `pnpm dev`          | Development server                              |
+| `pnpm build`        | Static export to `out/`                         |
+| `pnpm preview`      | Serve `out/` locally (port 3000)                |
+| `pnpm start`        | Node server — not used for static hosting       |
+| `pnpm lint`         | ESLint (next/core-web-vitals + TS)              |
+| `pnpm typecheck`    | `tsc --noEmit` (strict)                         |
+| `pnpm validate:seo` | Validate exported sitemap, metadata, and routes |
+| `pnpm test`         | Vitest unit tests (schema, content, utils)      |
+| `pnpm test:e2e`     | Playwright e2e (requires `pnpm build` first)    |
+| `pnpm format`       | Prettier write                                  |
 
-Before deploying run: `pnpm lint && pnpm typecheck && pnpm test && pnpm build`.
+Before deploying run: `pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm validate:seo`.
 For e2e: `pnpm build` first, then `pnpm test:e2e` (Playwright serves `out/` via `pnpm preview`).
 
 ## Architecture
@@ -121,7 +122,8 @@ no server action or Resend dependency — suitable for static Cloudflare Pages h
 | Build output directory | `out` |
 | Root directory | `/` |
 
-4. Set `NEXT_PUBLIC_SITE_URL` (and optional analytics vars) under Environment variables.
+4. Set any optional analytics variables under Environment variables. The canonical production
+   origin is intentionally fixed in `src/lib/site.ts` so previews cannot emit competing URLs.
 5. Deploy. After first deploy: verify `https://<domain>/sitemap.xml`, submit it in Google Search
    Console, and confirm the OG image renders via a share debugger.
 
@@ -160,7 +162,7 @@ one. Priority order:
 - [x] sitemap.xml, robots.txt, manifest, favicon, breadcrumbs, semantic URLs
 - [x] Structured data (Organization, WebSite, ProfessionalService, Service, Article,
   BreadcrumbList, FAQPage) matching visible content only
-- [ ] Set final production domain in `NEXT_PUBLIC_SITE_URL`
+- [x] Canonical production domain fixed to `https://www.nexolvetechnologies.com`
 - [ ] Submit sitemap in Google Search Console; verify rich results
 
 **Accessibility (WCAG 2.2 AA)**

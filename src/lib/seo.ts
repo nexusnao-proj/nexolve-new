@@ -13,6 +13,7 @@ type PageSeo = {
   path: string;
   ogType?: "website" | "article";
   publishedTime?: string;
+  modifiedTime?: string;
   noIndex?: boolean;
 };
 
@@ -34,6 +35,7 @@ export function buildMetadata({
   path,
   ogType = "website",
   publishedTime,
+  modifiedTime,
   noIndex,
 }: PageSeo): Metadata {
   return {
@@ -49,6 +51,7 @@ export function buildMetadata({
       locale: "en_US",
       images: [socialImage],
       ...(publishedTime ? { publishedTime } : {}),
+      ...(modifiedTime ? { modifiedTime } : {}),
     },
     twitter: {
       card: "summary_large_image",

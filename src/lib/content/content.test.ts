@@ -89,15 +89,24 @@ describe("posts content", () => {
     expect(new Set(posts.map((p) => p.slug)).size).toBe(posts.length);
     for (const post of posts) {
       expect(postCategories).toContain(post.category);
+      expect(["published", "draft"]).toContain(post.status);
       expect(post.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      if (post.updatedDate) {
+        expect(post.updatedDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(post.updatedDate >= post.date).toBe(true);
+      }
     }
   });
 
   it("has resolvable related-post references and section ids", () => {
     const slugs = new Set(posts.map((p) => p.slug));
+    const serviceSlugs = new Set(services.map((service) => service.slug));
     for (const post of posts) {
       for (const related of post.related) {
         expect(slugs, `${post.slug} → ${related}`).toContain(related);
+      }
+      for (const relatedService of post.relatedServices) {
+        expect(serviceSlugs, `${post.slug} → ${relatedService}`).toContain(relatedService);
       }
       const ids = new Set(post.sections.map((s) => s.id));
       expect(ids.size).toBe(post.sections.length);

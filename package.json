@@ -11,6 +11,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "validate:seo": "node scripts/validate-seo.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",

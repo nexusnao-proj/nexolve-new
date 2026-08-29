@@ -2,30 +2,7 @@
  * Global site configuration — single source of truth for brand strings,
  * URLs and navigation. Company name must always be written "Nexolve Technologies".
  */
-const DEFAULT_SITE_URL = "https://www.nexolvetechnologies.com";
-
-/**
- * Vercel environment values are user-entered and may be blank or omit a scheme.
- * Always expose a valid HTTP(S) origin because Next.js evaluates metadata while
- * collecting the built-in /_not-found route.
- */
-export function resolveSiteUrl(value: string | undefined): string {
-  const candidate = value?.trim();
-
-  if (!candidate) return DEFAULT_SITE_URL;
-
-  const absoluteCandidate = /^[a-z][a-z\d+.-]*:\/\//i.test(candidate)
-    ? candidate
-    : `https://${candidate}`;
-
-  try {
-    const url = new URL(absoluteCandidate);
-    if (url.protocol !== "http:" && url.protocol !== "https:") return DEFAULT_SITE_URL;
-    return url.origin;
-  } catch {
-    return DEFAULT_SITE_URL;
-  }
-}
+export const CANONICAL_SITE_URL = "https://www.nexolvetechnologies.com";
 
 export const site = {
   name: "Nexolve Technologies",
@@ -33,7 +10,8 @@ export const site = {
   tagline: "Procurement, solved.",
   description:
     "Procurement and supply chain transformation across SAP, Coupa and Oracle, delivered by one accountable consulting, integration and engineering team.",
-  url: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
+  // Canonicals and sitemap URLs must never change on preview deployments.
+  url: CANONICAL_SITE_URL,
   email: "info@nexolvetechnologies.com",
   address: "APAC & Middle East",
   social: {

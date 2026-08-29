@@ -77,10 +77,16 @@ export type Post = {
   title: string;
   excerpt: string;
   category: PostCategory;
-  date: string; // ISO
+  /** Only published posts are rendered or included in the sitemap. */
+  status: "published" | "draft";
+  /** Original publication date in YYYY-MM-DD format. */
+  date: string;
+  /** Most recent substantive update in YYYY-MM-DD format. */
+  updatedDate?: string;
   author: { name: string; role: string };
   sections: PostSection[];
   related: string[];
+  relatedServices: string[];
 };
 
 export const postCategories = [

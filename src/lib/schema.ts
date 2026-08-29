@@ -96,7 +96,7 @@ export function articleSchema(post: Post) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updatedDate ?? post.date,
     url: absoluteUrl(`/blog/${post.slug}`),
     author: { "@type": "Organization", name: site.name, url: site.url },
     publisher: { "@id": `${site.url}/#organization` },

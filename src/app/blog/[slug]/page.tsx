@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPost, posts } from "@/lib/content/posts";
+import { getPost, publishedPosts } from "@/lib/content/posts";
+import { getService } from "@/lib/content/services";
 import { buildMetadata } from "@/lib/seo";
 import { articleSchema } from "@/lib/schema";
 import { formatDate, readingTime } from "@/lib/utils";
@@ -16,14 +17,10 @@ import { Reveal } from "@/components/animation/Reveal";
 type Params = { slug: string };
 
 export function generateStaticParams(): Params[] {
-  return posts.map((p) => ({ slug: p.slug }));
+  return publishedPosts.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
@@ -33,6 +30,7 @@ export async function generateMetadata({
     path: `/blog/${post.slug}`,
     ogType: "article",
     publishedTime: post.date,
+    modifiedTime: post.updatedDate,
   });
 }
 
@@ -45,6 +43,9 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
   const related = post.related
     .map((r) => getPost(r))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
+  const relatedServices = post.relatedServices
+    .map((serviceSlug) => getService(serviceSlug))
+    .filter((service): service is NonNullable<typeof service> => Boolean(service));
 
   return (
     <>
@@ -94,10 +95,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
           <Container className="py-12 sm:py-16">
             <div className="grid gap-12 lg:grid-cols-[0.28fr_0.72fr]">
               {/* Table of contents */}
-              <nav
-                aria-label="Table of contents"
-                className="lg:sticky lg:top-28 lg:self-start"
-              >
+              <nav aria-label="Table of contents" className="lg:sticky lg:top-28 lg:self-start">
                 <h2 className="text-xs font-bold tracking-[0.18em] text-ink-muted uppercase">
                   In this article
                 </h2>
@@ -147,6 +145,32 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                 <div key={rel.slug} data-reveal>
                   <PostCard post={rel} sizes="(min-width: 768px) 50vw, 100vw" />
                 </div>
+              ))}
+            </Reveal>
+          </Container>
+        </section>
+      )}
+
+      {relatedServices.length > 0 && (
+        <section className="border-t border-line bg-white">
+          <Container className="py-12 sm:py-16">
+            <SectionHeading eyebrow="Related expertise" title="Services for this challenge" />
+            <Reveal group className="mt-7 grid gap-4 sm:grid-cols-2">
+              {relatedServices.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  data-reveal
+                  className="group rounded-2xl border border-line bg-neutral-light p-6 transition-colors hover:border-violet/40"
+                >
+                  <h3 className="font-extrabold text-ink group-hover:text-violet">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{service.excerpt}</p>
+                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-violet">
+                    Explore service
+                  </span>
+                </Link>
               ))}
             </Reveal>
           </Container>
