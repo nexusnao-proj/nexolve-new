@@ -1,8 +1,18 @@
 import type { NextConfig } from "next";
 
+const scriptSources = [
+  "'self'",
+  "'unsafe-inline'",
+  // Next.js' webpack runtime uses eval-based source maps in development.
+  // Keep this out of the production policy.
+  ...(process.env.NODE_ENV === "development" ? ["'unsafe-eval'"] : []),
+  "https://www.googletagmanager.com",
+  "https://static.cloudflareinsights.com",
+].join(" ");
+
 const contentSecurityPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com",
+  `script-src ${scriptSources}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",

@@ -90,6 +90,9 @@ function smtpConfiguration() {
       host,
       port,
       secure: process.env.SMTP_SECURE === "true",
+      // Hostinger accepts these mailbox credentials with AUTH LOGIN but
+      // rejects Nodemailer's default AUTH PLAIN mechanism.
+      authMethod: "LOGIN",
       auth: { user, pass },
       connectionTimeout: 10_000,
       greetingTimeout: 10_000,

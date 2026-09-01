@@ -1,9 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const sendMail = vi.fn();
+const { sendMail, createTransport } = vi.hoisted(() => {
+  const sendMail = vi.fn();
+  return { sendMail, createTransport: vi.fn(() => ({ sendMail })) };
+});
 vi.mock("nodemailer", () => ({
   default: {
-    createTransport: vi.fn(() => ({ sendMail })),
+    createTransport,
   },
 }));
 
@@ -52,6 +55,9 @@ describe("POST /api/contact", () => {
     const response = await POST(request(validSubmission, "192.0.2.1"));
 
     expect(response.status).toBe(200);
+    expect(createTransport).toHaveBeenCalledWith(
+      expect.objectContaining({ authMethod: "LOGIN" }),
+    );
     expect(sendMail).toHaveBeenCalledWith(
       expect.objectContaining({
         from: '"Nexolve Website" <info@nexolvetechnologies.com>',
